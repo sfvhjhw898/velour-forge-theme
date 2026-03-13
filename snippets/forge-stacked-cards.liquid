@@ -1,0 +1,351 @@
+{%- comment -%}
+  forge-stacked-cards.liquid
+  FORGE Pittch-standard stacked collection cards.
+
+  Expected variables (assign before render):
+    forge_stacks_heading  — section heading
+    forge_stacks_sub      — section subheading
+    forge_stacks_bg       — section background colour (hex)
+    forge_stacks_text     — primary text colour (hex)
+    forge_stacks_accent   — accent colour for hover ring / active state (hex)
+
+  Block schema (add to parent section):
+    - type: collection_stack
+      settings:
+        - id: collection
+          type: collection
+        - id: label
+          type: text
+          label: Stack label
+          default: Collection
+{%- endcomment -%}
+
+{%- liquid
+  assign fsc_heading = forge_stacks_heading | default: 'Shop the Range'
+  assign fsc_sub     = forge_stacks_sub     | default: ''
+  assign fsc_bg      = forge_stacks_bg      | default: '#0f0f0f'
+  assign fsc_text    = forge_stacks_text    | default: '#FFFFFF'
+  assign fsc_accent  = forge_stacks_accent  | default: '#FFFFFF'
+-%}
+
+<style>
+  /* ─── Forge Stacked Cards ───────────────────────────────────────── */
+  .fsc-section {
+    background: {{ fsc_bg }};
+    padding: clamp(60px, 8vw, 120px) clamp(20px, 5vw, 80px);
+    overflow: hidden;
+  }
+
+  .fsc-header {
+    text-align: center;
+    margin-bottom: clamp(40px, 6vw, 80px);
+  }
+
+  .fsc-heading {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: {{ fsc_text }};
+    margin: 0 0 16px;
+  }
+
+  .fsc-sub {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: {{ fsc_text }};
+    opacity: 0.6;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ─── Stacks grid ───────────────────────────────────────────────── */
+  .fsc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(48px, 6vw, 80px);
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  /* ─── Single stack ──────────────────────────────────────────────── */
+  .fsc-stack {
+    position: relative;
+    cursor: pointer;
+    /* Width of the outermost card + room for spread */
+    width: clamp(180px, 22vw, 260px);
+    /* Height is set on .fsc-stack-inner to carry the cards */
+    aspect-ratio: 3 / 4;
+  }
+
+  .fsc-stack-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ─── Individual cards ──────────────────────────────────────────── */
+  .fsc-card {
+    position: absolute;
+    inset: 0;
+    border-radius: clamp(12px, 2vw, 20px);
+    overflow: hidden;
+    background: #1a1a1a;
+    transition:
+      transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.4s ease;
+  }
+
+  .fsc-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  /* Hover spread — desktop */
+  @media (hover: hover) {
+    .fsc-stack:hover .fsc-card:nth-child(2) {
+      transform: translateX(-44px) rotate(-6deg);
+      box-shadow: -8px 12px 40px rgba(0, 0, 0, 0.35);
+    }
+    .fsc-stack:hover .fsc-card:nth-child(3) {
+      transform: translateX(44px) rotate(6deg);
+      box-shadow: 8px 12px 40px rgba(0, 0, 0, 0.35);
+    }
+    .fsc-stack:hover .fsc-card:nth-child(1) img {
+      transform: scale(1.05);
+    }
+  }
+
+  /* Touch spread — class toggled by JS */
+  .fsc-stack.is-spread .fsc-card:nth-child(2) {
+    transform: translateX(-44px) rotate(-6deg);
+    box-shadow: -8px 12px 40px rgba(0, 0, 0, 0.35);
+  }
+  .fsc-stack.is-spread .fsc-card:nth-child(3) {
+    transform: translateX(44px) rotate(6deg);
+    box-shadow: 8px 12px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Card z-order: card 1 on top */
+  .fsc-card:nth-child(1) { z-index: 3; }
+  .fsc-card:nth-child(2) { z-index: 2; }
+  .fsc-card:nth-child(3) { z-index: 1; }
+
+  /* Subtle initial offsets so you can see all 3 cards */
+  .fsc-card:nth-child(2) { transform: translateX(-10px) rotate(-2deg) scale(0.97); }
+  .fsc-card:nth-child(3) { transform: translateX(10px) rotate(2deg) scale(0.94); }
+
+  /* Accent ring on hover */
+  .fsc-stack::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: clamp(18px, 2.5vw, 26px);
+    border: 2px solid {{ fsc_accent }};
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  @media (hover: hover) {
+    .fsc-stack:hover::after { opacity: 0.4; }
+  }
+  .fsc-stack.is-spread::after { opacity: 0.4; }
+
+  /* ─── Stack label ───────────────────────────────────────────────── */
+  .fsc-label {
+    position: absolute;
+    bottom: -44px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: {{ fsc_text }};
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    transition: opacity 0.25s ease;
+    text-decoration: none;
+  }
+  .fsc-stack:hover .fsc-label,
+  .fsc-stack.is-spread .fsc-label { opacity: 1; }
+
+  /* ─── Placeholder card (no image) ───────────────────────────────── */
+  .fsc-card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1e1e1e 0%, #2e2e2e 100%);
+    opacity: 0.6;
+  }
+
+  /* ─── Scroll reveal ─────────────────────────────────────────────── */
+  .fsc-stack[data-reveal] {
+    opacity: 0;
+  }
+  .fsc-stack[data-reveal].is-revealed {
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .fsc-stack[data-reveal="slide-up"] { transform: translateY(40px); }
+  .fsc-stack[data-reveal="slide-up"].is-revealed { transform: translateY(0); }
+</style>
+
+<section class="fsc-section" aria-label="{{ fsc_heading }}">
+  <div class="fsc-header">
+    <h2 class="fsc-heading">{{ fsc_heading }}</h2>
+    {%- if fsc_sub != blank -%}
+      <p class="fsc-sub">{{ fsc_sub }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="fsc-grid">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'collection_stack' -%}
+        {%- assign fsc_col   = block.settings.collection -%}
+        {%- assign fsc_label = block.settings.label | default: fsc_col.title -%}
+        {%- assign fsc_url   = fsc_col.url | default: '/collections/all' -%}
+        {%- assign fsc_prods = fsc_col.products -%}
+        {%- assign fsc_delay = forloop.index0 | times: 80 -%}
+
+        <div
+          class="fsc-stack"
+          data-reveal="slide-up"
+          data-delay="{{ fsc_delay }}"
+          {{ block.shopify_attributes }}
+          role="group"
+          aria-label="{{ fsc_label }}"
+        >
+          <div class="fsc-stack-inner">
+            {%- comment -%} Card 1 (front) {%- endcomment -%}
+            <a href="{{ fsc_url }}" class="fsc-card" tabindex="0" aria-label="Shop {{ fsc_label }}">
+              {%- if fsc_prods[0].featured_image -%}
+                {{
+                  fsc_prods[0].featured_image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    alt: fsc_prods[0].featured_image.alt | default: fsc_label,
+                    widths: '300, 400, 600'
+                }}
+              {%- elsif fsc_col.image -%}
+                {{
+                  fsc_col.image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    alt: fsc_col.title,
+                    widths: '300, 400, 600'
+                }}
+              {%- else -%}
+                <div class="fsc-card-placeholder" aria-hidden="true"></div>
+              {%- endif -%}
+            </a>
+
+            {%- comment -%} Card 2 (back-left) {%- endcomment -%}
+            <div class="fsc-card" aria-hidden="true">
+              {%- if fsc_prods[1].featured_image -%}
+                {{
+                  fsc_prods[1].featured_image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    alt: '',
+                    widths: '300, 400, 600'
+                }}
+              {%- elsif fsc_prods[0].featured_image -%}
+                {{
+                  fsc_prods[0].featured_image
+                  | image_url: width: 600
+                  | image_tag: loading: 'lazy', alt: ''
+                }}
+              {%- else -%}
+                <div class="fsc-card-placeholder"></div>
+              {%- endif -%}
+            </div>
+
+            {%- comment -%} Card 3 (back-right) {%- endcomment -%}
+            <div class="fsc-card" aria-hidden="true">
+              {%- if fsc_prods[2].featured_image -%}
+                {{
+                  fsc_prods[2].featured_image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    alt: '',
+                    widths: '300, 400, 600'
+                }}
+              {%- elsif fsc_prods[0].featured_image -%}
+                {{
+                  fsc_prods[0].featured_image
+                  | image_url: width: 600
+                  | image_tag: loading: 'lazy', alt: ''
+                }}
+              {%- else -%}
+                <div class="fsc-card-placeholder"></div>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <a href="{{ fsc_url }}" class="fsc-label" tabindex="-1" aria-hidden="true">
+            {{ fsc_label }}
+          </a>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Touch tap-to-spread ─────────────────────────────── */
+  document.querySelectorAll('.fsc-stack').forEach(function (stack) {
+    stack.addEventListener('touchend', function (e) {
+      /* Only toggle spread; let the link inside handle navigation */
+      var isSpread = stack.classList.contains('is-spread');
+      /* Collapse any other open stack */
+      document.querySelectorAll('.fsc-stack.is-spread').forEach(function (s) {
+        if (s !== stack) s.classList.remove('is-spread');
+      });
+      if (!isSpread) {
+        stack.classList.add('is-spread');
+        /* If they tap a spread stack's front card-link, let it navigate */
+      } else {
+        stack.classList.remove('is-spread');
+      }
+    });
+  });
+
+  /* ── Scroll reveal ───────────────────────────────────── */
+  var revealEls = document.querySelectorAll('.fsc-stack[data-reveal]');
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && revealEls.length) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el    = entry.target;
+          var delay = parseInt(el.dataset.delay || '0', 10);
+          setTimeout(function () {
+            el.classList.add('is-revealed');
+          }, delay);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(function (el) { observer.observe(el); });
+  } else {
+    /* Reduced motion: show immediately */
+    revealEls.forEach(function (el) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
+})();
+</script>
