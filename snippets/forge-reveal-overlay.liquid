@@ -1,0 +1,78 @@
+{%- comment -%}
+  FORGE Product Reveal Overlay — based on Pittch brand CSS product card technique.
+  Include INSIDE the .card--standard div, after the image region.
+  Variables:
+    forge_reveal_bg        — e.g. "rgba(55,33,11,0.97)"
+    forge_reveal_text      — e.g. "#efede6"
+    forge_reveal_tile1_main / tile1_sub — feature tile 1
+    forge_reveal_tile2_main / tile2_sub — feature tile 2
+    forge_reveal_desc      — short product description (auto-truncated)
+{%- endcomment -%}
+
+{%- assign _rb = forge_reveal_bg   | default: 'rgba(10,10,10,0.97)' -%}
+{%- assign _rt = forge_reveal_text | default: '#FFFFFF' -%}
+
+<div class="forge-reveal" aria-hidden="true">
+  <div class="forge-reveal__inner">
+    <p class="forge-reveal__label">Product Details</p>
+    <p class="forge-reveal__desc">{{ forge_reveal_desc | default: product.description | strip_html | truncate: 100 }}</p>
+    <div class="forge-reveal__tiles">
+      <div class="forge-reveal__tile">
+        <span class="forge-reveal__tile-main">{{ forge_reveal_tile1_main | default: 'Premium' }}</span>
+        <span class="forge-reveal__tile-sub">{{ forge_reveal_tile1_sub | default: 'Quality' }}</span>
+      </div>
+      <div class="forge-reveal__tile">
+        <span class="forge-reveal__tile-main">{{ forge_reveal_tile2_main | default: 'Crafted' }}</span>
+        <span class="forge-reveal__tile-sub">{{ forge_reveal_tile2_sub | default: 'Detail' }}</span>
+      </div>
+    </div>
+    <div class="forge-reveal__actions">
+      <button type="button" class="forge-reveal__add-btn" data-forge-quick-add data-product-url="{{ product.url }}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add to Cart
+      </button>
+      <a href="{{ product.url }}" class="forge-reveal__view-btn">View Details</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.card-wrapper.product-card-wrapper{border-radius:2rem;overflow:visible;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s ease;}
+.card-wrapper.product-card-wrapper:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,0.2);}
+.card-wrapper.product-card-wrapper .card.card--standard{position:relative!important;border-radius:2rem;overflow:hidden;}
+.card-wrapper.product-card-wrapper .card--media .media img.motion-reduce{transition:transform 0.6s ease!important;}
+.card-wrapper.product-card-wrapper:hover .card--media .media img.motion-reduce{transform:scale(1.06)!important;}
+.card-wrapper.product-card-wrapper .card--standard.card--media .card__inner>.card__content{display:none!important;}
+.forge-reveal{position:absolute;inset:0;z-index:10;background:{{ _rb }};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;flex-direction:column;justify-content:flex-end;transform:translateY(100%);opacity:0;transition:transform 0.42s cubic-bezier(0.34,1.56,0.64,1),opacity 0.28s ease;pointer-events:none;}
+.card-wrapper.product-card-wrapper:hover .forge-reveal{transform:translateY(0);opacity:1;pointer-events:auto;}
+.forge-reveal__inner{padding:2rem 1.8rem;display:flex;flex-direction:column;gap:1.1rem;}
+.forge-reveal__label{font-size:1.35rem;font-weight:700;color:{{ _rt }};margin:0;}
+.forge-reveal__desc{font-size:1.25rem;line-height:1.58;color:{{ _rt }}AA;margin:0;}
+.forge-reveal__tiles{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;}
+.forge-reveal__tile{background:rgba(255,255,255,0.1);border-radius:0.9rem;padding:0.8rem 1rem;display:flex;flex-direction:column;gap:0.15rem;}
+.forge-reveal__tile-main{font-size:1.15rem;font-weight:700;color:{{ _rt }};line-height:1.2;}
+.forge-reveal__tile-sub{font-size:1.05rem;color:{{ _rt }}77;}
+.forge-reveal__actions{display:flex;flex-direction:column;gap:0.75rem;margin-top:0.2rem;}
+.forge-reveal__add-btn{display:flex;align-items:center;justify-content:center;gap:0.65rem;width:100%;height:4.4rem;background:{{ _rt }}F0;color:#0D0D0D;border:none;border-radius:100px;font-size:1.3rem;font-weight:600;letter-spacing:0.02em;cursor:pointer;transition:background 0.18s ease,transform 0.15s ease;}
+.forge-reveal__add-btn:hover{transform:scale(1.015);}
+.forge-reveal__view-btn{display:flex;align-items:center;justify-content:center;width:100%;height:3.8rem;background:transparent;color:{{ _rt }};border:1.5px solid {{ _rt }}44;border-radius:100px;font-size:1.25rem;font-weight:500;text-decoration:none;transition:border-color 0.18s ease,background 0.18s ease;}
+.forge-reveal__view-btn:hover{border-color:{{ _rt }}AA;background:{{ _rt }}11;}
+@media(hover:none){
+  .forge-reveal{transform:translateY(100%)!important;opacity:0!important;pointer-events:none!important;}
+  .card-wrapper.product-card-wrapper.forge-tapped .forge-reveal{transform:translateY(0)!important;opacity:1!important;pointer-events:auto!important;}
+}
+</style>
+
+<script>
+(function(){
+  if(!('ontouchstart' in window))return;
+  document.querySelectorAll('.card-wrapper.product-card-wrapper').forEach(function(card){
+    card.addEventListener('click',function(e){
+      if(e.target.closest('.forge-reveal'))return;
+      if(card.classList.contains('forge-tapped')){return;}
+      card.classList.add('forge-tapped');e.preventDefault();
+    });
+    document.addEventListener('click',function(e){if(!card.contains(e.target))card.classList.remove('forge-tapped');});
+  });
+})();
+</script>
