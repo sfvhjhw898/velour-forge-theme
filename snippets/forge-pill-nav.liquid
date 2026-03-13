@@ -1,0 +1,84 @@
+{%- comment -%}
+  FORGE Pill Navigation — based on Pittch pill nav technique.
+  Include at the top of sections/header.liquid, inside the <header> tag.
+  Variables:
+    forge_nav_pill_bg       — dark pill colour e.g. "rgba(55,33,11,0.93)"
+    forge_nav_pill_text     — pill link colour e.g. "rgba(255,255,255,0.82)"
+    forge_nav_brand_colour  — brand accent for logo + cart badge
+    forge_nav_sticky_bg     — glassmorphic sticky state e.g. "rgba(245,240,235,0.85)"
+{%- endcomment -%}
+
+{%- assign _pb     = forge_nav_pill_bg      | default: 'rgba(10,10,10,0.93)' -%}
+{%- assign _pt     = forge_nav_pill_text    | default: 'rgba(255,255,255,0.82)' -%}
+{%- assign _brand  = forge_nav_brand_colour | default: '#004225' -%}
+{%- assign _sticky = forge_nav_sticky_bg    | default: 'rgba(250,250,250,0.85)' -%}
+
+<style>
+/* Glassmorphic sticky nav — Shopify adds .shopify-section-header-sticky automatically on scroll */
+.shopify-section-header-sticky .header-wrapper{
+  background:{{ _sticky }}!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border-bottom:1px solid rgba(255,255,255,0.3)!important;
+  box-shadow:0 2px 20px rgba(0,0,0,0.06);
+}
+
+/* Desktop pill nav — pure CSS grid override, no JavaScript */
+@media screen and (min-width:990px){
+  .section-header .header.header--middle-left,
+  .section-header .header.header--middle-center{
+    display:grid!important;
+    grid-template-columns:1fr auto 1fr!important;
+    align-items:center!important;
+  }
+  /* Hide hamburger on desktop */
+  .section-header header-drawer{display:none!important;}
+  /* Icons (search, account, cart) → far LEFT */
+  .section-header .header__icons{grid-column:1!important;grid-row:1!important;justify-self:start!important;display:flex!important;align-items:center!important;}
+  /* Pill nav → CENTRE */
+  .section-header .header__inline-menu{grid-column:2!important;grid-row:1!important;justify-self:center!important;}
+  /* Logo → far RIGHT */
+  .section-header h1.header__heading,
+  .section-header .header>.header__heading-link{grid-column:3!important;grid-row:1!important;justify-self:end!important;margin:0!important;}
+  /* Pill styling */
+  .header__inline-menu{
+    background:{{ _pb }}!important;
+    border:1px solid rgba(255,255,255,0.18)!important;
+    border-radius:100px!important;
+    padding:0.3rem 0.5rem!important;
+    backdrop-filter:blur(20px) saturate(180%)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+    box-shadow:0 2px 28px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.12)!important;
+  }
+  /* Nav link colours inside pill */
+  .header__inline-menu .header__menu-item,
+  .header__inline-menu .list-menu__item--link{
+    color:{{ _pt }}!important;
+    font-size:1.35rem!important;
+    font-weight:500!important;
+    letter-spacing:0.015em!important;
+    text-transform:none!important;
+    padding:0.65rem 1.3rem!important;
+    border-radius:100px!important;
+    transition:background 0.18s ease,color 0.18s ease!important;
+  }
+  .header__inline-menu .header__menu-item:hover,
+  .header__inline-menu .list-menu__item--link:hover{
+    color:#FFFFFF!important;
+    background:rgba(255,255,255,0.10)!important;
+  }
+  /* Darker pill when scrolled */
+  .shopify-section-header-sticky .header__inline-menu{
+    box-shadow:0 4px 32px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.14)!important;
+  }
+}
+
+/* Brand elements */
+.cart-count-bubble{background-color:{{ _brand }};color:#FFFFFF;}
+.header__heading-link .h2,.header__heading-link span.h2{
+  font-family:var(--forge-font-heading,Georgia,serif)!important;
+  font-size:2.2rem;font-weight:600;letter-spacing:0.06em;
+  color:{{ _brand }};text-transform:uppercase;
+}
+*:focus-visible{outline:2px solid {{ _brand }};outline-offset:3px;}
+</style>
