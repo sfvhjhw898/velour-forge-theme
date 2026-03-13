@@ -1,0 +1,428 @@
+{%- comment -%}
+  forge-scroll-hero.liquid
+  FORGE Pittch-standard scroll expansion hero.
+
+  Expected variables (assign before render):
+    forge_hero_heading      — main headline (split at first space)
+    forge_hero_sub          — subheading / tagline
+    forge_hero_bg           — hero background image URL
+    forge_hero_text         — text colour (hex)
+    forge_hero_accent       — accent / button colour (hex)
+    forge_hero_btn1_label   — primary CTA label
+    forge_hero_btn1_url     — primary CTA href
+    forge_hero_btn2_label   — ghost CTA label
+    forge_hero_btn2_url     — ghost CTA href
+    forge_hero_scroll_hint  — scroll hint label (e.g. "Scroll to explore")
+    forge_hero_session_key  — unique key to namespace sessionStorage flag
+    forge_content_bg        — background colour of the page content below hero
+{%- endcomment -%}
+
+{%- liquid
+  assign fsh_heading      = forge_hero_heading      | default: 'Our Story'
+  assign fsh_sub          = forge_hero_sub          | default: 'Crafted with intention'
+  assign fsh_bg           = forge_hero_bg           | default: ''
+  assign fsh_text         = forge_hero_text         | default: '#FFFFFF'
+  assign fsh_accent       = forge_hero_accent       | default: '#FFFFFF'
+  assign fsh_btn1_label   = forge_hero_btn1_label   | default: 'Shop Now'
+  assign fsh_btn1_url     = forge_hero_btn1_url     | default: '/collections/all'
+  assign fsh_btn2_label   = forge_hero_btn2_label   | default: 'Our Story'
+  assign fsh_btn2_url     = forge_hero_btn2_url     | default: '/pages/about'
+  assign fsh_scroll_hint  = forge_hero_scroll_hint  | default: 'Scroll to explore'
+  assign fsh_session_key  = forge_hero_session_key  | default: 'forge-intro'
+  assign fsh_content_bg   = forge_content_bg        | default: '#FFFFFF'
+
+  assign fsh_words = fsh_heading | split: ' '
+  assign fsh_word1 = fsh_words | first
+  assign fsh_word_rest = fsh_words | shift | join: ' '
+-%}
+
+<style>
+  /* ─── Forge Scroll Hero ─────────────────────────────────────────── */
+  .fsh-lock { overflow: hidden; }
+
+  .fsh-stage {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f0f0f;
+    overflow: hidden;
+  }
+
+  .fsh-box {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    will-change: width, height, border-radius;
+  }
+
+  .fsh-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('{{ fsh_bg }}');
+    background-size: cover;
+    background-position: center;
+    will-change: opacity;
+    transition: opacity 0.05s linear;
+  }
+
+  .fsh-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Title — centred on box, splits left/right on scroll */
+  .fsh-title {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 32px 40px;
+    pointer-events: none;
+  }
+
+  .fsh-title-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 12px;
+    justify-content: center;
+  }
+
+  .fsh-word {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1;
+    color: {{ fsh_text }};
+    will-change: transform, opacity;
+    transition: transform 0.05s linear, opacity 0.05s linear;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+  }
+
+  /* Sub and CTAs — hidden until fully expanded */
+  .fsh-meta {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .fsh-meta.is-visible { opacity: 1; pointer-events: auto; }
+
+  .fsh-sub {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: {{ fsh_text }};
+    margin-bottom: 28px;
+    opacity: 0.85;
+    letter-spacing: 0.04em;
+  }
+
+  .fsh-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .fsh-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 32px;
+    border-radius: 100px;
+    background: {{ fsh_accent }};
+    color: #0f0f0f;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .fsh-btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .fsh-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 32px;
+    border-radius: 100px;
+    border: 1.5px solid rgba(255,255,255,0.55);
+    color: {{ fsh_text }};
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .fsh-btn-ghost:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.8);
+    transform: translateY(-1px);
+  }
+
+  /* Scroll hint */
+  .fsh-scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: {{ fsh_text }};
+    opacity: 0.6;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    pointer-events: none;
+    will-change: opacity;
+    z-index: 2;
+  }
+  .fsh-scroll-hint svg {
+    animation: fsh-bounce 1.6s ease-in-out infinite;
+  }
+  @keyframes fsh-bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(6px); }
+  }
+
+  /* ─── Page intro animation ──────────────────────────────────────── */
+  html.forge-intro-init .fsh-box {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  html.forge-intro-init .fsh-word {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  html.forge-intro-init .fsh-scroll-hint {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+
+  html.forge-intro-init.forge-intro-play .fsh-box {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.5s,
+                transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.5s;
+  }
+  html.forge-intro-init.forge-intro-play .fsh-word:nth-child(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease 0.9s, transform 0.6s cubic-bezier(0.22,1,0.36,1) 0.9s;
+  }
+  html.forge-intro-init.forge-intro-play .fsh-word:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease 1.05s, transform 0.6s cubic-bezier(0.22,1,0.36,1) 1.05s;
+  }
+  html.forge-intro-init.forge-intro-play .fsh-scroll-hint {
+    opacity: 0.6;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity 0.6s ease 1.3s, transform 0.6s ease 1.3s;
+  }
+</style>
+
+<section
+  class="fsh-stage"
+  id="forge-scroll-hero"
+  data-session-key="{{ fsh_session_key }}"
+  aria-label="{{ fsh_heading }}"
+>
+  <div class="fsh-box" id="fsh-box" role="img" aria-label="{{ fsh_heading }}">
+    <div class="fsh-bg" id="fsh-bg"></div>
+    <div class="fsh-overlay"></div>
+
+    <div class="fsh-title" aria-hidden="true">
+      <div class="fsh-title-inner">
+        <span class="fsh-word" id="fsh-word1">{{ fsh_word1 }}</span>
+        {%- if fsh_word_rest != blank -%}
+          <span class="fsh-word" id="fsh-word2">{{ fsh_word_rest }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="fsh-meta" id="fsh-meta" aria-hidden="true">
+      <p class="fsh-sub">{{ fsh_sub }}</p>
+      <div class="fsh-btns">
+        <a href="{{ fsh_btn1_url }}" class="fsh-btn-primary">{{ fsh_btn1_label }}</a>
+        <a href="{{ fsh_btn2_url }}" class="fsh-btn-ghost">{{ fsh_btn2_label }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="fsh-scroll-hint" id="fsh-scroll-hint" aria-hidden="true">
+    <span>{{ fsh_scroll_hint }}</span>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  var hero      = document.getElementById('forge-scroll-hero');
+  var box       = document.getElementById('fsh-box');
+  var bg        = document.getElementById('fsh-bg');
+  var word1     = document.getElementById('fsh-word1');
+  var word2     = document.getElementById('fsh-word2');
+  var meta      = document.getElementById('fsh-meta');
+  var hint      = document.getElementById('fsh-scroll-hint');
+  var sessionKey = (hero ? hero.dataset.sessionKey : null) || 'forge-intro';
+  var contentBg  = '{{ fsh_content_bg }}';
+
+  if (!hero || !box) return;
+
+  /* ── Intro animation ─────────────────────────────────── */
+  var seen = sessionStorage.getItem(sessionKey + '-seen');
+  if (!seen) {
+    document.documentElement.classList.add('forge-intro-init');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.documentElement.classList.add('forge-intro-play');
+      });
+    });
+    sessionStorage.setItem(sessionKey + '-seen', '1');
+  }
+
+  /* ── Geometry helpers ────────────────────────────────── */
+  var vw = window.innerWidth;
+  var vh = window.innerHeight;
+
+  var BOX_W0 = 300;
+  var BOX_H0 = 400;
+  var BOX_R0 = 20;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function ease(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+
+  /* ── Scroll state ────────────────────────────────────── */
+  var progress  = 0;
+  var target    = 0;
+  var locked    = true;
+  var rafId     = null;
+  var SCROLL_RANGE = vh * 1.5; // px of wheel delta to go 0→1
+
+  document.body.classList.add('fsh-lock');
+
+  function applyProgress(p) {
+    var ep = ease(p);
+
+    /* Box size */
+    var w = lerp(BOX_W0, vw, ep);
+    var h = lerp(BOX_H0, vh, ep);
+    var r = lerp(BOX_R0, 0, ep);
+    box.style.width        = w + 'px';
+    box.style.height       = h + 'px';
+    box.style.borderRadius = r + 'px';
+
+    /* Background image fade */
+    bg.style.opacity = clamp(1 - ep * 0.3, 0, 1);
+
+    /* Word split */
+    var split = ep * vw * 0.25;
+    if (word1) word1.style.transform = 'translateX(' + (-split) + 'px)';
+    if (word2) word2.style.transform = 'translateX(' + ( split) + 'px)';
+
+    /* Scroll hint fades out early */
+    if (hint) hint.style.opacity = clamp(0.6 * (1 - p * 4), 0, 0.6);
+
+    /* Meta (sub + CTAs) appears near end */
+    if (meta) {
+      if (p > 0.85) {
+        meta.classList.add('is-visible');
+      } else {
+        meta.classList.remove('is-visible');
+      }
+    }
+
+    /* Unlock body once fully expanded */
+    if (p >= 1 && locked) {
+      locked = false;
+      document.body.classList.remove('fsh-lock');
+      /* Tint hero to content colour so the seam disappears */
+      hero.style.background = contentBg;
+    }
+    if (p < 1 && !locked) {
+      locked = true;
+      document.body.classList.add('fsh-lock');
+      hero.style.background = '#0f0f0f';
+    }
+  }
+
+  function tick() {
+    rafId = null;
+    progress += (target - progress) * 0.12;
+    if (Math.abs(target - progress) < 0.001) progress = target;
+    applyProgress(progress);
+    if (Math.abs(target - progress) > 0.001) rafId = requestAnimationFrame(tick);
+  }
+
+  function schedule() {
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }
+
+  /* ── Wheel handler ───────────────────────────────────── */
+  window.addEventListener('wheel', function (e) {
+    if (!locked && e.deltaY < 0 && window.scrollY > 0) return;
+    if (!locked && e.deltaY < 0) {
+      locked = true;
+      document.body.classList.add('fsh-lock');
+      window.scrollTo(0, 0);
+    }
+    target = clamp(target + e.deltaY / SCROLL_RANGE, 0, 1);
+    if (locked) e.preventDefault();
+    schedule();
+  }, { passive: false });
+
+  /* ── Touch handler ───────────────────────────────────── */
+  var touchStartY = null;
+  window.addEventListener('touchstart', function (e) {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', function (e) {
+    if (touchStartY === null) return;
+    var dy = touchStartY - e.touches[0].clientY;
+    touchStartY = e.touches[0].clientY;
+    if (!locked && dy < 0 && window.scrollY > 0) return;
+    if (!locked && dy < 0) {
+      locked = true;
+      document.body.classList.add('fsh-lock');
+      window.scrollTo(0, 0);
+    }
+    target = clamp(target + dy / (SCROLL_RANGE * 0.6), 0, 1);
+    if (locked) e.preventDefault();
+    schedule();
+  }, { passive: false });
+
+  /* ── Resize ──────────────────────────────────────────── */
+  window.addEventListener('resize', function () {
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+    SCROLL_RANGE = vh * 1.5;
+    applyProgress(progress);
+  });
+
+  /* Initial render */
+  applyProgress(0);
+})();
+</script>
