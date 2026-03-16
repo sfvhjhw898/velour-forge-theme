@@ -1,48 +1,49 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "forge_hero": {
+      "type": "main-banner",
+      "disabled": false,
+      "settings": {}
+    },
+    "forge_showcase": {
+      "type": "forge-collection-showcase",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "stack_1": {
+          "type": "collection_stack",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "label": "New Arrivals"
           }
         },
-        "button": {
-          "type": "buttons",
+        "stack_2": {
+          "type": "collection_stack",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "label": "Best Sellers"
+          }
+        },
+        "stack_3": {
+          "type": "collection_stack",
+          "settings": {
+            "label": "Featured"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "stack_1",
+        "stack_2",
+        "stack_3"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "heading": "The Collections",
+        "subheading": "Curated pieces, crafted with intention",
+        "background_color": "#0F0F0F",
+        "text_color": "#FFFFFF",
+        "accent_color": "#F5F0EB"
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
+        "title": "New Arrivals",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -69,7 +70,8 @@
     }
   },
   "order": [
-    "image_banner",
+    "forge_hero",
+    "forge_showcase",
     "featured_collection"
   ]
 }
