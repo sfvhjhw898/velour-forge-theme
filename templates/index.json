@@ -2,8 +2,74 @@
   "sections": {
     "forge_hero": {
       "type": "main-banner",
-      "disabled": false,
-      "settings": {}
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "large",
+        "adapt_height_first_image": true,
+        "show_text_box": true,
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "mobile_content_alignment": "left",
+        "full_width": true,
+        "show_text_below_image": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "VELOUR. Dressed with Intent.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "heritage · premium · understated — made for Professional women aged 28-45 who value.",
+            "text_style": "subtitle"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop Collection",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "Our Story →",
+            "button_link_2": "shopify://pages/our-story",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "buttons"
+      ]
+    },
+    "brand_values": {
+      "type": "rich-text",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Heritage  ·  Premium  ·  Understated  ·  British</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "text"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
     },
     "forge_showcase": {
       "type": "forge-collection-showcase",
@@ -17,13 +83,13 @@
         "stack_2": {
           "type": "collection_stack",
           "settings": {
-            "label": "Best Sellers"
+            "label": "Essentials"
           }
         },
         "stack_3": {
           "type": "collection_stack",
           "settings": {
-            "label": "Featured"
+            "label": "Gift Sets"
           }
         }
       },
@@ -33,45 +99,201 @@
         "stack_3"
       ],
       "settings": {
-        "heading": "The Collections",
-        "subheading": "Curated pieces, crafted with intention",
-        "background_color": "#0F0F0F",
+        "heading": "Shop the Range",
+        "subheading": "",
+        "background_color": "#1A1A1A",
         "text_color": "#FFFFFF",
-        "accent_color": "#F5F0EB"
+        "accent_color": "#FFFFFF"
+      }
+    },
+    "forge_features": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_1": {
+          "type": "column",
+          "settings": {
+            "title": "Heritage",
+            "text": "VELOUR starts with heritage as the foundation for everything we do."
+          }
+        },
+        "col_2": {
+          "type": "column",
+          "settings": {
+            "title": "Premium",
+            "text": "Every luxury product is built with premium at the centre."
+          }
+        },
+        "col_3": {
+          "type": "column",
+          "settings": {
+            "title": "Understated",
+            "text": "understated matters. We don't ship anything we wouldn't keep for ourselves."
+          }
+        }
+      },
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3"
+      ],
+      "settings": {
+        "title": "Why Every Detail Matters",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "New Arrivals",
+        "title": "Featured Pieces",
         "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
+        "description": "<p>Our best-selling luxury — made with heritage.</p>",
+        "show_description": true,
+        "description_style": "subtitle",
         "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "none",
+        "quick_add": "standard",
         "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "swipe_on_mobile": true,
+        "padding_top": 64,
+        "padding_bottom": 56
+      }
+    },
+    "brand_story": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Story Behind the Brand.",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>VELOUR was built on a simple idea: heritage and premium shouldn't be mutually exclusive. Read about how we got here.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Read Our Story",
+            "button_link": "shopify://pages/our-story",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "scheme-1",
+        "section_color_scheme": "scheme-2",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "social_proof": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "\"I've never worn anything that felt this considered.\"",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>— Verified customer, VELOUR</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Stay close to VELOUR.",
+            "heading_size": "h2"
+          }
+        },
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "New arrivals, behind-the-scenes, and early access. No noise."
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "subheading"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     }
   },
   "order": [
     "forge_hero",
+    "brand_values",
     "forge_showcase",
-    "featured_collection"
+    "forge_features",
+    "featured_collection",
+    "brand_story",
+    "social_proof",
+    "newsletter"
   ]
 }
