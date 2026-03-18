@@ -72,24 +72,27 @@
       }
     },
     "forge_showcase": {
-      "type": "forge-collection-showcase",
+      "type": "multicolumn",
       "blocks": {
         "stack_1": {
-          "type": "collection_stack",
+          "type": "column",
           "settings": {
-            "label": "New Arrivals"
+            "title": "New Arrivals",
+            "text": "Explore our new arrivals — the latest from VELOUR."
           }
         },
         "stack_2": {
-          "type": "collection_stack",
+          "type": "column",
           "settings": {
-            "label": "Essentials"
+            "title": "Essentials",
+            "text": "The essentials range. Core pieces worth keeping."
           }
         },
         "stack_3": {
-          "type": "collection_stack",
+          "type": "column",
           "settings": {
-            "label": "Gift Sets"
+            "title": "Gift Sets",
+            "text": "Perfectly presented gifts from VELOUR."
           }
         }
       },
@@ -99,11 +102,20 @@
         "stack_3"
       ],
       "settings": {
-        "heading": "Shop the Range",
-        "subheading": "",
-        "background_color": "#1A1A1A",
-        "text_color": "#FFFFFF",
-        "accent_color": "#FFFFFF"
+        "title": "Shop the Range",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "View All",
+        "button_link": "shopify://collections/all",
+        "color_scheme": "scheme-3",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "forge_features": {
