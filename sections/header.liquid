@@ -1,38 +1,28 @@
 <style>
-
-/* VELOUR — Minimal centred nav */
+/* VELOUR — Cream minimal nav */
 .section-header .header-wrapper {
   background: #F5F0EB !important;
-  display: flex !important;
-  flex-direction: column !important;
-  padding: 0 !important;
-  border-bottom: none !important;
+  border-bottom: 1px solid rgba(26,26,26,0.08) !important;
 }
+/* Logo */
+.section-header .header__heading-link .h2,
+.section-header .header__heading-link span {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 22px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #1A1A1A !important;
+}
+/* Nav links */
 @media screen and (min-width: 990px) {
-  /* Top row: icons left | logo centre | cart right */
-  .section-header .header.header--top-left,
-  .section-header .header.header--middle-left,
-  .section-header .header.header--middle-center {
-    display: grid !important;
-    grid-template-columns: 1fr auto 1fr !important;
-    align-items: center !important;
-    padding: 20px 40px !important;
-  }
-  .section-header .header__icons { grid-column: 1; justify-self: start !important; }
-  .section-header h1.header__heading,
-  .section-header .header > .header__heading-link { grid-column: 2; justify-self: center !important; }
-  .section-header .header__icons .cart-count-bubble { background: #1A1A1A !important; }
-  /* Bottom nav row */
   .section-header .header__inline-menu {
-    grid-column: 1 / -1 !important;
-    justify-self: center !important;
     background: transparent !important;
     border: none !important;
-    border-top: 1px solid rgba(26,26,26,0.08) !important;
     border-radius: 0 !important;
-    padding: 10px 0 !important;
     backdrop-filter: none !important;
     box-shadow: none !important;
+    padding: 0 !important;
   }
   .section-header .header__inline-menu .header__menu-item,
   .section-header .header__inline-menu .list-menu__item--link {
@@ -41,25 +31,23 @@
     text-transform: uppercase !important;
     color: #1A1A1A !important;
     font-weight: 400 !important;
-    padding: 8px 20px !important;
+    padding: 8px 16px !important;
     border-radius: 0 !important;
     transition: color 0.2s !important;
   }
-  .section-header .header__inline-menu .header__menu-item:hover { color: #C4A882 !important; background: transparent !important; }
+  .section-header .header__inline-menu .header__menu-item:hover,
+  .section-header .header__inline-menu .list-menu__item--link:hover {
+    color: #C4A882 !important;
+    background: transparent !important;
+  }
 }
-/* Logo styling */
-.section-header .header__heading-link .h2,
-.section-header .header > .header__heading-link {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-size: 26px !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.12em !important;
-  text-transform: uppercase !important;
-  color: #1A1A1A !important;
-}
-/* Sticky: fade in cream glass */
+/* Icons */
+.section-header .header__icon svg,
+.section-header .header__icon path { color: #1A1A1A !important; stroke: #1A1A1A !important; }
+.cart-count-bubble { background: #1A1A1A !important; color: #F5F0EB !important; }
+/* Sticky: cream glass */
 .shopify-section-header-sticky .header-wrapper {
-  background: rgba(245,240,235,0.92) !important;
+  background: rgba(245,240,235,0.94) !important;
   backdrop-filter: blur(20px) saturate(150%) !important;
   -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
 }
