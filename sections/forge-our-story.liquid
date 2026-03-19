@@ -1,0 +1,904 @@
+<div class="forge-story">
+
+  {{- '<!-- ① MASTHEAD: Giant display text fills viewport -->' -}}
+  <section class="ps-masthead">
+    <div class="ps-masthead__grid">
+
+      <div class="ps-masthead__label ps-masthead__label--tl">
+        EST. 2024
+      </div>
+      <div class="ps-masthead__label ps-masthead__label--tr">
+        YORKSHIRE MILL
+      </div>
+
+      <h1 class="ps-masthead__line ps-masthead__line--1" aria-hidden="true">OUR</h1>
+
+      {{- '<!-- Floating product image sits between the two heading lines -->' -}}
+      <div class="ps-masthead__img-wrap">
+        {%- if section.settings.hero_image -%}
+          <img
+            src="{{ section.settings.hero_image | image_url: width: 800 }}"
+            alt="{{ section.settings.hero_image.alt | default: 'PITTCH Merino socks' | escape }}"
+            loading="eager"
+            width="800"
+          >
+        {%- else -%}
+          {{ 'product-apparel-2' | placeholder_svg_tag: 'ps-masthead__img-placeholder' }}
+        {%- endif -%}
+      </div>
+
+      <h1 class="ps-masthead__line ps-masthead__line--2" aria-hidden="true">STORY</h1>
+
+      <p class="ps-masthead__label ps-masthead__label--bl">BRITISH MERINO WOOL</p>
+      <p class="ps-masthead__label ps-masthead__label--br">MADE IN ENGLAND</p>
+
+    </div>
+    <p class="visually-hidden">Our Story — PITTCH British Merino Wool Socks</p>
+  </section>
+
+  {{- '<!-- ② MANIFESTO: Wide editorial statement -->' -}}
+  <section class="ps-manifesto">
+    <div class="ps-manifesto__inner page-width">
+
+      <div class="ps-manifesto__row">
+        <p class="ps-manifesto__tag">THE VISION</p>
+        <p class="ps-manifesto__body">
+          PITTCH blends British craft, vibrant colour, and the uncompromising quality of Merino wool. Clean lines, real warmth, and a drawer full of personality.
+        </p>
+      </div>
+
+      <div class="ps-manifesto__display" aria-hidden="true">
+        <span class="ps-manifesto__big">BRITISH</span>
+        <div class="ps-manifesto__img-mid">
+          {%- if section.settings.detail_image -%}
+            <img src="{{ section.settings.detail_image | image_url: width: 600 }}" alt="" loading="lazy">
+          {%- else -%}
+            {{ 'product-apparel-1' | placeholder_svg_tag: 'ps-manifesto__img-mid-placeholder' }}
+          {%- endif -%}
+        </div>
+        <span class="ps-manifesto__big ps-manifesto__big--outline">MERINO</span>
+      </div>
+
+      <div class="ps-manifesto__row ps-manifesto__row--right">
+        <p class="ps-manifesto__tag">SINCE 2024</p>
+        <p class="ps-manifesto__body">
+          Every pair is knitted in our Yorkshire mill using 80% Merino wool, sustainably sourced and spun into yarn that feels luxurious on the skin — and lasts for years.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  {{- '<!-- ③ FOUNDER: Elisabeth Braddock -->' -}}
+  <section class="ps-founder">
+    <div class="ps-founder__inner page-width">
+
+      <div class="ps-founder__text">
+        <p class="ps-founder__eyebrow">FOUNDED BY</p>
+        <h2 class="ps-founder__name">Elisabeth<br>Braddock</h2>
+        <div class="ps-founder__bio">
+          <p>PITTCH was born from a simple but uncompromising belief: that socks — something worn every single day — should be made properly, from the best materials, right here in Britain.</p>
+          <p>Elisabeth Braddock founded PITTCH after years of frustration with fast-fashion sock drawers full of synthetic blends that wore out, lost their shape, and felt dull against the skin. A lifelong lover of British countryside and the heritage of English textile craft, she set out to create a brand that brought real Merino wool quality to a product long neglected by the luxury market.</p>
+          <p>"I wanted socks that felt as good on the hundredth wear as they did on the first. Merino was the obvious answer — but so was England. We have an extraordinary history of textile craft here, and I was determined to keep every stitch of PITTCH on home soil."</p>
+          <p class="ps-founder__bio-attr">— Elisabeth Braddock, Founder</p>
+        </div>
+      </div>
+
+      <div class="ps-founder__portrait">
+        {%- if section.settings.founder_image -%}
+          <img
+            src="{{ section.settings.founder_image | image_url: width: 900 }}"
+            alt="Elisabeth Braddock, Founder of PITTCH"
+            loading="lazy"
+          >
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'ps-founder__portrait-placeholder' }}
+        {%- endif -%}
+      </div>
+
+    </div>
+  </section>
+
+  {{- '<!-- ④ LARGE PULL QUOTE -->' -}}
+  <section class="ps-quote">
+    <div class="ps-quote__inner page-width">
+      <p class="ps-quote__mark" aria-hidden="true">&ldquo;</p>
+      <blockquote class="ps-quote__text">
+        Socks are the one luxury most people never allow themselves. We are changing that.
+      </blockquote>
+      <p class="ps-quote__attr">Elisabeth Braddock · Founder, PITTCH</p>
+    </div>
+  </section>
+
+  {{- '<!-- ⑤ THE CRAFT: Two-column with giant number -->' -}}
+  <section class="ps-craft">
+    <div class="ps-craft__inner page-width">
+
+      <div class="ps-craft__left">
+        <span class="ps-craft__num" aria-hidden="true">80</span>
+        <p class="ps-craft__num-label">% Merino Wool</p>
+      </div>
+
+      <div class="ps-craft__right">
+        <p class="ps-craft__eyebrow">THE CRAFT</p>
+        <h2 class="ps-craft__heading">Knitted in Yorkshire.<br>Worn everywhere.</h2>
+        <p class="ps-craft__body">
+          Our mill in Yorkshire has been producing fine knitwear for generations. PITTCH works directly with the mill — controlling every stage from yarn sourcing to the final stitch, ensuring that each pair meets our obsessive quality standard.
+        </p>
+        <p class="ps-craft__body">
+          Merino wool is selected for its natural thermoregulation — keeping you warm in winter and cool in summer. It wicks moisture, resists odour, and softens with every wash. Unlike synthetic blends, Merino breathes with your body.
+        </p>
+
+        <div class="ps-craft__stats">
+          <div class="ps-craft__stat">
+            <span class="ps-craft__stat-val">30°</span>
+            <span class="ps-craft__stat-lbl">Machine washable</span>
+          </div>
+          <div class="ps-craft__stat">
+            <span class="ps-craft__stat-val">100%</span>
+            <span class="ps-craft__stat-lbl">Made in England</span>
+          </div>
+          <div class="ps-craft__stat">
+            <span class="ps-craft__stat-val">2+</span>
+            <span class="ps-craft__stat-lbl">Years lifespan</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  {{- '<!-- ⑥ EDITORIAL IMAGE STRIP -->' -}}
+  <section class="ps-strip">
+    <div class="ps-strip__inner">
+
+      <div class="ps-strip__img ps-strip__img--tall">
+        {%- if section.settings.strip_image_1 -%}
+          <img src="{{ section.settings.strip_image_1 | image_url: width: 700 }}" alt="" loading="lazy">
+        {%- else -%}
+          {{ 'product-apparel-3' | placeholder_svg_tag }}
+        {%- endif -%}
+      </div>
+
+      <div class="ps-strip__text-col">
+        <p class="ps-strip__eyebrow">THE COLOURS</p>
+        <p class="ps-strip__body">
+          PITTCH is defined by colour. From deep forest tones to bold electric brights, every colourway is chosen with the same rigour as our materials. Vibrant enough to express personality. Refined enough to belong in any wardrobe.
+        </p>
+        <div class="ps-strip__img ps-strip__img--sq">
+          {%- if section.settings.strip_image_2 -%}
+            <img src="{{ section.settings.strip_image_2 | image_url: width: 500 }}" alt="" loading="lazy">
+          {%- else -%}
+            {{ 'product-apparel-2' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="ps-strip__img ps-strip__img--tall ps-strip__img--offset">
+        {%- if section.settings.strip_image_3 -%}
+          <img src="{{ section.settings.strip_image_3 | image_url: width: 700 }}" alt="" loading="lazy">
+        {%- else -%}
+          {{ 'product-apparel-1' | placeholder_svg_tag }}
+        {%- endif -%}
+      </div>
+
+    </div>
+  </section>
+
+  {{- '<!-- ⑦ VALUES GRID -->' -}}
+  <section class="ps-values">
+    <div class="ps-values__inner page-width">
+
+      <h2 class="ps-values__heading">What PITTCH stands for</h2>
+
+      <div class="ps-values__grid">
+        <div class="ps-values__item">
+          <span class="ps-values__num">01</span>
+          <h3 class="ps-values__title">British Craft</h3>
+          <p class="ps-values__body">Designed and knitted in England from start to finish. Every stitch is a commitment to domestic craft and sustainable employment.</p>
+        </div>
+        <div class="ps-values__item">
+          <span class="ps-values__num">02</span>
+          <h3 class="ps-values__title">Quality First</h3>
+          <p class="ps-values__body">An 80% Merino blend chosen for softness, durability, and performance. No compromise on materials — ever.</p>
+        </div>
+        <div class="ps-values__item">
+          <span class="ps-values__num">03</span>
+          <h3 class="ps-values__title">Responsible Making</h3>
+          <p class="ps-values__body">Merino is a natural, biodegradable fibre. We use sustainable sourcing, minimal packaging, and a mill that shares our values.</p>
+        </div>
+        <div class="ps-values__item">
+          <span class="ps-values__num">04</span>
+          <h3 class="ps-values__title">Colour with Purpose</h3>
+          <p class="ps-values__body">Colour is self-expression. PITTCH socks are the one piece of an outfit entirely your own — bold, joyful, and considered.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  {{- '<!-- ⑧ CLOSING CTA -->' -}}
+  <section class="ps-cta">
+    <div class="ps-cta__inner page-width">
+      <h2 class="ps-cta__heading">Ready to wear PITTCH?</h2>
+      <div class="ps-cta__btns">
+        <a href="/collections/all" class="ps-cta__btn ps-cta__btn--primary">Shop the Collection</a>
+        <a href="/pages/gift-sets" class="ps-cta__btn ps-cta__btn--secondary">Gift Sets</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<style>
+/* ════════════════════════════════════════════
+   PITTCH Our Story — Editorial Page
+   Inspired by Gauchere editorial layout
+   Palette: #efede6 bg · #37210b text
+   ════════════════════════════════════════════ */
+
+.forge-story {
+  background: #efede6;
+  color: #37210b;
+  overflow-x: hidden;
+}
+
+/* ── ① MASTHEAD ── */
+.ps-masthead {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 4rem;
+  overflow: hidden;
+  background: #efede6;
+}
+
+.ps-masthead__grid {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Giant display lines */
+.ps-masthead__line {
+  display: block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(14vw, 18vw, 22rem);
+  font-weight: 600;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: #37210b;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.ps-masthead__line--1 { z-index: 1; }
+.ps-masthead__line--2 { z-index: 1; }
+
+/* Floating image between lines */
+.ps-masthead__img-wrap {
+  position: relative;
+  z-index: 2;
+  width: clamp(180px, 28vw, 380px);
+  margin: -1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(55, 33, 11, 0.2);
+  aspect-ratio: 3/4;
+}
+
+.ps-masthead__img-wrap img,
+.ps-masthead__img-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Corner micro-labels */
+.ps-masthead__label {
+  position: absolute;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(55, 33, 11, 0.5);
+  margin: 0;
+}
+
+.ps-masthead__label--tl { top: 0; left: 0; }
+.ps-masthead__label--tr { top: 0; right: 0; }
+.ps-masthead__label--bl { bottom: 0; left: 0; }
+.ps-masthead__label--br { bottom: 0; right: 0; }
+
+/* ── ② MANIFESTO ── */
+.ps-manifesto {
+  padding: 10rem 0 8rem;
+  background: #37210b;
+  overflow: hidden;
+}
+
+.ps-manifesto__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.ps-manifesto__row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.ps-manifesto__row--right {
+  grid-template-columns: 1fr 180px;
+  text-align: right;
+}
+
+.ps-manifesto__tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(239, 237, 230, 0.45);
+  margin: 0;
+  padding-top: 0.4rem;
+}
+
+.ps-manifesto__body {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.6rem, 2vw, 2.2rem);
+  line-height: 1.55;
+  color: rgba(239, 237, 230, 0.82);
+  margin: 0;
+}
+
+/* The "BRITISH — image — MERINO" display row */
+.ps-manifesto__display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  padding: 2rem 0;
+}
+
+.ps-manifesto__big {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(6rem, 10vw, 12rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: #efede6;
+  line-height: 1;
+}
+
+.ps-manifesto__big--outline {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(239, 237, 230, 0.55);
+  text-stroke: 2px rgba(239, 237, 230, 0.55);
+}
+
+.ps-manifesto__img-mid {
+  width: clamp(120px, 16vw, 260px);
+  aspect-ratio: 3/4;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ps-manifesto__img-mid img,
+.ps-manifesto__img-mid-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── ③ FOUNDER ── */
+.ps-founder {
+  padding: 10rem 0 8rem;
+  background: #efede6;
+}
+
+.ps-founder__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rem;
+  align-items: start;
+}
+
+.ps-founder__eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(55, 33, 11, 0.45);
+  margin: 0 0 1.2rem;
+}
+
+.ps-founder__name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(4rem, 5.5vw, 7rem);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: #37210b;
+  margin: 0 0 3.6rem;
+}
+
+.ps-founder__bio p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.55rem;
+  line-height: 1.72;
+  color: rgba(55, 33, 11, 0.72);
+  margin: 0 0 2rem;
+}
+
+.ps-founder__bio-attr {
+  font-style: italic;
+  font-size: 1.35rem !important;
+  color: rgba(55, 33, 11, 0.5) !important;
+}
+
+.ps-founder__portrait {
+  position: sticky;
+  top: 12rem;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: rgba(55, 33, 11, 0.08);
+}
+
+.ps-founder__portrait img,
+.ps-founder__portrait-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── ④ PULL QUOTE ── */
+.ps-quote {
+  padding: 10rem 0;
+  background: #37210b;
+}
+
+.ps-quote__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+  max-width: 900px;
+}
+
+.ps-quote__mark {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 10rem;
+  line-height: 0.6;
+  color: rgba(239, 237, 230, 0.2);
+  margin: 0;
+  user-select: none;
+}
+
+.ps-quote__text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(3rem, 4.5vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #efede6;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.ps-quote__attr {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(239, 237, 230, 0.45);
+  margin: 0;
+}
+
+/* ── ⑤ CRAFT ── */
+.ps-craft {
+  padding: 10rem 0;
+  background: #efede6;
+  overflow: hidden;
+}
+
+.ps-craft__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.ps-craft__num {
+  display: block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(12rem, 20vw, 22rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(55, 33, 11, 0.2);
+  text-stroke: 2px rgba(55, 33, 11, 0.2);
+  user-select: none;
+}
+
+.ps-craft__num-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(55, 33, 11, 0.45);
+  margin: 0;
+}
+
+.ps-craft__eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(55, 33, 11, 0.4);
+  margin: 0 0 1.6rem;
+}
+
+.ps-craft__heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(3rem, 4vw, 5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #37210b;
+  margin: 0 0 2.8rem;
+}
+
+.ps-craft__body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.72;
+  color: rgba(55, 33, 11, 0.68);
+  margin: 0 0 2rem;
+}
+
+.ps-craft__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4rem;
+  margin-top: 4rem;
+  padding-top: 3.2rem;
+  border-top: 1.5px solid rgba(55, 33, 11, 0.12);
+}
+
+.ps-craft__stat-val {
+  display: block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 3.6rem;
+  font-weight: 600;
+  color: #37210b;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.ps-craft__stat-lbl {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgba(55, 33, 11, 0.5);
+  letter-spacing: 0.04em;
+}
+
+/* ── ⑥ IMAGE STRIP ── */
+.ps-strip {
+  padding: 0;
+  background: #37210b;
+  overflow: hidden;
+}
+
+.ps-strip__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  min-height: 80dvh;
+}
+
+.ps-strip__img {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ps-strip__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s ease;
+}
+
+.ps-strip__img:hover img {
+  transform: scale(1.04);
+}
+
+.ps-strip__img--tall {
+  width: 35%;
+  height: 80dvh;
+}
+
+.ps-strip__img--sq {
+  width: 100%;
+  aspect-ratio: 4/3;
+  margin-top: 4rem;
+}
+
+.ps-strip__img--offset {
+  align-self: flex-end;
+}
+
+.ps-strip__text-col {
+  flex: 1;
+  padding: 8rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ps-strip__eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(239, 237, 230, 0.4);
+  margin: 0 0 1.6rem;
+}
+
+.ps-strip__body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.2rem, 2.8vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.35;
+  color: rgba(239, 237, 230, 0.9);
+  margin: 0;
+}
+
+/* ── ⑦ VALUES GRID ── */
+.ps-values {
+  padding: 10rem 0;
+  background: #efede6;
+}
+
+.ps-values__heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.8rem, 4vw, 5.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #37210b;
+  margin: 0 0 6rem;
+  max-width: 900px;
+}
+
+.ps-values__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4rem 3.2rem;
+}
+
+.ps-values__item {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.ps-values__num {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(55, 33, 11, 0.35);
+}
+
+.ps-values__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #37210b;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.ps-values__body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.45rem;
+  line-height: 1.65;
+  color: rgba(55, 33, 11, 0.62);
+  margin: 0;
+}
+
+/* ── ⑧ CLOSING CTA ── */
+.ps-cta {
+  padding: 10rem 0;
+  background: #37210b;
+}
+
+.ps-cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4.8rem;
+  text-align: center;
+}
+
+.ps-cta__heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(3.2rem, 5vw, 6.5rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #efede6;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.ps-cta__btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  justify-content: center;
+}
+
+.ps-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  height: 5rem;
+  padding: 0 3.4rem;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.ps-cta__btn--primary {
+  background: #efede6;
+  color: #37210b;
+}
+
+.ps-cta__btn--primary:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.ps-cta__btn--secondary {
+  background: transparent;
+  color: #efede6;
+  border: 1.5px solid rgba(239, 237, 230, 0.35);
+}
+
+.ps-cta__btn--secondary:hover {
+  border-color: rgba(239, 237, 230, 0.7);
+  background: rgba(239, 237, 230, 0.06);
+}
+
+/* ── RESPONSIVE ── */
+@media screen and (max-width: 989px) {
+  .ps-masthead__label--tl,
+  .ps-masthead__label--tr,
+  .ps-masthead__label--bl,
+  .ps-masthead__label--br { display: none; }
+
+  .ps-manifesto__row,
+  .ps-manifesto__row--right {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: left;
+  }
+
+  .ps-manifesto__display {
+    gap: 2rem;
+  }
+
+  .ps-manifesto__big { font-size: clamp(4rem, 8vw, 8rem); }
+
+  .ps-founder__inner {
+    grid-template-columns: 1fr;
+    gap: 5rem;
+  }
+
+  .ps-founder__portrait {
+    position: relative;
+    top: 0;
+    aspect-ratio: 16/9;
+  }
+
+  .ps-craft__inner {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .ps-craft__num { font-size: clamp(8rem, 18vw, 14rem); }
+
+  .ps-strip__inner { flex-direction: column; }
+  .ps-strip__img--tall { width: 100%; height: 55dvh; }
+  .ps-strip__text-col { padding: 5rem 2rem; }
+
+  .ps-values__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media screen and (max-width: 749px) {
+  .ps-manifesto__display { flex-direction: column; gap: 2rem; }
+  .ps-manifesto__img-mid { width: 200px; }
+
+  .ps-craft__stats { grid-template-columns: 1fr 1fr; }
+
+  .ps-values__grid { grid-template-columns: 1fr; gap: 3.2rem; }
+
+  .ps-quote__text { font-size: clamp(2.4rem, 7vw, 4rem); }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Our Story Page",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero floating image (between OUR / STORY)"
+    },
+    {
+      "type": "image_picker",
+      "id": "detail_image",
+      "label": "Manifesto centre image"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Elisabeth Braddock portrait"
+    },
+    {
+      "type": "image_picker",
+      "id": "strip_image_1",
+      "label": "Image strip — left"
+    },
+    {
+      "type": "image_picker",
+      "id": "strip_image_2",
+      "label": "Image strip — centre small"
+    },
+    {
+      "type": "image_picker",
+      "id": "strip_image_3",
+      "label": "Image strip — right"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story Page"
+    }
+  ]
+}
+{% endschema %}
