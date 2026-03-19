@@ -27,7 +27,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "heritage · premium · understated — made for Professional women aged 28-45 who value.",
+            "text": "luxury · editorial · minimal — made for Style-conscious professionals aged 28-45 who value.",
             "text_style": "subtitle"
           }
         },
@@ -55,7 +55,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>Heritage  ·  Premium  ·  Understated  ·  British</strong></p>"
+            "text": "<p><strong>Luxury  ·  Editorial  ·  Minimal</strong></p>"
           }
         }
       },
@@ -124,22 +124,22 @@
         "col_1": {
           "type": "column",
           "settings": {
-            "title": "Heritage",
-            "text": "VELOUR starts with heritage as the foundation for everything we do."
+            "title": "Luxury",
+            "text": "VELOUR starts with luxury as the foundation for everything we do."
           }
         },
         "col_2": {
           "type": "column",
           "settings": {
-            "title": "Premium",
-            "text": "Every luxury product is built with premium at the centre."
+            "title": "Editorial",
+            "text": "Every luxury product is built with editorial at the centre."
           }
         },
         "col_3": {
           "type": "column",
           "settings": {
-            "title": "Understated",
-            "text": "understated matters. We don't ship anything we wouldn't keep for ourselves."
+            "title": "Minimal",
+            "text": "minimal matters. We don't ship anything we wouldn't keep for ourselves."
           }
         }
       },
@@ -170,7 +170,7 @@
       "settings": {
         "title": "Featured Pieces",
         "heading_size": "h2",
-        "description": "<p>Our best-selling luxury — made with heritage.</p>",
+        "description": "<p>Our best-selling luxury — made with luxury.</p>",
         "show_description": true,
         "description_style": "subtitle",
         "collection": "all",
@@ -206,7 +206,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>VELOUR was built on a simple idea: heritage and premium shouldn't be mutually exclusive. Read about how we got here.</p>",
+            "text": "<p>VELOUR was built on a simple idea: luxury and editorial shouldn't be mutually exclusive. Read about how we got here.</p>",
             "text_style": "body"
           }
         },
@@ -237,6 +237,90 @@
         "mobile_content_alignment": "left",
         "padding_top": 64,
         "padding_bottom": 64
+      }
+    },
+    "editorial_story_2": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Worn Every Day. Built to Last.",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Minimal design doesn't happen by accident. Every decision at VELOUR starts with the question: does this make it better?</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "scheme-3",
+        "section_color_scheme": "scheme-3",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "brand_values_cols": {
+      "type": "multicolumn",
+      "blocks": {
+        "val_1": {
+          "type": "column",
+          "settings": {
+            "title": "Luxury",
+            "text": "We don't cut corners. Luxury is the baseline, not the exception."
+          }
+        },
+        "val_2": {
+          "type": "column",
+          "settings": {
+            "title": "Editorial",
+            "text": "Every piece reflects the attention that VELOUR puts into its work."
+          }
+        },
+        "val_3": {
+          "type": "column",
+          "settings": {
+            "title": "Minimal",
+            "text": "Purpose-led from the first sketch. Nothing ships without reason."
+          }
+        }
+      },
+      "block_order": [
+        "val_1",
+        "val_2",
+        "val_3"
+      ],
+      "settings": {
+        "title": "What VELOUR Stands For",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "social_proof": {
@@ -305,6 +389,8 @@
     "forge_features",
     "featured_collection",
     "brand_story",
+    "editorial_story_2",
+    "brand_values_cols",
     "social_proof",
     "newsletter"
   ]
