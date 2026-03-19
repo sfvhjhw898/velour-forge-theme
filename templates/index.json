@@ -362,9 +362,9 @@
           }
         },
         "subheading": {
-          "type": "subheading",
+          "type": "paragraph",
           "settings": {
-            "subheading": "New arrivals, behind-the-scenes, and early access. No noise."
+            "text": "New arrivals, behind-the-scenes, and early access. No noise."
           }
         }
       },
