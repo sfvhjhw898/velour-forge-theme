@@ -1,0 +1,537 @@
+{%- comment -%}
+  PITTCH — Collection Cards: Three Independent Stacked Stacks
+  Three stacks displayed side-by-side, one per collection.
+  Each stack: front card (linked) + 2 decorative back cards that spread on hover.
+  Spring animation: cubic-bezier(0.34, 1.56, 0.64, 1)
+  Mobile: tap to toggle spread per stack.
+{%- endcomment -%}
+
+{%- style -%}
+  .forge-collection-cards {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: rgb(var(--color-background));
+  }
+{%- endstyle -%}
+
+<style>
+  /* ── Section header ── */
+  .forge-collection-cards__header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .forge-collection-cards__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(3.2rem, 5vw, 5.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: #0D0D0D;
+    margin: 0 0 1rem;
+  }
+
+  .forge-collection-cards__subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.6rem;
+    color: #3A3A3A;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ── Row of three stacks ── */
+  .forge-stacks-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5rem;
+    padding: 2rem 4rem 5rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Per-stack column wrapper ── */
+  .forge-stack-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+  }
+
+  /* ── The stack container ── */
+  .forge-stack {
+    position: relative;
+    width: 280px;
+    height: 340px;
+    cursor: pointer;
+    isolation: isolate;
+  }
+
+  /* ── Each card ── */
+  .forge-stack__card {
+    position: absolute;
+    inset: 0;
+    width: 280px;
+    height: 340px;
+    border-radius: 2rem;
+    overflow: hidden;
+    background: #FFFFFF;
+    border: 1px solid rgba(232, 232, 232, 0.85);
+    transition:
+      transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.3s ease;
+    will-change: transform;
+  }
+
+  /* Front card — highest z-index */
+  .forge-stack__card:nth-child(1) {
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0,0,0,0.02), 0 4px 24px rgba(0,0,0,0.08);
+    transition-delay: 0s;
+  }
+
+  /* Back card left */
+  .forge-stack__card:nth-child(2) {
+    z-index: 1;
+    transition-delay: 0.05s;
+    box-shadow: 0 0 10px rgba(0,0,0,0.02);
+  }
+
+  /* Back card right */
+  .forge-stack__card:nth-child(3) {
+    z-index: 1;
+    transition-delay: 0.10s;
+    box-shadow: 0 0 10px rgba(0,0,0,0.02);
+  }
+
+  /* ── Hover / JS spread state ── */
+  .forge-stack:hover .forge-stack__card:nth-child(2),
+  .forge-stack.is-spread .forge-stack__card:nth-child(2) {
+    transform: translateX(-44px) rotate(-6deg);
+    z-index: 5;
+  }
+
+  .forge-stack:hover .forge-stack__card:nth-child(3),
+  .forge-stack.is-spread .forge-stack__card:nth-child(3) {
+    transform: translateX(44px) rotate(6deg);
+    z-index: 5;
+  }
+
+  .forge-stack:hover .forge-stack__card:nth-child(1),
+  .forge-stack.is-spread .forge-stack__card:nth-child(1) {
+    box-shadow:
+      0 0 10px rgba(0,0,0,0.02),
+      0 20px 60px rgba(0, 66, 37, 0.18);
+  }
+
+  /* ── Card image area ── */
+  .forge-stack__card-image {
+    height: 212px;
+    margin: 8px 8px 0;
+    border-radius: 1.4rem;
+    overflow: hidden;
+    background: #E8F5EE; /* default; overridden per stack below */
+  }
+
+  .forge-stack__card-image img,
+  .forge-stack__card-image .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .forge-stack:hover .forge-stack__card:nth-child(1) .forge-stack__card-image img,
+  .forge-stack.is-spread .forge-stack__card:nth-child(1) .forge-stack__card-image img {
+    transform: scale(1.04);
+  }
+
+  /* ── Per-stack accent colours for back cards ── */
+  .forge-stack-column:nth-child(1) .forge-stack__card-image { background: #E8F5EE; }
+  .forge-stack-column:nth-child(2) .forge-stack__card-image { background: #FBF3EB; }
+  .forge-stack-column:nth-child(3) .forge-stack__card-image { background: #EAF0F5; }
+
+  /* Slightly tint back cards so they look distinct from front */
+  .forge-stack-column:nth-child(1) .forge-stack__card:nth-child(2) .forge-stack__card-image { background: #C8E8D8; }
+  .forge-stack-column:nth-child(1) .forge-stack__card:nth-child(3) .forge-stack__card-image { background: #D8F0E4; }
+  .forge-stack-column:nth-child(2) .forge-stack__card:nth-child(2) .forge-stack__card-image { background: #F0DDD0; }
+  .forge-stack-column:nth-child(2) .forge-stack__card:nth-child(3) .forge-stack__card-image { background: #F8E8DC; }
+  .forge-stack-column:nth-child(3) .forge-stack__card:nth-child(2) .forge-stack__card-image { background: #D0DFF0; }
+  .forge-stack-column:nth-child(3) .forge-stack__card:nth-child(3) .forge-stack__card-image { background: #DCE8F8; }
+
+  /* ── Card body ── */
+  .forge-stack__card-body {
+    padding: 10px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .forge-stack__card-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #0D0D0D;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .forge-stack__card-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    color: #3A3A3A;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .forge-stack__card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #37210b;
+    text-decoration: none;
+    margin-top: 4px;
+    transition: gap 200ms ease;
+    pointer-events: none;
+  }
+
+  .forge-stack:hover .forge-stack__card-cta,
+  .forge-stack.is-spread .forge-stack__card-cta {
+    gap: 8px;
+  }
+
+  /* ── Explore hint ── */
+  .forge-stack-hint {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(0, 66, 37, 0.5);
+    user-select: none;
+    margin: 0;
+  }
+
+  .forge-stack-hint--desktop { display: block; }
+  .forge-stack-hint--mobile  { display: none; }
+
+  /* ── Card type rules ── */
+  .forge-stack__card--back {
+    pointer-events: none;
+  }
+
+  .forge-stack__card--front {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  /* ── Mobile ── */
+  @media screen and (max-width: 989px) {
+    .forge-stacks-row {
+      gap: 3rem;
+      padding: 1.6rem 2rem 4rem;
+    }
+
+    .forge-stack {
+      width: 260px;
+      height: 320px;
+    }
+
+    .forge-stack__card {
+      width: 260px;
+      height: 320px;
+    }
+
+    .forge-stack__card-image {
+      height: 196px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .forge-stacks-row {
+      flex-direction: column;
+      align-items: center;
+      padding: 1.6rem 2.4rem 4rem;
+    }
+
+    .forge-stack {
+      width: 300px;
+      height: 360px;
+    }
+
+    .forge-stack__card {
+      width: 300px;
+      height: 360px;
+    }
+
+    .forge-stack__card-image {
+      height: 228px;
+    }
+
+    /* Disable CSS hover on touch — JS handles it */
+    .forge-stack:hover .forge-stack__card:nth-child(2) { transform: none; }
+    .forge-stack:hover .forge-stack__card:nth-child(3) { transform: none; }
+    .forge-stack:hover .forge-stack__card:nth-child(1) {
+      box-shadow: 0 0 10px rgba(0,0,0,0.02), 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    .forge-stack-hint--desktop { display: none; }
+    .forge-stack-hint--mobile  { display: block; }
+  }
+</style>
+
+<div class="forge-collection-cards color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+
+    {%- if section.settings.heading != blank -%}
+      <div class="forge-collection-cards__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <h2 class="forge-collection-cards__title" data-reveal="masked">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="forge-collection-cards__subtitle" data-reveal="slide-up" data-reveal-delay="200">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="forge-stacks-row" data-reveal="stagger">
+
+      {%- for block in section.blocks -%}
+        {%- assign coll       = collections[block.settings.collection] -%}
+        {%- assign coll_title = coll.title | default: block.settings.fallback_title -%}
+        {%- assign coll_url   = coll.url   | default: routes.collections_url -%}
+        {%- assign stack_id   = 'PittchStack-' | append: section.id | append: '-' | append: forloop.index -%}
+
+        {%- comment -%} Choose placeholder SVGs for back cards by position {%- endcomment -%}
+        {%- if forloop.index == 1 -%}
+          {%- assign back_svg_1 = 'collection-apparel-2' -%}
+          {%- assign back_svg_2 = 'collection-apparel-3' -%}
+        {%- elsif forloop.index == 2 -%}
+          {%- assign back_svg_1 = 'collection-apparel-1' -%}
+          {%- assign back_svg_2 = 'collection-apparel-3' -%}
+        {%- else -%}
+          {%- assign back_svg_1 = 'collection-apparel-1' -%}
+          {%- assign back_svg_2 = 'collection-apparel-2' -%}
+        {%- endif -%}
+
+        <div class="forge-stack-column{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+             style="animation-delay: {{ forloop.index0 | times: 120 }}ms">
+
+          <div
+            class="forge-stack"
+            id="{{ stack_id }}"
+            role="group"
+            aria-label="{{ coll_title | escape }}"
+            {{ block.shopify_attributes }}
+          >
+
+            {%- comment -%} ── FRONT CARD ── {%- endcomment -%}
+            <a
+              href="{{ coll_url }}"
+              class="forge-stack__card forge-stack__card--front"
+              aria-label="{{ 'Shop ' | append: coll_title | escape }}"
+            >
+              <div class="forge-stack__card-image">
+                {%- if coll.featured_image != blank -%}
+                  <img
+                    src="{{ coll.featured_image | image_url: width: 600 }}"
+                    alt="{{ coll.featured_image.alt | default: coll_title | escape }}"
+                    loading="{{ forloop.first | iif: 'eager', 'lazy' }}"
+                    width="600"
+                    height="750"
+                  >
+                {%- else -%}
+                  {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="forge-stack__card-body">
+                <p class="forge-stack__card-title">{{ coll_title }}</p>
+                <p class="forge-stack__card-desc">{{ block.settings.tagline }}</p>
+                <span class="forge-stack__card-cta" aria-hidden="true">Shop Now &rarr;</span>
+              </div>
+            </a>
+
+            {%- comment -%} ── BACK CARD LEFT ── {%- endcomment -%}
+            <div class="forge-stack__card forge-stack__card--back" aria-hidden="true">
+              <div class="forge-stack__card-image">
+                {%- if coll.images[1] != blank -%}
+                  <img src="{{ coll.images[1] | image_url: width: 600 }}" alt="" loading="lazy" width="600" height="750">
+                {%- else -%}
+                  {{ back_svg_1 | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="forge-stack__card-body">
+                <p class="forge-stack__card-title">{{ coll_title }}</p>
+              </div>
+            </div>
+
+            {%- comment -%} ── BACK CARD RIGHT ── {%- endcomment -%}
+            <div class="forge-stack__card forge-stack__card--back" aria-hidden="true">
+              <div class="forge-stack__card-image">
+                {%- if coll.images[2] != blank -%}
+                  <img src="{{ coll.images[2] | image_url: width: 600 }}" alt="" loading="lazy" width="600" height="750">
+                {%- else -%}
+                  {{ back_svg_2 | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="forge-stack__card-body">
+                <p class="forge-stack__card-title">{{ coll_title }}</p>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="forge-stack-hint forge-stack-hint--desktop" aria-hidden="true">Hover to explore</p>
+          <p class="forge-stack-hint forge-stack-hint--mobile"  aria-hidden="true">Tap to explore</p>
+
+        </div>
+      {%- endfor -%}
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    var isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+    if (!isTouchDevice) return;
+
+    {%- for block in section.blocks -%}
+      {%- assign stack_id = 'PittchStack-' | append: section.id | append: '-' | append: forloop.index -%}
+      (function () {
+        var stack = document.getElementById('{{ stack_id }}');
+        if (!stack) return;
+
+        stack.addEventListener('click', function (e) {
+          if (stack.classList.contains('is-spread')) {
+            var front = stack.querySelector('.forge-stack__card--front');
+            if (front && front.contains(e.target)) {
+              stack.classList.remove('is-spread');
+              return;
+            }
+            stack.classList.remove('is-spread');
+            e.preventDefault();
+          } else {
+            stack.classList.add('is-spread');
+            e.preventDefault();
+          }
+        });
+
+        document.addEventListener('click', function (e) {
+          if (!stack.contains(e.target)) {
+            stack.classList.remove('is-spread');
+          }
+        });
+      })();
+    {%- endfor -%}
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "PITTCH Collection Cards",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Shop by Style",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "default": "Every pair made in England from sustainable Merino wool.",
+      "label": "Subheading"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "fallback_title",
+          "default": "Shop the Collection",
+          "label": "Fallback title"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "default": "Discover our Merino range",
+          "label": "Tagline"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PITTCH Collection Cards",
+      "blocks": [
+        {
+          "type": "collection_card",
+          "settings": {
+            "fallback_title": "Ankle Socks",
+            "tagline": "Low-profile comfort, maximum breathability"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "fallback_title": "Mid-Length Socks",
+            "tagline": "The versatile everyday Merino sock"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "fallback_title": "Crew & Boot Socks",
+            "tagline": "Full-coverage warmth for every adventure"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
