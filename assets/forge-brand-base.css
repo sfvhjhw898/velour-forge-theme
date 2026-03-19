@@ -1,0 +1,1486 @@
+/* ==========================================================================
+   PITTCH — Brand CSS
+   British Heritage meets Modern Luxury
+   v1.0 · March 2026
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Brand Color Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --pittch-green:       #37210b;
+  --pittch-green-rgb:   55, 33, 11;
+  --pittch-green-light: #f5ede0;
+  --pittch-gold:        #A07820;
+  --pittch-white:       #efede6;
+  --pittch-warm-stone:  #F5F0EB;
+  --pittch-obsidian:    #0D0D0D;
+  --pittch-mid-grey:    #3A3A3A;
+  --pittch-border:      #E8E8E8;
+
+  /* Glassmorphism */
+  --pittch-glass:        rgba(239, 237, 230, 0.72);
+  --pittch-glass-border: rgba(239, 237, 230, 0.45);
+  --pittch-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --pittch-glass-shadow-hover: 0 16px 48px rgba(55, 33, 11, 0.12);
+
+  /* Typography */
+  --pittch-font-serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --pittch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --pittch-font-mono:   'JetBrains Mono', 'Courier New', Courier, monospace;
+}
+
+/* --------------------------------------------------------------------------
+   2. Typography Overrides — Cormorant Garamond for headings
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4,
+.card__heading,
+.featured-collection .title,
+.collection-card__title,
+.hero__heading,
+.image-with-text__heading,
+.multicolumn-card__title,
+.rich-text__heading,
+.section-header__heading,
+.banner__heading,
+.full-unstyled-link,
+.footer-block__heading {
+  font-family: var(--pittch-font-serif) !important;
+  letter-spacing: -0.02em;
+}
+
+body,
+p, li, a, span, label, input, button, select, textarea,
+.price, .caption, .caption-large, .caption-with-letter-spacing {
+  font-family: var(--pittch-font-sans);
+}
+
+/* Heading scales */
+.banner__heading {
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.card__heading {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. Glassmorphic Navigation
+   -------------------------------------------------------------------------- */
+
+/* Wrapper transitions */
+.header-wrapper {
+  transition: background-color 300ms ease,
+              backdrop-filter 300ms ease,
+              -webkit-backdrop-filter 300ms ease,
+              border-color 300ms ease;
+}
+
+/* Default state — transparent */
+.header-wrapper.color-scheme-1 {
+  background-color: var(--pittch-white);
+}
+
+/* When page is at top, make nav glass-transparent */
+.section-header:not(.shopify-section-header-sticky) .header-wrapper {
+  background-color: rgba(250, 250, 250, 0.85);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+/* Sticky scrolled state — full glass */
+.shopify-section-header-sticky .header-wrapper {
+  background: var(--pittch-glass) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid var(--pittch-glass-border) !important;
+  box-shadow: 0 2px 20px rgba(55, 33, 11, 0.06);
+}
+
+/* PITTCH wordmark / shop name */
+.header__heading-link .h2,
+.header__heading-link span.h2 {
+  font-family: var(--pittch-font-serif) !important;
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--pittch-green);
+  text-transform: uppercase;
+}
+
+/* Nav links */
+.header__menu-item,
+.list-menu__item--link {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pittch-obsidian);
+  transition: color 200ms ease;
+}
+
+.header__menu-item:hover,
+.list-menu__item--link:hover {
+  color: var(--pittch-green);
+}
+
+/* Nav icons */
+.header__icon svg {
+  color: var(--pittch-obsidian);
+  transition: color 200ms ease;
+}
+
+.header__icon:hover svg {
+  color: var(--pittch-green);
+}
+
+/* Cart count badge — British Racing Green */
+.cart-count-bubble {
+  background-color: var(--pittch-green);
+  color: #FFFFFF;
+}
+
+/* Green bottom accent line on nav */
+.header-wrapper--border-bottom {
+  border-bottom: 2px solid var(--pittch-green) !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Buttons — British Racing Green
+   -------------------------------------------------------------------------- */
+
+/* Primary button */
+.button,
+.button--primary {
+  background-color: var(--pittch-green) !important;
+  color: #FFFFFF !important;
+  border-color: var(--pittch-green) !important;
+  font-family: var(--pittch-font-sans);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.button:hover,
+.button--primary:hover {
+  background-color: rgba(55, 33, 11, 0.88) !important;
+  transform: scale(1.01);
+  box-shadow: 0 4px 16px rgba(55, 33, 11, 0.25);
+}
+
+/* Secondary / outline button */
+.button--secondary {
+  background-color: transparent !important;
+  color: var(--pittch-green) !important;
+  border: 1px solid var(--pittch-green) !important;
+}
+
+.button--secondary:hover {
+  background-color: var(--pittch-green-light) !important;
+}
+
+/* Quick-add button */
+.quick-add__submit,
+.product-form__submit {
+  background-color: var(--pittch-green) !important;
+  color: #FFFFFF !important;
+  font-family: var(--pittch-font-sans);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   5. Product Cards — PITTCH Style
+   -------------------------------------------------------------------------- */
+
+/* Card container */
+.card-wrapper {
+  transition: box-shadow 500ms ease, transform 350ms ease;
+  border-radius: 1.6rem;
+  overflow: hidden;
+}
+
+.card-wrapper:hover {
+  box-shadow: var(--pittch-glass-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Card image zoom on hover */
+.card__media .media img,
+.card .media img {
+  transition: transform 350ms ease;
+}
+
+.card-wrapper:hover .card__media .media img,
+.card-wrapper:hover .card .media img {
+  transform: scale(1.04);
+}
+
+/* Glassmorphic quick-add overlay */
+.card__footer,
+.card__information {
+  font-family: var(--pittch-font-sans);
+}
+
+/* Quick-add glass panel */
+.quick-add {
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Price display */
+.price .price-item--sale,
+.price .price-item--regular {
+  font-family: var(--pittch-font-sans);
+  font-weight: 600;
+  color: var(--pittch-green);
+}
+
+.price--on-sale .price-item--regular {
+  color: var(--pittch-gold);
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+/* Sale badge */
+.badge--sale,
+.badge--on-sale {
+  background-color: var(--pittch-gold) !important;
+  color: #FFFFFF !important;
+  font-family: var(--pittch-font-sans);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Sold-out badge */
+.badge--sold-out {
+  background-color: var(--pittch-mid-grey) !important;
+  color: #FFFFFF !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Collection Cards
+   -------------------------------------------------------------------------- */
+
+.collection-card,
+.card--card {
+  border-radius: 2rem;
+  overflow: hidden;
+  transition: box-shadow 350ms ease;
+}
+
+.collection-card:hover,
+.card--card:hover {
+  box-shadow: var(--pittch-glass-shadow-hover);
+}
+
+/* --------------------------------------------------------------------------
+   7. Cart Drawer — Glassmorphic
+   -------------------------------------------------------------------------- */
+
+.cart-drawer {
+  background: rgba(255, 255, 255, 0.80) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-left: 1px solid var(--pittch-glass-border);
+}
+
+.cart-drawer__header {
+  font-family: var(--pittch-font-serif);
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--pittch-obsidian);
+  border-bottom: 1px solid var(--pittch-border);
+}
+
+.cart-drawer__checkout {
+  background-color: var(--pittch-green) !important;
+  color: #FFFFFF !important;
+}
+
+/* Free shipping progress */
+.cart-drawer__collection .progress-bar,
+.progress-bar__progress {
+  background-color: var(--pittch-green) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. Variant Pills / Size Selectors
+   -------------------------------------------------------------------------- */
+
+.swatch--active,
+.swatch-input:checked + .swatch-label {
+  border-color: var(--pittch-green) !important;
+  outline: 2px solid var(--pittch-green);
+  outline-offset: 2px;
+}
+
+.swatch-label:hover {
+  border-color: var(--pittch-green) !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Filter Chips (Collection pages)
+   -------------------------------------------------------------------------- */
+
+.facets__pill,
+.filter-chip {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.3rem;
+  font-weight: 500;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.facets__pill.active,
+.active .facets__pill,
+.filter-chip--active {
+  background-color: var(--pittch-green) !important;
+  color: #FFFFFF !important;
+  border-color: var(--pittch-green) !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. Announcement Bar — PITTCH Brand Values Strip
+   -------------------------------------------------------------------------- */
+
+.announcement-bar-section .utility-bar {
+  background-color: var(--pittch-green) !important;
+  padding: 10px 0;
+}
+
+.announcement-bar-section .announcement-bar__message {
+  color: rgba(255, 255, 255, 0.90) !important;
+  font-family: var(--pittch-font-serif);
+  font-style: italic;
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+}
+
+/* --------------------------------------------------------------------------
+   11. System Status Marquee Strip (Footer)
+   -------------------------------------------------------------------------- */
+
+.pittch-status-strip {
+  background-color: var(--pittch-green);
+  overflow: hidden;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.pittch-status-strip__track {
+  display: flex;
+  width: max-content;
+  animation: pittch-marquee 35s linear infinite;
+}
+
+.pittch-status-strip__segment {
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  white-space: nowrap;
+  font-family: var(--pittch-font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  gap: 1.5rem;
+}
+
+.pittch-status-strip__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #22c55e; /* green pulse dot */
+  flex-shrink: 0;
+}
+
+.pittch-status-strip__divider {
+  color: rgba(255, 255, 255, 0.25);
+  margin: 0 0.5rem;
+}
+
+@keyframes pittch-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pittch-status-strip__track {
+    animation: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. Footer — British Racing Green
+   -------------------------------------------------------------------------- */
+
+/* Override footer to use green scheme */
+.footer.color-scheme-4,
+.footer.color-scheme-pittch-dark {
+  background-color: var(--pittch-green);
+}
+
+.footer.color-scheme-4 a,
+.footer.color-scheme-4 .footer-block__heading,
+.footer.color-scheme-4 .h2 {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+.footer.color-scheme-4 a:hover {
+  color: #FFFFFF;
+}
+
+/* Footer newsletter input */
+.footer .newsletter-form__button {
+  background-color: var(--pittch-gold);
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   13. Merino-Pulse Scroll Reveal Animations
+   -------------------------------------------------------------------------- */
+
+/* Dawn has its own scroll reveal — we augment it */
+.animate--fade-in {
+  animation-duration: 550ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate--slide-in {
+  animation-duration: 600ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom pulse classes for sections */
+[data-pulse] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 550ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-pulse].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-pulse="fade-in"] {
+  transform: none;
+  transition: opacity 500ms ease-out;
+}
+
+[data-pulse="scale-in"] {
+  transform: scale(0.96);
+  transition: opacity 500ms ease-out, transform 500ms ease-out;
+}
+
+[data-pulse="scale-in"].is-visible {
+  transform: scale(1);
+}
+
+[data-pulse="slide-right"] {
+  transform: translateX(-24px);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+}
+
+[data-pulse="slide-right"].is-visible {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-pulse],
+  [data-pulse="fade-in"],
+  [data-pulse="scale-in"],
+  [data-pulse="slide-right"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. Section Spacing & Layout
+   -------------------------------------------------------------------------- */
+
+/* Hero banner heading */
+.banner__content .banner__heading {
+  font-family: var(--pittch-font-serif) !important;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+/* Section headings */
+.featured-collection__title,
+.collection-list__title,
+.rich-text__heading,
+.multicolumn__heading,
+.image-with-text__heading {
+  font-family: var(--pittch-font-serif) !important;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+/* Generous section padding */
+.section-featured-collection-padding {
+  padding-top: 5.6rem;
+  padding-bottom: 5.6rem;
+}
+
+/* Image banner — full viewport */
+.banner.banner--medium {
+  min-height: 70vh;
+}
+
+.banner.banner--large {
+  min-height: 90vh;
+}
+
+/* --------------------------------------------------------------------------
+   15. Glassmorphic Glass Panel Utility
+   -------------------------------------------------------------------------- */
+
+.glass-panel {
+  background: var(--pittch-glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--pittch-glass-border);
+  border-radius: 2rem;
+  box-shadow: var(--pittch-glass-shadow);
+}
+
+.glass-panel:hover {
+  box-shadow: var(--pittch-glass-shadow-hover);
+}
+
+/* --------------------------------------------------------------------------
+   16. Search / Inputs
+   -------------------------------------------------------------------------- */
+
+.field__input:focus,
+.select__select:focus {
+  border-color: var(--pittch-green) !important;
+  box-shadow: 0 0 0 2px rgba(55, 33, 11, 0.15);
+  outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   17. Links & Accents
+   -------------------------------------------------------------------------- */
+
+a.link--text:hover,
+.link:hover {
+  color: var(--pittch-green);
+}
+
+/* Active nav state */
+.list-menu__item--active {
+  color: var(--pittch-green) !important;
+  border-bottom: 2px solid var(--pittch-green);
+}
+
+/* Breadcrumbs */
+.breadcrumbs a:hover {
+  color: var(--pittch-green);
+}
+
+/* --------------------------------------------------------------------------
+   18. Mega Menu / Dropdown — PITTCH Green accent
+   -------------------------------------------------------------------------- */
+
+.mega-menu__link:hover,
+.dropdown__link:hover {
+  color: var(--pittch-green) !important;
+}
+
+/* --------------------------------------------------------------------------
+   19. Mobile Enhancements
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 749px) {
+  /* Larger touch targets */
+  .header__icon {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Full-screen cart drawer on mobile */
+  .cart-drawer {
+    max-width: 100% !important;
+  }
+
+  /* Mobile banner headline */
+  .banner__heading {
+    font-size: clamp(3.2rem, 8vw, 5.6rem);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   20. PITTCH Pill Nav — Aceternity-style floating dark capsule
+   Layout: [icons / cart ← left] | [pill nav centred] | [logo → right]
+   -------------------------------------------------------------------------- */
+
+@media screen and (min-width: 990px) {
+
+  /* Three-column grid override:
+     col 1 (1fr) = icons left   |  col 2 (auto) = pill nav  |  col 3 (1fr) = logo right */
+  .section-header .header.header--middle-left,
+  .section-header .header.header--middle-center {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+  }
+
+  /* Hide hamburger on desktop */
+  .section-header header-drawer {
+    display: none !important;
+  }
+
+  /* Icons (search · account · cart) → far LEFT */
+  .section-header .header__icons {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* Pill nav → CENTRE */
+  .section-header .header__inline-menu {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+  }
+
+  /* Logo (h1 wrapper on index, bare <a> on other pages) → far RIGHT */
+  .section-header h1.header__heading,
+  .section-header .header > .header__heading-link {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    margin: 0 !important;
+  }
+
+  /* ── Pill styling — British Racing Green ── */
+  .header__inline-menu {
+    background: rgba(55, 33, 11, 0.93) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 100px !important;
+    padding: 0.3rem 0.5rem !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    box-shadow:
+      0 2px 28px rgba(55, 33, 11, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+  }
+
+  /* Override pittch-nav link colours inside the pill */
+  .header__inline-menu .pittch-nav__link {
+    color: rgba(255, 255, 255, 0.82) !important;
+    font-size: 1.35rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.015em !important;
+    text-transform: none !important;
+    padding: 0.65rem 1.3rem !important;
+    border-radius: 100px !important;
+    transition: background 0.18s ease, color 0.18s ease !important;
+    opacity: 1 !important;
+  }
+
+  .header__inline-menu .pittch-nav__link:hover {
+    color: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.10) !important;
+    opacity: 1 !important;
+  }
+
+  /* Caret colour inside dark pill */
+  .header__inline-menu .pittch-nav__caret path {
+    stroke: rgba(255, 255, 255, 0.55) !important;
+  }
+
+  .header__inline-menu .pittch-nav__item.is-active .pittch-nav__caret path {
+    stroke: rgba(255, 255, 255, 0.90) !important;
+  }
+
+  /* Active nav label */
+  .header__inline-menu .header__active-menu-item {
+    color: #FFFFFF !important;
+  }
+
+  /* PITTCH wordmark stays brand-green on right side */
+  .header__heading-link .h2,
+  .header__heading-link span.h2 {
+    color: var(--pittch-green) !important;
+  }
+}
+
+/* BRG pill when header is scrolled */
+.shopify-section-header-sticky .header__inline-menu {
+  background: rgba(55, 33, 11, 0.98) !important;
+  box-shadow:
+    0 4px 32px rgba(55, 33, 11, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+}
+
+/* --------------------------------------------------------------------------
+   21. Collection Page — Reveal Card + Velvety editorial layout
+   -------------------------------------------------------------------------- */
+
+/* Collection banner */
+.collection-banner .page-width {
+  padding-top: 5.6rem;
+  padding-bottom: 2.4rem;
+  text-align: center;
+}
+
+.collection-banner .collection-hero__title,
+.collection-banner h1 {
+  font-family: var(--pittch-font-serif) !important;
+  font-size: clamp(4rem, 6vw, 7rem) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.0 !important;
+  color: #0D0D0D !important;
+  margin-bottom: 1.2rem !important;
+}
+
+.collection-banner .collection__description,
+.collection-banner .rte {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.5rem;
+  color: #3A3A3A;
+  max-width: 52rem;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* Filter chips */
+.facets-horizontal {
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  padding-bottom: 1.6rem;
+}
+
+.facets__wrapper { display: flex; align-items: center; flex-wrap: wrap; gap: 0.8rem; }
+
+.facets__pill,
+.facets-horizontal .facets__label {
+  font-family: var(--pittch-font-sans) !important;
+  font-size: 1.3rem !important;
+  font-weight: 500 !important;
+  border-radius: 100px !important;
+  border: 1px solid rgba(0,0,0,0.16) !important;
+  background: transparent !important;
+  color: #0D0D0D !important;
+  padding: 0.6rem 1.4rem !important;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease !important;
+  cursor: pointer !important;
+}
+
+.facets__pill:hover, .facets-horizontal .facets__label:hover {
+  background: rgba(55,33,11,0.06) !important;
+  border-color: #37210b !important;
+  color: #37210b !important;
+}
+
+.facets__pill--active, [data-facets-active] .facets__pill, .active .facets__pill {
+  background: #37210b !important;
+  border-color: #37210b !important;
+  color: #FFFFFF !important;
+}
+
+.facets__sort .select__select, .collection .select__select {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.3rem;
+  border-radius: 100px;
+  border: 1px solid rgba(0,0,0,0.16);
+  padding: 0.6rem 3rem 0.6rem 1.4rem;
+}
+
+.product-count__text { font-family: var(--pittch-font-sans); font-size: 1.3rem; color: #3A3A3A; }
+
+/* ──────────────────────────────────────────
+   PITTCH Product Reveal Card
+   Full-card dark overlay slides up on hover:
+   "Product Details" label, description,
+   2 feature tiles, Add to Cart + View Details
+   No discount badge, no reviews
+   Applies site-wide (collection + homepage)
+   ────────────────────────────────────────── */
+
+/* Hide sale badge sitewide (keep sold-out) */
+.badge--sale,
+.card__badge .badge--sale { display: none !important; }
+
+/* ── Card wrapper ── lift + shadow on hover */
+.card-wrapper.product-card-wrapper {
+  border-radius: 2rem;
+  overflow: visible;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+}
+
+.card-wrapper.product-card-wrapper:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Card shell — position:relative + overflow:hidden required for overlay ── */
+.card-wrapper.product-card-wrapper .card.card--standard {
+  position: relative !important;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Image zoom on hover ── */
+.card-wrapper.product-card-wrapper .card--media .media img.motion-reduce {
+  transition: transform 0.6s ease !important;
+}
+.card-wrapper.product-card-wrapper:hover .card--media .media img.motion-reduce {
+  transform: scale(1.06) !important;
+}
+
+/* ── Hide the old image-area inner overlay ── */
+.card-wrapper.product-card-wrapper .card--standard.card--media .card__inner > .card__content {
+  display: none !important;
+}
+
+/* ── Product info below image ── */
+.card-wrapper.product-card-wrapper .card--standard > .card__content {
+  padding: 1.2rem 1.4rem 0.4rem !important;
+  background: #efede6;
+}
+
+.card-wrapper.product-card-wrapper .card--standard > .card__content .card__heading {
+  font-family: var(--pittch-font-serif) !important;
+  font-size: 1.75rem !important;
+  font-weight: 600 !important;
+  color: #0D0D0D !important;
+  margin-bottom: 0.2rem !important;
+}
+
+.card-wrapper.product-card-wrapper .card--standard > .card__content .price {
+  color: #37210b !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+}
+
+/* ── Quick-add (hidden behind overlay, still functional via JS) ── */
+.card-wrapper.product-card-wrapper .quick-add {
+  padding: 0.8rem 1.4rem 1.4rem !important;
+  background: #efede6;
+  margin: 0 !important;
+}
+
+.card-wrapper.product-card-wrapper .quick-add__submit {
+  background: #37210b !important;
+  color: #efede6 !important;
+  border: none !important;
+  border-radius: 100px !important;
+  font-family: var(--pittch-font-sans) !important;
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  height: 4.6rem !important;
+  transition: background 0.2s ease !important;
+}
+
+/* ════════════════════════════════════════
+   PITTCH Reveal Overlay
+   Absolute over full .card, slides up
+   ════════════════════════════════════════ */
+
+.pittch-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(55, 33, 11, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transform: translateY(100%);
+  opacity: 0;
+  transition:
+    transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.28s ease;
+  pointer-events: none;
+}
+
+.card-wrapper.product-card-wrapper:hover .pittch-reveal {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pittch-reveal__inner {
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.pittch-reveal__label {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #efede6;
+  margin: 0;
+}
+
+.pittch-reveal__desc {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.25rem;
+  line-height: 1.58;
+  color: rgba(239, 237, 230, 0.68);
+  margin: 0;
+}
+
+.pittch-reveal__tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+.pittch-reveal__tile {
+  background: rgba(239, 237, 230, 0.1);
+  border-radius: 0.9rem;
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.pittch-reveal__tile-main {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #efede6;
+  line-height: 1.2;
+}
+
+.pittch-reveal__tile-sub {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.05rem;
+  color: rgba(239, 237, 230, 0.5);
+}
+
+.pittch-reveal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.2rem;
+}
+
+.pittch-reveal__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  height: 4.4rem;
+  background: rgba(239, 237, 230, 0.95);
+  color: #37210b;
+  border: none;
+  border-radius: 100px;
+  font-family: var(--pittch-font-sans);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.15s ease;
+}
+
+.pittch-reveal__add-btn:hover {
+  background: #efede6;
+  transform: scale(1.015);
+}
+
+.pittch-reveal__view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3.8rem;
+  background: transparent;
+  color: #efede6;
+  border: 1.5px solid rgba(239, 237, 230, 0.3);
+  border-radius: 100px;
+  font-family: var(--pittch-font-sans);
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.pittch-reveal__view-btn:hover {
+  border-color: rgba(239, 237, 230, 0.7);
+  background: rgba(239, 237, 230, 0.07);
+}
+
+/* Touch devices — tap to reveal */
+@media (hover: none) {
+  .pittch-reveal {
+    transform: translateY(100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: transform 0.36s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.24s ease !important;
+  }
+  .card-wrapper.product-card-wrapper.pittch-tapped .pittch-reveal {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   22. Product Page — Officine Générale-inspired clean editorial
+   -------------------------------------------------------------------------- */
+
+/* Product media column */
+.product__media-wrapper {
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+/* Thumbnail strip */
+.product__media-list--thumbnail-slider .thumbnail-slider__button {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.product__media-list--thumbnail-slider .thumbnail-slider__button.is-active,
+.product__media-list--thumbnail-slider .thumbnail-slider__button:hover {
+  border-color: #37210b;
+}
+
+/* Vendor / brand label */
+.product__text.caption-with-letter-spacing {
+  font-family: var(--pittch-font-sans) !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: rgba(55,33,11,0.65) !important;
+  margin-bottom: 0.8rem !important;
+}
+
+/* Product title */
+.product__title {
+  font-family: var(--pittch-font-serif) !important;
+  font-size: clamp(2.8rem, 3.5vw, 4.4rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+  color: #0D0D0D !important;
+  margin-bottom: 1.2rem !important;
+}
+
+/* Price */
+.product__info-wrapper .price {
+  font-family: var(--pittch-font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #37210b;
+}
+
+/* Variant picker — pill buttons */
+.product-form__input .swatch-input + .swatch-label,
+.product-form__input .swatch {
+  border-radius: 100px !important;
+  border: 1px solid rgba(0,0,0,0.18) !important;
+  font-family: var(--pittch-font-sans) !important;
+  font-size: 1.3rem !important;
+  transition: background 0.18s ease, border-color 0.18s ease !important;
+}
+
+.product-form__input .swatch-input:checked + .swatch-label,
+.product-form__input .swatch--active {
+  background: #37210b !important;
+  border-color: #37210b !important;
+  color: #FFFFFF !important;
+}
+
+/* Variant button grid */
+.product-form__input--pill .product-form__radio:checked + .product-form__radio-label {
+  background: #37210b !important;
+  border-color: #37210b !important;
+  color: #FFFFFF !important;
+}
+
+/* Add to cart */
+.product-form__submit {
+  background: #37210b !important;
+  color: #FFFFFF !important;
+  border-radius: 8px !important;
+  font-family: var(--pittch-font-sans) !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  height: 5.2rem !important;
+  transition: background 0.2s ease, transform 0.2s ease !important;
+}
+
+.product-form__submit:hover {
+  background: rgba(55,33,11,0.88) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(55,33,11,0.25) !important;
+}
+
+/* Dynamic checkout (Buy Now) */
+.shopify-payment-button__button {
+  border-radius: 8px !important;
+  font-family: var(--pittch-font-sans) !important;
+}
+
+/* Product description */
+.product__description {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.45rem;
+  line-height: 1.7;
+  color: #3A3A3A;
+}
+
+.product__description p { margin-bottom: 1rem; }
+
+/* Share / social row */
+.product__share-button {
+  font-family: var(--pittch-font-sans);
+  font-size: 1.3rem;
+}
+
+/* Related products heading */
+.related-products .section-header__title {
+  font-family: var(--pittch-font-serif) !important;
+  font-size: 3.2rem !important;
+  font-weight: 600 !important;
+}
+
+/* --------------------------------------------------------------------------
+   23. Accessibility
+   -------------------------------------------------------------------------- */
+
+/* Focus rings in brand green */
+*:focus-visible {
+  outline: 2px solid var(--pittch-green);
+  outline-offset: 3px;
+}
+
+/* Skip to content */
+.skip-to-content-link:focus {
+  background-color: var(--pittch-green);
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   24. Page Intro Animation — First-visit immersive reveal
+   JS adds pittch-intro-init immediately, then pittch-intro-play after
+   double rAF so the browser paints the hidden state first.
+   Both classes are on <html> simultaneously during animation.
+   -------------------------------------------------------------------------- */
+
+/* Skip animation for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html.pittch-intro-init .pittch-scroll-hero,
+  html.pittch-intro-init .section-header,
+  html.pittch-intro-init .header__inline-menu,
+  html.pittch-intro-init .header__icons,
+  html.pittch-intro-init .psh-media-wrap,
+  html.pittch-intro-init .psh-titles,
+  html.pittch-intro-init .psh-hint {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    background: #37210b !important;
+  }
+}
+
+/* ── 1. Initial hidden states ─────────────────────────────────────────── */
+
+/* Hero bg starts lighter — deepens to brand brown on play */
+html.pittch-intro-init .pittch-scroll-hero {
+  background: #8a6040 !important;
+}
+
+/* Header pushed fully off the top */
+html.pittch-intro-init .section-header {
+  transform: translateY(-110%) !important;
+}
+
+/* Nav pill + icon cluster invisible & slightly small */
+html.pittch-intro-init .header__inline-menu {
+  opacity: 0 !important;
+  transform: scale(0.95) !important;
+}
+html.pittch-intro-init .header__icons {
+  opacity: 0 !important;
+  transform: scale(0.95) !important;
+}
+
+/* Media box starts 40px lower and invisible */
+html.pittch-intro-init .psh-media-wrap {
+  opacity: 0 !important;
+  transform: translate(-50%, calc(-50% + 40px)) !important;
+}
+
+/* Split title starts blurred and invisible */
+html.pittch-intro-init .psh-titles {
+  opacity: 0 !important;
+  filter: blur(10px) !important;
+}
+
+/* Scroll hint hidden */
+html.pittch-intro-init .psh-hint {
+  opacity: 0 !important;
+}
+
+/* ── 2. Transition definitions (active once pittch-intro-play is added) ── */
+/* Requires both classes so transitions only fire during the intro sequence */
+
+html.pittch-intro-init.pittch-intro-play .pittch-scroll-hero {
+  transition: background 0.8s ease !important;
+}
+
+/* Header: slides down 0.2s after play fires */
+html.pittch-intro-init.pittch-intro-play .section-header {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s !important;
+}
+
+/* Hero image: rises up from 0.5s */
+html.pittch-intro-init.pittch-intro-play .psh-media-wrap {
+  transition:
+    opacity 0.55s ease 0.5s,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s !important;
+}
+
+/* Nav items: fade + scale from 0.7s */
+html.pittch-intro-init.pittch-intro-play .header__inline-menu {
+  transition: opacity 0.4s ease 0.7s, transform 0.4s ease 0.7s !important;
+}
+html.pittch-intro-init.pittch-intro-play .header__icons {
+  transition: opacity 0.4s ease 0.7s, transform 0.4s ease 0.7s !important;
+}
+
+/* Title text: blurs into focus from 0.9s */
+html.pittch-intro-init.pittch-intro-play .psh-titles {
+  transition: opacity 0.5s ease 0.9s, filter 0.5s ease 0.9s !important;
+}
+
+/* Scroll hint: fades in last */
+html.pittch-intro-init.pittch-intro-play .psh-hint {
+  transition: opacity 0.4s ease 1.3s !important;
+}
+
+/* ── 3. Target visible states (override hidden states above) ─────────── */
+
+html.pittch-intro-play .pittch-scroll-hero {
+  background: #37210b !important;
+}
+html.pittch-intro-play .section-header {
+  transform: translateY(0) !important;
+}
+html.pittch-intro-play .header__inline-menu {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+html.pittch-intro-play .header__icons {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+html.pittch-intro-play .psh-media-wrap {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) !important;
+}
+html.pittch-intro-play .psh-titles {
+  opacity: 1 !important;
+  filter: blur(0px) !important;
+}
+html.pittch-intro-play .psh-hint {
+  opacity: 1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   25. Global Rounded Image Radius — 20px / 2rem applied consistently
+   Targets every image container, card, placeholder and media wrapper
+   across Dawn built-ins and PITTCH custom sections.
+   -------------------------------------------------------------------------- */
+
+/* ── Dawn universal media container ── */
+.media,
+.media--transparent,
+.media--square,
+.media--portrait,
+.media--landscape {
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+/* ── Product card — image region (card__inner clips the media) ── */
+.card__inner {
+  border-radius: 2rem;
+  overflow: hidden;
+}
+.card--card {
+  border-radius: 2rem !important;
+  overflow: hidden;
+}
+
+/* ── Product/collection page — main image panel & thumbnails ── */
+.product__media-wrapper {
+  border-radius: 2rem !important;
+}
+.product__media-list--thumbnail-slider .thumbnail-slider__button {
+  border-radius: 1rem !important;
+}
+
+/* ── Image-with-text section ── */
+.image-with-text__media {
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+/* ── Full-bleed hero banner stays flush ── */
+.banner__media {
+  border-radius: 0;
+}
+
+/* ── SVG placeholders (shown when no image is uploaded) ── */
+.placeholder-svg {
+  border-radius: 2rem;
+}
+
+/* ── Multicolumn card image ── */
+.multicolumn-card__image-wrapper {
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+/* ── Collection list / blog article cards ── */
+.collection-card__image-wrapper,
+.article-card__image-wrapper {
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+/* ── Slideshow ── */
+.slideshow__media {
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+/* ── PITTCH Collection stacks — card image box ── */
+.pittch-stack__card-image {
+  border-radius: 2rem !important;
+}
+
+/* ── PITTCH Our Story page images ── */
+.pittch-our-story img {
+  border-radius: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   26. Scroll Reveal Animations — Intersection Observer driven
+   Three motion signatures applied via data-reveal attribute.
+   The JS file pittch-scroll-reveal.js adds .is-visible on entry.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ── 1. Masked Slide — heading clips up from invisible baseline ── */
+  [data-reveal="masked"] {
+    clip-path: inset(0 0 110% 0);
+    transform: translateY(16px);
+    opacity: 0;
+    will-change: clip-path, transform, opacity;
+    transition:
+      clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform  0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity    0.5s ease;
+  }
+  [data-reveal="masked"].is-visible {
+    clip-path: inset(0 0 0% 0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* ── 2. Slide Up — subtitles and body text drift in ── */
+  [data-reveal="slide-up"] {
+    transform: translateY(40px);
+    opacity: 0;
+    will-change: transform, opacity;
+    transition:
+      transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity   0.6s ease;
+  }
+  [data-reveal="slide-up"].is-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* ── 3. Soft Zoom — images scale gently into frame ── */
+  [data-reveal="zoom"] {
+    overflow: hidden;
+  }
+  [data-reveal="zoom"] img,
+  [data-reveal="zoom"] video,
+  [data-reveal="zoom"] svg {
+    transform: scale(1.08);
+    opacity: 0;
+    will-change: transform, opacity;
+    transition:
+      transform 2s   cubic-bezier(0.16, 1, 0.3, 1),
+      opacity   0.8s ease;
+  }
+  [data-reveal="zoom"].is-visible img,
+  [data-reveal="zoom"].is-visible video,
+  [data-reveal="zoom"].is-visible svg {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  /* ── 4. Stagger Fade — grid children enter sequentially ── */
+  [data-reveal="stagger"] > * {
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: transform, opacity;
+    transition:
+      opacity   0.6s ease,
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [data-reveal="stagger"].is-visible > *:nth-child(1) { transition-delay: 0s; }
+  [data-reveal="stagger"].is-visible > *:nth-child(2) { transition-delay: 0.1s; }
+  [data-reveal="stagger"].is-visible > *:nth-child(3) { transition-delay: 0.2s; }
+  [data-reveal="stagger"].is-visible > *:nth-child(4) { transition-delay: 0.3s; }
+  [data-reveal="stagger"].is-visible > *:nth-child(5) { transition-delay: 0.4s; }
+  [data-reveal="stagger"].is-visible > *:nth-child(6) { transition-delay: 0.5s; }
+  [data-reveal="stagger"].is-visible > *:nth-child(7) { transition-delay: 0.6s; }
+  [data-reveal="stagger"].is-visible > *:nth-child(8) { transition-delay: 0.7s; }
+  [data-reveal="stagger"].is-visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Optional per-element delay override */
+  [data-reveal][data-reveal-delay="100"] { transition-delay: 0.1s !important; }
+  [data-reveal][data-reveal-delay="200"] { transition-delay: 0.2s !important; }
+  [data-reveal][data-reveal-delay="300"] { transition-delay: 0.3s !important; }
+  [data-reveal][data-reveal-delay="400"] { transition-delay: 0.4s !important; }
+
+}
