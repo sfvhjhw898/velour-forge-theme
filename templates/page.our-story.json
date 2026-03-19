@@ -13,7 +13,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>VELOUR is a luxury fashion brand with a luxury editorial minimal aesthetic.</p>",
+            "text": "<p>British luxury knitwear. Merino wool. Made in England.</p>",
             "text_style": "body"
           }
         }
@@ -43,21 +43,21 @@
         "col_1": {
           "type": "column",
           "settings": {
-            "title": "heritage",
-            "text": "We put heritage first in every decision we make."
+            "title": "luxury",
+            "text": "We put luxury first in every decision we make."
           }
         },
         "col_2": {
           "type": "column",
           "settings": {
-            "title": "premium",
-            "text": "premium is not a buzzword for us — it's how we work."
+            "title": "editorial",
+            "text": "editorial is not a buzzword for us — it's how we work."
           }
         },
         "col_3": {
           "type": "column",
           "settings": {
-            "title": "understated",
+            "title": "minimal",
             "text": "We are transparent about how we make things and who we make them for."
           }
         }
@@ -86,7 +86,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "\"Premium luxury fashion with a luxury design philosophy.\"",
+            "heading": "\"Merino Wool · Made in England · Machine Washable · Free UK Shipping\"",
             "heading_size": "h2"
           }
         }
