@@ -1,51 +1,16 @@
 {
   "sections": {
     "forge_hero": {
-      "type": "image-banner",
+      "type": "forge-scroll-hero",
       "settings": {
-        "image_overlay_opacity": 0,
-        "image_height": "large",
-        "image_behavior": "none",
-        "show_text_box": true,
-        "desktop_content_position": "middle-left",
-        "desktop_content_alignment": "left",
-        "color_scheme": "scheme-1",
-        "mobile_content_alignment": "left",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      },
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "VELOUR. Dressed with Intent.",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "luxury · editorial · minimal — made for Style-conscious professionals aged 28-45 who value.",
-            "text_style": "subtitle"
-          }
-        },
-        "buttons": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop Collection",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "Our Story →",
-            "button_link_2": "shopify://pages/our-story",
-            "button_style_secondary_2": true
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "buttons"
-      ]
+        "heading": "VELOUR. Dressed with Intent.",
+        "subheading": "luxury · editorial · minimal — made for Style-conscious professionals aged 28-45 who value.",
+        "scroll_hint": "Scroll to explore",
+        "button_label_1": "Shop Collection",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "Our Story",
+        "button_link_2": "shopify://pages/our-story"
+      }
     },
     "brand_values": {
       "type": "rich-text",
@@ -69,96 +34,50 @@
         "padding_bottom": 24
       }
     },
-    "forge_showcase": {
-      "type": "multicolumn",
+    "forge_collections": {
+      "type": "forge-collection-cards",
       "blocks": {
-        "stack_1": {
-          "type": "column",
+        "card_1": {
+          "type": "collection_card",
           "settings": {
-            "title": "New Arrivals",
-            "text": "Explore our new arrivals — the latest from VELOUR."
+            "fallback_title": "New Arrivals",
+            "tagline": "Explore our new arrivals — the latest from VELOUR."
           }
         },
-        "stack_2": {
-          "type": "column",
+        "card_2": {
+          "type": "collection_card",
           "settings": {
-            "title": "Essentials",
-            "text": "The essentials range. Core pieces worth keeping."
+            "fallback_title": "Essentials",
+            "tagline": "The essentials range. Core pieces worth keeping."
           }
         },
-        "stack_3": {
-          "type": "column",
+        "card_3": {
+          "type": "collection_card",
           "settings": {
-            "title": "Gift Sets",
-            "text": "Perfectly presented gifts from VELOUR."
+            "fallback_title": "Gift Sets",
+            "tagline": "Perfectly presented gifts from VELOUR."
           }
         }
       },
       "block_order": [
-        "stack_1",
-        "stack_2",
-        "stack_3"
+        "card_1",
+        "card_2",
+        "card_3"
       ],
       "settings": {
-        "title": "Shop the Range",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "button_label": "View All",
-        "button_link": "shopify://collections/all",
+        "heading": "Shop the Range",
+        "subheading": "Explore everything VELOUR has to offer.",
         "color_scheme": "scheme-3",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
         "padding_top": 72,
         "padding_bottom": 72
       }
     },
-    "forge_features": {
-      "type": "multicolumn",
-      "blocks": {
-        "col_1": {
-          "type": "column",
-          "settings": {
-            "title": "Luxury",
-            "text": "VELOUR starts with luxury as the foundation for everything we do."
-          }
-        },
-        "col_2": {
-          "type": "column",
-          "settings": {
-            "title": "Editorial",
-            "text": "Every luxury product is built with editorial at the centre."
-          }
-        },
-        "col_3": {
-          "type": "column",
-          "settings": {
-            "title": "Minimal",
-            "text": "minimal matters. We don't ship anything we wouldn't keep for ourselves."
-          }
-        }
-      },
-      "block_order": [
-        "col_1",
-        "col_2",
-        "col_3"
-      ],
+    "forge_bento": {
+      "type": "forge-bento",
       "settings": {
-        "title": "Why Every Detail Matters",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
+        "heading": "Why Every Detail Matters",
+        "subheading": "VELOUR — luxury, editorial, minimal.",
+        "story_link": "shopify://pages/our-story",
         "padding_top": 72,
         "padding_bottom": 72
       }
@@ -237,120 +156,6 @@
         "padding_bottom": 64
       }
     },
-    "editorial_story_2": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Worn Every Day. Built to Last.",
-            "heading_size": "h2"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Minimal design doesn't happen by accident. Every decision at VELOUR starts with the question: does this make it better?</p>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "height": "medium",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "scheme-3",
-        "section_color_scheme": "scheme-3",
-        "image_behavior": "none",
-        "mobile_content_alignment": "left",
-        "padding_top": 64,
-        "padding_bottom": 64
-      }
-    },
-    "brand_values_cols": {
-      "type": "multicolumn",
-      "blocks": {
-        "val_1": {
-          "type": "column",
-          "settings": {
-            "title": "Luxury",
-            "text": "We don't cut corners. Luxury is the baseline, not the exception."
-          }
-        },
-        "val_2": {
-          "type": "column",
-          "settings": {
-            "title": "Editorial",
-            "text": "Every piece reflects the attention that VELOUR puts into its work."
-          }
-        },
-        "val_3": {
-          "type": "column",
-          "settings": {
-            "title": "Minimal",
-            "text": "Purpose-led from the first sketch. Nothing ships without reason."
-          }
-        }
-      },
-      "block_order": [
-        "val_1",
-        "val_2",
-        "val_3"
-      ],
-      "settings": {
-        "title": "What VELOUR Stands For",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 72,
-        "padding_bottom": 72
-      }
-    },
-    "social_proof": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "\"I've never worn anything that felt this considered.\"",
-            "heading_size": "h2"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>— Verified customer, VELOUR</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "full_width": false,
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
     "newsletter": {
       "type": "newsletter",
       "blocks": {
@@ -383,13 +188,10 @@
   "order": [
     "forge_hero",
     "brand_values",
-    "forge_showcase",
-    "forge_features",
+    "forge_collections",
+    "forge_bento",
     "featured_collection",
     "brand_story",
-    "editorial_story_2",
-    "brand_values_cols",
-    "social_proof",
     "newsletter"
   ]
 }
