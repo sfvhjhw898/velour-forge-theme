@@ -79,7 +79,24 @@
         "subheading": "VELOUR — luxury, editorial, minimal.",
         "story_link": "shopify://pages/our-story",
         "padding_top": 72,
-        "padding_bottom": 72
+        "padding_bottom": 72,
+        "cell_1_eyebrow": "The VELOUR Standard",
+        "cell_1_heading": "British Knitwear, Redefined.",
+        "cell_1_body": "Every VELOUR piece begins with 100% Merino wool, sourced from the finest fleeces and crafted in England. The result is knitwear that feels extraordinary and lasts for years.",
+        "cell_1_cta": "Our Story →",
+        "cell_2_heading": "Naturally Temperature-Regulating",
+        "cell_2_body": "Merino wool regulates your body temperature year-round — warm in winter, cool in summer. No synthetic fibres. No compromise.",
+        "cell_3_stat": "100%",
+        "cell_3_stat_label": "Merino Wool",
+        "cell_3_body": "Pure Merino in every piece. No blends, no shortcuts.",
+        "cell_4_heading": "Machine Washable",
+        "cell_4_body": "Luxury without the fuss. Every VELOUR piece is machine washable at 30°C.",
+        "cell_5_heading": "Made in England",
+        "cell_5_body": "Designed, crafted, and finished in our Yorkshire mill.",
+        "pill_1": "Free UK Shipping",
+        "pill_2": "30-Day Returns",
+        "pill_3": "Sustainable Packaging",
+        "pill_4": "Lifetime Quality"
       }
     },
     "featured_collection": {
