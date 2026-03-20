@@ -300,11 +300,13 @@
   <!-- FORGE: Brand Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">\n
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- FORGE: Brand Design System -->
   {{ 'velour-brand.css' | asset_url | stylesheet_tag }}
-  {{ 'forge-brand-base.css' | asset_url | stylesheet_tag }}\n
-  <!-- FORGE Generated Theme v2.0 | VELOUR | 2026-03-19 -->
+  {{ 'forge-brand-base.css' | asset_url | stylesheet_tag }}
+
+  <!-- FORGE Generated Theme v2.0 | VELOUR | 2026-03-20 -->
 </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -383,5 +385,6 @@
     {%- endif -%}
   
   <!-- FORGE: Scroll Reveal -->
-  <script src="{{ 'forge-scroll-reveal.js' | asset_url }}" defer></script>\n</body>
+  <script src="{{ 'forge-scroll-reveal.js' | asset_url }}" defer></script>
+</body>
 </html>
