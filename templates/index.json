@@ -99,34 +99,6 @@
         "pill_4": "Lifetime Quality"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured Pieces",
-        "heading_size": "h2",
-        "description": "<p>Our best-selling luxury — made with luxury.</p>",
-        "show_description": true,
-        "description_style": "subtitle",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 64,
-        "padding_bottom": 56
-      }
-    },
     "brand_story": {
       "type": "image-with-text",
       "blocks": {
@@ -161,7 +133,7 @@
       "settings": {
         "height": "medium",
         "desktop_image_width": "medium",
-        "layout": "image_first",
+        "layout": "text_first",
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
         "content_layout": "no-overlap",
@@ -171,6 +143,34 @@
         "mobile_content_alignment": "left",
         "padding_top": 64,
         "padding_bottom": 64
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured Pieces",
+        "heading_size": "h2",
+        "description": "<p>Our best-selling luxury — made with luxury.</p>",
+        "show_description": true,
+        "description_style": "subtitle",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 64,
+        "padding_bottom": 56
       }
     },
     "newsletter": {
@@ -207,8 +207,8 @@
     "brand_values",
     "forge_collections",
     "forge_bento",
-    "featured_collection",
     "brand_story",
+    "featured_collection",
     "newsletter"
   ]
 }
