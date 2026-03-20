@@ -1,58 +1,8 @@
-<style>
-/* VELOUR — Cream minimal nav */
-.section-header .header-wrapper {
-  background: #F5F0EB !important;
-  border-bottom: 1px solid rgba(26,26,26,0.08) !important;
-}
-/* Logo */
-.section-header .header__heading-link .h2,
-.section-header .header__heading-link span {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-size: 22px !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.14em !important;
-  text-transform: uppercase !important;
-  color: #1A1A1A !important;
-}
-/* Nav links */
-@media screen and (min-width: 990px) {
-  .section-header .header__inline-menu {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    backdrop-filter: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-  }
-  .section-header .header__inline-menu .header__menu-item,
-  .section-header .header__inline-menu .list-menu__item--link {
-    font-size: 11px !important;
-    letter-spacing: 0.15em !important;
-    text-transform: uppercase !important;
-    color: #1A1A1A !important;
-    font-weight: 400 !important;
-    padding: 8px 16px !important;
-    border-radius: 0 !important;
-    transition: color 0.2s !important;
-  }
-  .section-header .header__inline-menu .header__menu-item:hover,
-  .section-header .header__inline-menu .list-menu__item--link:hover {
-    color: #C4A882 !important;
-    background: transparent !important;
-  }
-}
-/* Icons */
-.section-header .header__icon svg,
-.section-header .header__icon path { color: #1A1A1A !important; stroke: #1A1A1A !important; }
-.cart-count-bubble { background: #1A1A1A !important; color: #F5F0EB !important; }
-/* Sticky: cream glass */
-.shopify-section-header-sticky .header-wrapper {
-  background: rgba(245,240,235,0.94) !important;
-  backdrop-filter: blur(20px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
-}
-*:focus-visible { outline: 2px solid #C4A882; outline-offset: 3px; }
-</style>
+{%- assign forge_nav_pill_bg      = "rgba(26,26,26,0.93)" -%}
+{%- assign forge_nav_pill_text    = "rgba(245,240,235,0.82)" -%}
+{%- assign forge_nav_brand_colour = "#C4A882" -%}
+{%- assign forge_nav_sticky_bg    = "rgba(245,240,235,0.93)" -%}
+{%- render 'forge-pill-nav' -%}
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
