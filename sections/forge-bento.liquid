@@ -353,7 +353,12 @@
           {%- endif -%}
         </div>
         <div class="forge-bento__cell-deco" aria-hidden="true">
-          {%- render 'icon-pattern-dots' -%}
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <pattern id="dots-{{ section.id }}" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.5" fill="currentColor" opacity="0.25"/>
+            </pattern>
+            <rect width="120" height="120" fill="url(#dots-{{ section.id }})"/>
+          </svg>
         </div>
       </div>
 
