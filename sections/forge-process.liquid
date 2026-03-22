@@ -1,0 +1,219 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} .forge-process {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: rgb(var(--color-background));
+  }
+
+  #shopify-section-{{ section.id }} .fpr-header {
+    text-align: center;
+    margin-bottom: 6.4rem;
+  }
+
+  #shopify-section-{{ section.id }} .fpr-eyebrow {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(var(--color-foreground), 0.4);
+    display: block;
+    margin-bottom: 1.2rem;
+    font-family: var(--font-body-family, inherit);
+  }
+
+  #shopify-section-{{ section.id }} .fpr-heading {
+    font-family: var(--forge-font-heading, Georgia, serif);
+    font-size: clamp(2.4rem, 3vw, 3.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .fpr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 4rem;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .fpr-grid::before {
+    content: '';
+    position: absolute;
+    top: 4.2rem;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: rgba(var(--color-foreground), 0.08);
+    pointer-events: none;
+  }
+
+  @media (max-width: 989px) {
+    #shopify-section-{{ section.id }} .fpr-grid::before {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} .fpr-grid {
+      grid-template-columns: 1fr;
+      gap: 3.2rem;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .fpr-step {
+    text-align: center;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .fpr-step__num {
+    font-family: var(--forge-font-heading, Georgia, serif);
+    font-size: 5.6rem;
+    font-weight: 300;
+    line-height: 1;
+    color: rgba(var(--color-foreground), 0.07);
+    display: block;
+    margin-bottom: 2rem;
+    letter-spacing: -0.04em;
+  }
+
+  #shopify-section-{{ section.id }} .fpr-step__title {
+    font-family: var(--forge-font-heading, Georgia, serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgb(var(--color-foreground));
+    margin: 0 0 1.2rem;
+    letter-spacing: -0.01em;
+  }
+
+  #shopify-section-{{ section.id }} .fpr-step__body {
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: rgba(var(--color-foreground), 0.6);
+    margin: 0;
+    max-width: 28ch;
+    margin-inline: auto;
+    font-family: var(--font-body-family, inherit);
+  }
+{%- endstyle -%}
+
+<div class="forge-process">
+  <div class="page-width">
+
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+      <div class="fpr-header">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="fpr-eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fpr-heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="fpr-grid">
+      {%- assign step_num = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'step' -%}
+          {%- assign step_num = step_num | plus: 1 -%}
+          <div class="fpr-step" {{ block.shopify_attributes }}>
+            <span class="fpr-step__num">0{{ step_num }}</span>
+            {%- if block.settings.title != blank -%}
+              <h3 class="fpr-step__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.body != blank -%}
+              <p class="fpr-step__body">{{ block.settings.body }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Forge Process",
+  "tag": "section",
+  "class": "forge-section-process",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "How It Works"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Three steps to yours."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Step title"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Step description",
+          "default": "Brief description of this step."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Forge Process",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Browse",
+            "body": "Explore our full range and find what speaks to you."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Order",
+            "body": "Secure checkout with fast dispatch on all in-stock items."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Delivered",
+            "body": "Free UK delivery. Beautifully packaged, ready to gift."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
