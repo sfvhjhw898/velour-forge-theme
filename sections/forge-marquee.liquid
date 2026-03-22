@@ -1,0 +1,107 @@
+{%- style -%}
+  .forge-marquee-{{ section.id }} {
+    background: rgb(var(--color-foreground));
+    overflow: hidden;
+    padding: 1.4rem 0;
+    user-select: none;
+  }
+
+  .forge-marquee-{{ section.id }} .fmq-track {
+    display: flex;
+    width: max-content;
+    animation: fmq-{{ section.id }} linear infinite;
+    animation-duration: {{ section.settings.speed }}s;
+  }
+
+  .forge-marquee-{{ section.id }}:hover .fmq-track {
+    animation-play-state: paused;
+  }
+
+  .forge-marquee-{{ section.id }} .fmq-item {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 0 2.4rem;
+    font-family: var(--forge-font-heading, inherit);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--color-background));
+  }
+
+  .forge-marquee-{{ section.id }} .fmq-dot {
+    margin-left: 2.4rem;
+    opacity: 0.35;
+  }
+
+  @keyframes fmq-{{ section.id }} {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .forge-marquee-{{ section.id }} .fmq-track {
+      animation: none;
+    }
+  }
+{%- endstyle -%}
+
+<div class="forge-marquee-{{ section.id }}" aria-hidden="true">
+  <div class="fmq-track">
+    {%- for pass in (1..2) -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'phrase' and block.settings.phrase != blank -%}
+          <span class="fmq-item" {{ block.shopify_attributes }}>
+            {{- block.settings.phrase -}}<span class="fmq-dot">·</span>
+          </span>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Forge Marquee",
+  "tag": "section",
+  "class": "forge-section-marquee",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll speed (seconds)",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "phrase",
+      "name": "Phrase",
+      "settings": [
+        {
+          "type": "text",
+          "id": "phrase",
+          "label": "Phrase",
+          "default": "New Season"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Forge Marquee",
+      "blocks": [
+        { "type": "phrase", "settings": { "phrase": "New Season" } },
+        { "type": "phrase", "settings": { "phrase": "Free UK Shipping" } },
+        { "type": "phrase", "settings": { "phrase": "Crafted with Care" } },
+        { "type": "phrase", "settings": { "phrase": "Shop Now" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
