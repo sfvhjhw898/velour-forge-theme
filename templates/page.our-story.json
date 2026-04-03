@@ -13,7 +13,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>British luxury knitwear. Merino wool. Made in England.</p>",
+            "text": "<p>Ultra-luxury British fashion. Minimal, dark, editorial. Worn by people who buy once and buy forever.</p>",
             "text_style": "body"
           }
         }
@@ -43,21 +43,21 @@
         "col_1": {
           "type": "column",
           "settings": {
-            "title": "luxury",
-            "text": "We put luxury first in every decision we make."
+            "title": "heritage",
+            "text": "We put heritage first in every decision we make."
           }
         },
         "col_2": {
           "type": "column",
           "settings": {
-            "title": "editorial",
-            "text": "editorial is not a buzzword for us — it's how we work."
+            "title": "premium",
+            "text": "premium is not a buzzword for us — it's how we work."
           }
         },
         "col_3": {
           "type": "column",
           "settings": {
-            "title": "minimal",
+            "title": "understated",
             "text": "We are transparent about how we make things and who we make them for."
           }
         }
@@ -86,7 +86,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "\"Merino Wool · Made in England · Machine Washable · Free UK Shipping\"",
+            "heading": "\"Handcrafted in England. Designed to last a lifetime.\"",
             "heading_size": "h2"
           }
         }
