@@ -338,7 +338,7 @@
                   <img
                     src="{{ coll.featured_image | image_url: width: 600 }}"
                     alt="{{ coll.featured_image.alt | default: coll_title | escape }}"
-                    loading="{{ forloop.first | iif: 'eager', 'lazy' }}"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                     width="600"
                     height="750"
                   >
