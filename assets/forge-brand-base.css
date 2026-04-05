@@ -1438,3 +1438,37 @@ html.pittch-intro-play .psh-hint {
   [data-reveal][data-reveal-delay="400"] { transition-delay: 0.4s !important; }
 
 }
+
+/* ==========================================================================
+   FORGE Interaction Components
+   Custom cursor · Ticker · H-scroll · Section wipes · 3D tilt
+   ========================================================================== */
+
+/* ── Custom Cursor ────────────────────────────────────────────────────────── */
+[data-forge-cursor] * { cursor: none !important; }
+#forge-cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999; mix-blend-mode: var(--forge-cursor-blend, normal); }
+.forge-cursor__dot  { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--forge-cursor-colour, currentColor); transform: translate(-50%, -50%); will-change: transform; }
+.forge-cursor__ring { position: absolute; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--forge-cursor-colour, currentColor); opacity: 0.7; transform: translate(-50%, -50%); will-change: transform; }
+
+/* ── Ticker ───────────────────────────────────────────────────────────────── */
+.forge-ticker-section { width: 100%; overflow: hidden; user-select: none; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+[data-forge-ticker-wrap] { overflow: hidden; width: 100%; }
+[data-forge-ticker] { display: flex; flex-wrap: nowrap; will-change: transform; width: max-content; }
+.forge-ticker-item { flex-shrink: 0; display: flex; align-items: center; gap: 1.2rem; padding: 14px 2.4rem; font-size: clamp(0.65rem, 1vw, 0.85rem); font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.75; white-space: nowrap; }
+.forge-ticker-divider { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: 0.4; flex-shrink: 0; }
+
+/* ── Section wipe ─────────────────────────────────────────────────────────── */
+.forge-section-wipe { clip-path: inset(0% 0% 0% 0%); }
+
+/* ── H-scroll showcase ────────────────────────────────────────────────────── */
+.forge-hscroll-container { height: 100vh; overflow: hidden; position: relative; }
+.forge-hscroll-track { display: flex; height: 100%; align-items: center; gap: 2.4rem; padding: 0 6vw; will-change: transform; }
+.forge-hscroll-slide { flex-shrink: 0; width: clamp(260px, 28vw, 400px); }
+.forge-hscroll-card { display: block; text-decoration: none; }
+.forge-hscroll-card__img { width: 100%; aspect-ratio: 3 / 4; overflow: hidden; }
+.forge-hscroll-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.forge-hscroll-card__info { padding: 1rem 0; display: flex; justify-content: space-between; font-size: clamp(0.75rem, 1vw, 0.9rem); }
+
+/* ── App Block Protected Zone ─────────────────────────────────────────────── */
+.forge-app-blocks { width: 100%; max-width: var(--page-width, 1200px); margin: 2rem auto 0; padding: 0 1.6rem; }
+.forge-app-blocks > div { margin-bottom: 1.6rem; }

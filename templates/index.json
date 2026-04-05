@@ -1,10 +1,10 @@
 {
   "sections": {
     "forge_hero": {
-      "type": "forge-scroll-hero",
+      "type": "main-banner",
       "settings": {
         "heading": "VELOUR. Dressed with Intent.",
-        "subheading": "heritage · premium · understated — made for Professional women and men aged 28-50.",
+        "subheading": "heritage · premium · understated — made for Style-conscious professionals aged 28-45 who value.",
         "scroll_hint": "Scroll to explore",
         "button_label_1": "Shop Collection",
         "button_link_1": "shopify://collections/all",
@@ -12,26 +12,51 @@
         "button_link_2": "shopify://pages/our-story"
       }
     },
-    "brand_values": {
-      "type": "rich-text",
+    "forge_ticker": {
+      "type": "forge-ticker-section",
       "blocks": {
-        "text": {
-          "type": "text",
+        "item_0": {
+          "type": "item",
           "settings": {
-            "text": "<p><strong>Heritage  ·  Premium  ·  Understated  ·  Editorial</strong></p>"
+            "text": "VELOUR"
+          }
+        },
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Made in England"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Designed by Hand"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Free UK Shipping"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "New Collection"
           }
         }
       },
       "block_order": [
-        "text"
+        "item_0",
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
       ],
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 24,
-        "padding_bottom": 24
+        "color_scheme": "scheme-4",
+        "speed": 50,
+        "direction": "ltr"
       }
     },
     "forge_collections": {
@@ -70,6 +95,15 @@
         "color_scheme": "scheme-3",
         "padding_top": 72,
         "padding_bottom": 72
+      }
+    },
+    "forge_hscroll": {
+      "type": "forge-hscroll-showcase",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "heading": "The VELOUR Collection",
+        "color_scheme": "scheme-5"
       }
     },
     "forge_bento": {
@@ -204,8 +238,9 @@
   },
   "order": [
     "forge_hero",
-    "brand_values",
+    "forge_ticker",
     "forge_collections",
+    "forge_hscroll",
     "forge_bento",
     "brand_story",
     "featured_collection",

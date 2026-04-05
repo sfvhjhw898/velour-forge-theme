@@ -1,0 +1,50 @@
+<section class="forge-ticker-section color-{{ section.settings.color_scheme }}">
+  <div data-forge-ticker-wrap>
+    <div data-forge-ticker
+         data-forge-ticker-speed="{{ section.settings.speed | default: 60 }}"
+         data-forge-ticker-dir="{{ section.settings.direction | default: 'ltr' }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'item' -%}
+          <span class="forge-ticker-item" {{ block.shopify_attributes }}>{{- block.settings.text -}}</span>
+          <span class="forge-ticker-divider" aria-hidden="true"></span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if section.blocks | where: 'type', '@app' | size > 0 -%}
+    <div class="forge-app-blocks" id="forge-app-blocks-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          <div {{ block.shopify_attributes }}>
+            {%- render block.type, block: block, section: section -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "FORGE Ticker",
+  "tag": "section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-4" },
+    { "type": "range", "id": "speed", "label": "Speed", "min": 20, "max": 120, "step": 10, "default": 60 },
+    { "type": "select", "id": "direction", "label": "Direction",
+      "options": [{ "value": "ltr", "label": "Left to right" }, { "value": "rtl", "label": "Right to left" }],
+      "default": "ltr" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "New Collection" }]
+    },
+    { "type": "@app" }
+  ],
+  "presets": [{ "name": "FORGE Ticker" }],
+  "max_blocks": 20
+}
+{% endschema %}

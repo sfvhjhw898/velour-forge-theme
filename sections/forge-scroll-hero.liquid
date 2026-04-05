@@ -91,7 +91,7 @@
 </section>
 
 <style>
-/* ── PITTCH Scroll Expansion Hero ── */
+/* ── FORGE Scroll Expansion Hero ── */
 .forge-scroll-hero {
   position: relative;
   width: 100%;
@@ -319,7 +319,7 @@
 </style>
 
 <script>
-/* ── PITTCH Page Intro — runs once per session on the homepage ── */
+/* ── FORGE Page Intro — runs once per session on the homepage ── */
 (function () {
   var isHome = window.location.pathname === '/' ||
                window.location.pathname === '';
@@ -328,7 +328,7 @@
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   sessionStorage.setItem('forge_intro_v1', '1');
-  window.__pittchIntroPlaying = true;
+  window.__forgeIntroPlaying = true;
 
   var html = document.documentElement;
   html.classList.add('forge-intro-init');
@@ -340,7 +340,7 @@
 
       /* Clean up after all transitions finish (~2 s longest + buffer) */
       setTimeout(function () {
-        window.__pittchIntroPlaying = false;
+        window.__forgeIntroPlaying = false;
         html.classList.remove('forge-intro-init', 'forge-intro-play');
       }, 2500);
     });
@@ -417,7 +417,7 @@
 
   /* ── Wheel handler ── */
   function handleWheel(e) {
-    if (window.__pittchIntroPlaying) { e.preventDefault(); return; }
+    if (window.__forgeIntroPlaying) { e.preventDefault(); return; }
     if (expanded) {
       /* If user scrolled back to top and wheels up → collapse */
       if (e.deltaY < 0 && window.scrollY <= 2) {
@@ -450,7 +450,7 @@
   }
 
   function handleTouchMove(e) {
-    if (window.__pittchIntroPlaying) { e.preventDefault(); return; }
+    if (window.__forgeIntroPlaying) { e.preventDefault(); return; }
     if (!touchStartY) return;
     var deltaY = touchStartY - e.touches[0].clientY;
 
@@ -568,6 +568,9 @@
       "id": "button_link_2",
       "label": "Button 2 link"
     }
+  ],
+  "blocks": [
+    { "type": "@app" }
   ],
   "presets": [
     {
