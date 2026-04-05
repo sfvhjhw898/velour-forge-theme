@@ -402,10 +402,10 @@
     initSectionWipes(); initTickers(); initPageIntro();
   }
 
-  // Only load GSAP if there are elements that need it
-  var needsGSAP = document.querySelector(
-    '[data-forge-anim],[data-forge-magnet],[data-forge-parallax],[data-forge-counter],[data-forge-hover-lift]'
-  );
+  // Load GSAP if any animated elements exist, or if the intro overlay / cursor is active
+  var needsGSAP = document.documentElement.dataset.forgeIntro
+    || document.documentElement.dataset.forgeCursor
+    || document.querySelector('[data-forge-anim],[data-forge-magnet],[data-forge-parallax],[data-forge-counter],[data-forge-hover-lift]');
   if (needsGSAP) {
     loadGSAP(init);
   }
