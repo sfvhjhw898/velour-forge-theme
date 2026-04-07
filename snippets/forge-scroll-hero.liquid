@@ -33,7 +33,7 @@
 
   assign fsh_words = fsh_heading | split: ' '
   assign fsh_word1 = fsh_words | first
-  assign fsh_word_rest = fsh_words | shift | join: ' '
+  assign fsh_word_rest = fsh_heading | remove_first: fsh_word1 | strip
 -%}
 
 <style>
