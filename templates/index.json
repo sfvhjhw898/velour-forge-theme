@@ -1,276 +1,79 @@
 {
   "sections": {
-    "forge_hero": {
-      "type": "forge-scroll-hero",
+    "velour_hero": {
+      "type": "velour-hero",
       "settings": {
+        "eyebrow": "New Season 2026",
         "heading": "VELOUR.",
         "subheading": "Luxury fashion, crafted slowly. New season pieces available now.",
-        "scroll_hint": "Scroll to explore",
-        "button_label_1": "Shop the Edit",
-        "button_link_1": "shopify://collections/all",
-        "button_label_2": "Our Story",
-        "button_link_2": "shopify://pages/our-story"
+        "btn_1_label": "Shop the Edit",
+        "btn_1_url": "shopify://collections/all",
+        "btn_2_label": "Our Story",
+        "btn_2_url": "shopify://pages/our-story"
       }
     },
-    "forge_marquee": {
-      "type": "forge-marquee",
+    "velour_statement": {
+      "type": "velour-statement",
       "settings": {
-        "speed": 35
-      },
-      "blocks": {
-        "p1": {
-          "type": "phrase",
-          "settings": {
-            "phrase": "New Season"
-          }
-        },
-        "p2": {
-          "type": "phrase",
-          "settings": {
-            "phrase": "Crafted in Europe"
-          }
-        },
-        "p3": {
-          "type": "phrase",
-          "settings": {
-            "phrase": "Free UK Delivery"
-          }
-        },
-        "p4": {
-          "type": "phrase",
-          "settings": {
-            "phrase": "Made to Last"
-          }
-        },
-        "p5": {
-          "type": "phrase",
-          "settings": {
-            "phrase": "SS26 Collection"
-          }
-        },
-        "p6": {
-          "type": "phrase",
-          "settings": {
-            "phrase": "Luxury Redefined"
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3",
-        "p4",
-        "p5",
-        "p6"
-      ]
+        "eyebrow": "The Edit",
+        "statement": "Fashion made to outlast every trend.",
+        "color_scheme": "light"
+      }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "The Edit",
+        "title": "The Collection",
         "heading_size": "h2",
-        "description": "<p>Curated pieces for the considered wardrobe.</p>",
-        "show_description": true,
-        "description_style": "subtitle",
         "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "outline",
         "color_scheme": "scheme-1",
         "image_ratio": "portrait",
-        "image_shape": "default",
         "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
         "padding_top": 72,
         "padding_bottom": 56
       }
     },
-    "forge_bento": {
-      "type": "forge-bento",
-      "settings": {
-        "heading": "Crafted Without Compromise",
-        "subheading": "VELOUR \u2014 luxury editorial fashion for those who dress with intention.",
-        "story_link": "shopify://pages/our-story",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "cell_1_eyebrow": "The VELOUR Standard",
-        "cell_1_heading": "Garments built to outlast trends.",
-        "cell_1_body": "Every VELOUR piece is constructed from premium European fabrics, finished by hand, and designed to wear beautifully for years \u2014 not seasons. We reject fast fashion at every level.",
-        "cell_1_cta": "Read the Manifesto \u2192",
-        "cell_2_heading": "Italian Linen",
-        "cell_2_body": "Sourced from certified mills in Emilia-Romagna. Cool, breathable, and only gets better with age.",
-        "cell_3_stat": "12",
-        "cell_3_stat_label": "Pieces per Collection",
-        "cell_3_body": "A considered edit. Never more, never less.",
-        "cell_4_heading": "Hand-Finished",
-        "cell_4_body": "Every seam, every button, every hem. Finished by hand in our London studio.",
-        "cell_5_heading": "Carbon Neutral",
-        "cell_5_body": "Fully offset supply chain since 2022. Fashion with a conscience.",
-        "pill_1": "Free UK Shipping",
-        "pill_2": "30-Day Returns",
-        "pill_3": "Certified Sustainable",
-        "pill_4": "Lifetime Repairs"
-      }
-    },
-    "forge_process": {
-      "type": "forge-process",
-      "settings": {
-        "eyebrow": "The Process",
-        "heading": "From our atelier to your wardrobe.",
-        "padding_top": 80,
-        "padding_bottom": 80
-      },
+    "velour_lookbook": {
+      "type": "velour-lookbook",
+      "settings": { "eyebrow": "The Lookbook", "heading": "Season Highlights" },
       "blocks": {
-        "s1": {
-          "type": "step",
-          "settings": {
-            "title": "Browse the Edit",
-            "body": "Each piece is carefully curated. Explore the collection and take your time \u2014 nothing here is mass-produced."
-          }
-        },
-        "s2": {
-          "type": "step",
-          "settings": {
-            "title": "Place Your Order",
-            "body": "Secure checkout. Discreet, sustainable packaging. Free UK delivery on all orders over \u00a3100."
-          }
-        },
-        "s3": {
-          "type": "step",
-          "settings": {
-            "title": "Yours, Forever",
-            "body": "VELOUR pieces are designed to be worn for decades. We offer lifetime repairs on every garment we make."
-          }
-        }
+        "l1": { "type": "look", "settings": { "label": "SS26",       "title": "The Linen Edit" } },
+        "l2": { "type": "look", "settings": { "label": "Collection", "title": "Evening Wear" } },
+        "l3": { "type": "look", "settings": { "label": "Casual",     "title": "Weekend Pieces" } }
       },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3"
-      ]
+      "block_order": ["l1", "l2", "l3"]
     },
-    "forge_collections": {
-      "type": "forge-collection-cards",
+    "velour_process": {
+      "type": "velour-process",
+      "settings": { "eyebrow": "The Process", "heading": "From our atelier to your wardrobe." },
       "blocks": {
-        "card_1": {
-          "type": "collection_card",
-          "settings": {
-            "fallback_title": "Ready-to-Wear",
-            "tagline": "Considered pieces for every occasion."
-          }
-        },
-        "card_2": {
-          "type": "collection_card",
-          "settings": {
-            "fallback_title": "Outerwear",
-            "tagline": "Investment pieces for the long run."
-          }
-        },
-        "card_3": {
-          "type": "collection_card",
-          "settings": {
-            "fallback_title": "Accessories",
-            "tagline": "The finishing details. Made to match."
-          }
-        }
+        "s1": { "type": "step", "settings": { "title": "Select Your Piece",  "body": "Carefully curated — never mass-produced. Take your time." } },
+        "s2": { "type": "step", "settings": { "title": "Crafted to Order",   "body": "Hand-finished in our London studio. Every stitch deliberate." } },
+        "s3": { "type": "step", "settings": { "title": "Yours, Forever",     "body": "Lifetime repair guarantee. Clothes that last decades." } }
       },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3"
-      ],
-      "settings": {
-        "heading": "Shop by Category",
-        "subheading": "Everything VELOUR, organised for you.",
-        "color_scheme": "scheme-3",
-        "padding_top": 0,
-        "padding_bottom": 72
-      }
+      "block_order": ["s1", "s2", "s3"]
     },
-    "forge_testimonials": {
-      "type": "forge-testimonials",
-      "settings": {
-        "eyebrow": "Our Clients",
-        "heading": "What they say.",
-        "padding_top": 72,
-        "padding_bottom": 72
-      },
+    "velour_testimonials": {
+      "type": "velour-testimonials",
+      "settings": { "eyebrow": "Our Clients", "heading": "What they say." },
       "blocks": {
-        "t1": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "The quality is unlike anything on the high street. VELOUR pieces feel genuinely luxurious \u2014 worth every penny.",
-            "name": "A. Whitmore",
-            "role": "Verified Buyer \u00b7 London"
-          }
-        },
-        "t2": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Arrived in beautiful packaging. The garment itself is perfectly cut and drapes exactly as shown. I'll be ordering again.",
-            "name": "C. Dupont",
-            "role": "Verified Buyer \u00b7 Paris"
-          }
-        },
-        "t3": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "I've worn this piece to three events and received compliments at every one. This is how clothes should feel.",
-            "name": "P. Nakashima",
-            "role": "Verified Buyer \u00b7 Tokyo"
-          }
-        }
+        "t1": { "type": "testimonial", "settings": { "quote": "The quality is unlike anything on the high street. VELOUR pieces feel genuinely luxurious.", "name": "A. Whitmore", "role": "Verified Buyer · London" } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Arrived in beautiful packaging. The garment is perfectly cut. I'll be ordering again.", "name": "C. Dupont", "role": "Verified Buyer · Paris" } },
+        "t3": { "type": "testimonial", "settings": { "quote": "I've worn this piece to three events and received compliments at every one.", "name": "P. Nakashima", "role": "Verified Buyer · Tokyo" } }
       },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3"
-      ]
+      "block_order": ["t1", "t2", "t3"]
     },
     "newsletter": {
       "type": "newsletter",
       "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "New season. First to know.",
-            "heading_size": "h2"
-          }
-        },
-        "subheading": {
-          "type": "paragraph",
-          "settings": {
-            "text": "Early access, private sales, and editorials. No noise."
-          }
-        }
+        "heading": { "type": "heading",   "settings": { "heading": "New season. First to know.", "heading_size": "h2" } },
+        "sub":     { "type": "paragraph", "settings": { "text": "Early access, private sales, and editorials. No noise." } }
       },
-      "block_order": [
-        "heading",
-        "subheading"
-      ],
-      "settings": {
-        "color_scheme": "scheme-5",
-        "full_width": true,
-        "padding_top": 56,
-        "padding_bottom": 56
-      }
+      "block_order": ["heading", "sub"],
+      "settings": { "color_scheme": "scheme-5", "full_width": true, "padding_top": 56, "padding_bottom": 56 }
     }
   },
-  "order": [
-    "forge_hero",
-    "forge_marquee",
-    "featured_collection",
-    "forge_bento",
-    "forge_process",
-    "forge_collections",
-    "forge_testimonials",
-    "newsletter"
-  ]
+  "order": ["velour_hero", "velour_statement", "featured_collection", "velour_lookbook", "velour_process", "velour_testimonials", "newsletter"]
 }
