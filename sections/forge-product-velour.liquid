@@ -1,0 +1,203 @@
+{%- assign cv = product.selected_or_first_available_variant -%}
+
+<div class="vp-wrap">
+
+  <aside class="vp-aside">
+    <p class="vp-vendor">{{ product.vendor | default: 'VELOUR' }}</p>
+    <h1 class="vp-title">{{ product.title }}</h1>
+    <p class="vp-price">
+      {%- if cv.compare_at_price > cv.price -%}
+        <s class="vp-was">{{ cv.compare_at_price | money }}</s>
+      {%- endif -%}
+      <span class="vp-now">{{ cv.price | money }}</span>
+    </p>
+    <div class="vp-desc">{{ product.description }}</div>
+
+    {%- form 'product', product, id: 'vp-form' -%}
+      {%- for option in product.options_with_values -%}
+        <div class="vp-opt">
+          <p class="vp-opt__label">{{ option.name }}</p>
+          {%- if option.name == 'Color' or option.name == 'Colour' -%}
+            <div class="vp-swatches">
+              {%- for value in option.values -%}
+                <label class="vp-sw" title="{{ value }}">
+                  <input type="radio" name="option[{{ option.position }}]" value="{{ value }}"
+                    {% if option.selected_value == value %}checked{% endif %}>
+                  <span class="vp-sw__dot"></span>
+                </label>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <select name="option[{{ option.position }}]" class="vp-select">
+              {%- for value in option.values -%}
+                <option value="{{ value }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+              {%- endfor -%}
+            </select>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+      <input type="hidden" name="id" value="{{ cv.id }}">
+      <button type="submit" name="add" class="vp-btn">Add to Wardrobe</button>
+    {%- endform -%}
+  </aside>
+
+  <div class="vp-image" id="vp-image">
+    {%- if product.featured_image -%}
+      <img id="vp-hero"
+        src="{{ product.featured_image | image_url: width: 1400 }}"
+        alt="{{ product.featured_image.alt | escape }}"
+        loading="eager" width="1400" height="1750" class="vp-hero-img">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'vp-hero-img' }}
+    {%- endif -%}
+  </div>
+
+  <div class="vp-thumbs">
+    {%- for image in product.images limit: 5 -%}
+      <button class="vp-tb{% if forloop.first %} vp-tb--active{% endif %}"
+        data-src="{{ image | image_url: width: 1400 }}" type="button" aria-label="View image {{ forloop.index }}">
+        <img src="{{ image | image_url: width: 180 }}" alt="{{ image.alt | escape }}" loading="lazy">
+      </button>
+    {%- endfor -%}
+  </div>
+
+</div>
+
+<style>
+.vp-wrap {
+  display: grid;
+  grid-template-columns: 300px 1fr 130px;
+  min-height: 100vh;
+  background: #f5f5f3;
+}
+.vp-aside {
+  padding: 64px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border-right: 1px solid #ddd;
+}
+.vp-vendor {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #999;
+  margin: 0;
+}
+.vp-title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0;
+  color: #111;
+}
+.vp-price { margin: 0; }
+.vp-was { color: #aaa; font-size: 14px; margin-right: 8px; }
+.vp-now { font-size: 20px; color: #111; font-family: 'Georgia', serif; }
+.vp-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #666;
+  border-top: 1px solid #ddd;
+  padding-top: 18px;
+}
+.vp-opt { }
+.vp-opt__label {
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0 0 10px;
+}
+.vp-swatches { display: flex; gap: 10px; }
+.vp-sw input { display: none; }
+.vp-sw__dot {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #333;
+  border: 2px solid transparent;
+  display: block;
+  cursor: pointer;
+  outline-offset: 3px;
+  transition: border-color .2s;
+}
+.vp-sw input:checked + .vp-sw__dot { border-color: #111; }
+.vp-select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 13px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
+}
+.vp-btn {
+  margin-top: 8px;
+  padding: 15px 20px;
+  background: #111;
+  color: #fff;
+  border: none;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s;
+}
+.vp-btn:hover { background: #444; }
+.vp-image { overflow: hidden; position: relative; }
+.vp-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.vp-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+}
+.vp-tb {
+  border: 2px solid transparent;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.vp-tb--active, .vp-tb:hover { border-color: #111; }
+.vp-tb img { display: block; width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+@media (max-width: 768px) {
+  .vp-wrap { grid-template-columns: 1fr; }
+  .vp-image { min-height: 70vw; }
+  .vp-thumbs { flex-direction: row; border-left: none; border-top: 1px solid #ddd; padding: 8px; }
+  .vp-tb { width: 72px; flex-shrink: 0; }
+}
+</style>
+
+<script>
+(function(){
+  var hero = document.getElementById('vp-hero');
+  document.querySelectorAll('.vp-tb').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (hero) hero.src = this.dataset.src;
+      document.querySelectorAll('.vp-tb').forEach(function(b){ b.classList.remove('vp-tb--active'); });
+      this.classList.add('vp-tb--active');
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "VELOUR Product",
+  "tag": "section",
+  "class": "forge-product-velour"
+}
+{% endschema %}
