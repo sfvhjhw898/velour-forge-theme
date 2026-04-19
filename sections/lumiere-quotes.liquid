@@ -1,0 +1,70 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&family=Inter:wght@300;400;600&display=swap');
+  .lmi-quo { --lmi-rose: #F5EDE8; --lmi-pink: #C4917C; --lmi-cream: #FAF7F4; --lmi-dark: #2A1F1A; --lmi-mid: #8C7B75; --lmi-border: #E8DDD8; --lmi-shadow: 0 4px 24px rgba(42,31,26,0.08); background: var(--lmi-rose); padding: {{ section.settings.padding_top }}px 48px {{ section.settings.padding_bottom }}px; font-family: 'Inter', sans-serif; }
+  .lmi-quo__inner { max-width: 1100px; margin: 0 auto; }
+  .lmi-quo__header { text-align: center; margin-bottom: 56px; }
+  .lmi-quo__eyebrow { display: block; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--lmi-pink); margin: 0 0 16px; font-weight: 300; }
+  .lmi-quo__heading { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(28px, 4vw, 52px); font-weight: 400; color: var(--lmi-dark); margin: 0; }
+  .lmi-quo__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .lmi-quo__card { background: var(--lmi-cream); border-radius: 12px; box-shadow: var(--lmi-shadow); padding: 40px 32px; position: relative; }
+  .lmi-quo__stars { display: flex; gap: 4px; margin-bottom: 20px; }
+  .lmi-quo__star { width: 14px; height: 14px; fill: #C4917C; }
+  .lmi-quo__big-quote { position: absolute; top: 20px; right: 24px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 80px; line-height: 1; color: rgba(196,145,124,0.15); user-select: none; pointer-events: none; }
+  .lmi-quo__text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; line-height: 1.75; color: var(--lmi-dark); margin: 0 0 24px; font-weight: 400; }
+  .lmi-quo__name { font-size: 13px; font-weight: 600; color: var(--lmi-dark); display: block; margin: 0 0 4px; }
+  .lmi-quo__role { font-size: 12px; font-weight: 300; color: var(--lmi-pink); }
+  @media (max-width: 900px) { .lmi-quo { padding: 64px 24px; } .lmi-quo__grid { grid-template-columns: 1fr; } }
+</style>
+
+<section class="lmi-quo">
+  <div class="lmi-quo__inner">
+    <div class="lmi-quo__header">
+      {%- if section.settings.eyebrow != blank -%}<span class="lmi-quo__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="lmi-quo__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+    <div class="lmi-quo__grid">
+      {%- for block in section.blocks -%}
+        <div class="lmi-quo__card" {{ block.shopify_attributes }}>
+          <span class="lmi-quo__big-quote" aria-hidden="true">&ldquo;</span>
+          {%- if block.settings.show_stars -%}
+            <div class="lmi-quo__stars" aria-label="5 stars">
+              {%- for i in (1..5) -%}
+                <svg class="lmi-quo__star" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <blockquote class="lmi-quo__text">{{ block.settings.text | default: 'Amazing product.' }}</blockquote>
+          <footer>
+            <span class="lmi-quo__name">{{ block.settings.name | default: 'Customer' }}</span>
+            {%- if block.settings.role != blank -%}<span class="lmi-quo__role">{{ block.settings.role }}</span>{%- endif -%}
+          </footer>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LUMIÈRE Quotes",
+  "tag": "section",
+  "class": "lmi-section-quotes",
+  "settings": [
+    { "type": "text",  "id": "eyebrow", "label": "Eyebrow", "default": "Real Results" },
+    { "type": "text",  "id": "heading", "label": "Heading", "default": "What our clients say." },
+    { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 40, "max": 160, "step": 8, "default": 96 }
+  ],
+  "blocks": [{ "type": "quote", "name": "Quote", "settings": [
+    { "type": "textarea", "id": "text",       "label": "Quote",       "default": "My skin has completely transformed." },
+    { "type": "text",     "id": "name",       "label": "Name",        "default": "Sophie L." },
+    { "type": "text",     "id": "role",       "label": "Role/product","default": "Verified Buyer · Paris" },
+    { "type": "checkbox", "id": "show_stars", "label": "Show stars",  "default": true }
+  ]}],
+  "presets": [{ "name": "LUMIÈRE Quotes", "blocks": [
+    { "type": "quote", "settings": { "text": "My skin has completely transformed in 6 weeks. I finally understand what glass skin means.", "name": "Sophie L.",  "role": "Verified Buyer · Paris",  "show_stars": true } },
+    { "type": "quote", "settings": { "text": "The cleanser alone is worth every penny. My rosacea is calmer than it has been in years.",  "name": "Emma W.",    "role": "Verified Buyer · London", "show_stars": true } },
+    { "type": "quote", "settings": { "text": "LUMIÈRE is the first skincare brand that has genuinely changed my skin.",                   "name": "Camille R.", "role": "Verified Buyer · Milan",  "show_stars": true } }
+  ]}]
+}
+{% endschema %}

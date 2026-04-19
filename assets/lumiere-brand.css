@@ -1,0 +1,53 @@
+/* LUMIERE — Beauty & Skincare Brand Tokens
+   Design: Soft UI Evolution — subtle depth, accessibility-focused
+   Fonts: Playfair Display (heading) + Inter (body)
+   ─────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  --lu-pink:     #C8859E;
+  --lu-rose:     #F5E6EC;
+  --lu-cream:    #FDF8F5;
+  --lu-text:     #2D1B24;
+  --lu-muted:    #9B7B88;
+  --lu-border:   #E8D4DC;
+  --lu-lavender: #8B5CF6;
+  --lu-gold:     #B8963C;
+  --lu-font-head:'Playfair Display', Georgia, serif;
+  --lu-font-body:'Inter', system-ui, sans-serif;
+  --lu-shadow:   0 2px 16px rgba(200,133,158,.12), 0 1px 4px rgba(200,133,158,.08);
+  --lu-shadow-lg:0 8px 40px rgba(200,133,158,.18);
+  --lu-radius:   6px;
+  --lu-trans:    280ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.lumiere-section {
+  font-family: var(--lu-font-body);
+  background: var(--lu-cream);
+  color: var(--lu-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.lumiere-section h2,
+.lumiere-section h3 {
+  font-family: var(--lu-font-head);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.lu-card {
+  background: var(--lu-cream);
+  border: 1px solid var(--lu-border);
+  border-radius: var(--lu-radius);
+  box-shadow: var(--lu-shadow);
+  transition: box-shadow var(--lu-trans), transform var(--lu-trans);
+}
+.lu-card:hover {
+  box-shadow: var(--lu-shadow-lg);
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lu-card, .lumiere-section * { transition: none !important; transform: none !important; }
+}

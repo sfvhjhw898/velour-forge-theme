@@ -1,0 +1,190 @@
+{{ 'grounds-brand.css' | asset_url | stylesheet_tag }}
+
+<section class="grounds-section gbg-wrap" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="gbg-inner">
+
+    <div class="gbg-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="gbg-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="gbg-heading">{{ section.settings.heading | default: 'How to Brew' }}</h2>
+      {%- if section.settings.intro != blank -%}
+        <p class="gbg-intro">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="gbg-methods">
+      {%- for block in section.blocks -%}
+        <article class="gbg-method" {{ block.shopify_attributes }}>
+          <div class="gbg-method__num" aria-hidden="true">{{ forloop.index }}</div>
+          <div class="gbg-method__body">
+            <h3 class="gbg-method__name">{{ block.settings.method | default: 'Method' }}</h3>
+            <p class="gbg-method__ratio">
+              <span class="gbg-method__ratio-label">Ratio</span>
+              {{ block.settings.ratio | default: '1:15' }}
+            </p>
+            <p class="gbg-method__time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              {{ block.settings.time | default: '4 min' }}
+            </p>
+            {%- if block.settings.tip != blank -%}
+              <p class="gbg-method__tip">{{ block.settings.tip }}</p>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.image != blank -%}
+            <div class="gbg-method__img-wrap">
+              <img
+                src="{{ block.settings.image | image_url: width: 480 }}"
+                alt="{{ block.settings.image.alt | default: block.settings.method | escape }}"
+                loading="lazy"
+                width="240" height="240"
+                class="gbg-method__img">
+            </div>
+          {%- endif -%}
+        </article>
+      {%- else -%}
+        <p style="color:var(--gr-muted);padding:24px;">Add brew methods using the block editor.</p>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+.gbg-wrap { background: var(--gr-cream); }
+.gbg-inner { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+.gbg-header { margin-bottom: 56px; }
+.gbg-eyebrow {
+  font-family: var(--gr-font-body);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gr-warm);
+  margin: 0 0 12px;
+}
+.gbg-heading {
+  font-family: var(--gr-font-head);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 700;
+  color: var(--gr-brown);
+  margin: 0 0 16px;
+  line-height: 1;
+}
+.gbg-intro {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--gr-muted);
+  max-width: 520px;
+  margin: 0;
+}
+
+.gbg-methods { display: flex; flex-direction: column; gap: 2px; }
+
+.gbg-method {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 28px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--gr-border);
+}
+.gbg-method:first-child { border-top: 1px solid var(--gr-border); }
+
+.gbg-method__num {
+  font-family: var(--gr-font-head);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--gr-paper);
+  line-height: 1;
+  text-align: center;
+  -webkit-text-stroke: 1.5px var(--gr-border);
+}
+.gbg-method__body { display: flex; flex-direction: column; gap: 8px; }
+.gbg-method__name {
+  font-family: var(--gr-font-head);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gr-brown);
+  margin: 0;
+}
+.gbg-method__ratio {
+  font-size: 13px;
+  color: var(--gr-muted);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gbg-method__ratio-label {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gr-border);
+  font-family: var(--gr-font-body);
+}
+.gbg-method__time {
+  font-size: 13px;
+  color: var(--gr-warm);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.gbg-method__tip {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--gr-muted);
+  margin: 4px 0 0;
+  line-height: 1.6;
+}
+.gbg-method__img-wrap { width: 100px; flex-shrink: 0; }
+.gbg-method__img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  border: 3px solid var(--gr-paper);
+}
+@media (max-width: 600px) {
+  .gbg-inner { padding: 0 20px; }
+  .gbg-method { grid-template-columns: 40px 1fr; }
+  .gbg-method__img-wrap { display: none; }
+  .gbg-method__num { font-size: 36px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "GROUNDS Brew Guide",
+  "tag": "section",
+  "class": "grounds-section-brew",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",  "label": "Eyebrow",  "default": "From Origin to Cup" },
+    { "type": "text",     "id": "heading",  "label": "Heading",  "default": "How to Brew" },
+    { "type": "textarea", "id": "intro",    "label": "Intro text" },
+    { "type": "range",    "id": "padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 8, "default": 80 },
+    { "type": "range",    "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 8, "default": 80 }
+  ],
+  "blocks": [{
+    "type": "method",
+    "name": "Brew Method",
+    "settings": [
+      { "type": "text",         "id": "method", "label": "Method name", "default": "Pour Over" },
+      { "type": "text",         "id": "ratio",  "label": "Ratio",       "default": "1:16" },
+      { "type": "text",         "id": "time",   "label": "Brew time",   "default": "4 min" },
+      { "type": "textarea",     "id": "tip",    "label": "Tip / note" },
+      { "type": "image_picker", "id": "image",  "label": "Image" }
+    ]
+  }],
+  "presets": [{
+    "name": "GROUNDS Brew Guide",
+    "blocks": [
+      { "type": "method", "settings": { "method": "Pour Over",   "ratio": "1:16", "time": "4 min",  "tip": "Grind medium-fine. Bloom 45s with 2× coffee weight in water." } },
+      { "type": "method", "settings": { "method": "French Press","ratio": "1:15", "time": "4 min",  "tip": "Coarse grind. Don't stir after pressing." } },
+      { "type": "method", "settings": { "method": "Espresso",    "ratio": "1:2",  "time": "28 sec", "tip": "Dial in grind until shot runs 25–32 seconds." } }
+    ]
+  }]
+}
+{% endschema %}

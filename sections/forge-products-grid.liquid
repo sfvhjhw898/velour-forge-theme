@@ -1,0 +1,45 @@
+<section class="forge-products-grid color-{{ section.settings.color_scheme }}"
+         style="padding-top:{{ section.settings.padding_top }}px;padding-bottom:{{ section.settings.padding_bottom }}px;--forge-grid-cols:{{ section.settings.columns_desktop }}">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="forge-products-grid__title" data-forge-anim="fade-up">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- assign collection = section.settings.collection | default: collections.all -%}
+    <div class="forge-products-grid__grid" data-forge-anim="stagger">
+      {%- for product in collection.products limit: section.settings.products_to_show -%}
+        <div class="forge-products-grid__item"
+          {%- if section.settings.card_effect contains 'tilt' %} data-forge-tilt data-forge-tilt-intensity="{{ section.settings.tilt_intensity | default: 12 }}"{% if section.settings.card_effect contains 'glare' %} data-forge-tilt-glare="true"{% endif %}{%- endif -%}
+          {%- if section.settings.card_effect == 'hover-lift' %} data-forge-hover-lift{%- endif -%}>
+          {%- render 'card-product',
+            card_product: product,
+            media_aspect_ratio: 'portrait',
+            show_secondary_image: true,
+            show_vendor: false,
+            show_rating: false,
+            extend_height: false
+          -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FORGE Products Grid",
+  "tag": "section",
+  "settings": [
+    {"type": "text", "id": "title", "label": "Heading", "default": "Bestsellers"},
+    {"type": "collection", "id": "collection", "label": "Collection"},
+    {"type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 16, "step": 1, "default": 8},
+    {"type": "select", "id": "columns_desktop", "label": "Columns", "options": [{"value": "2", "label": "2"}, {"value": "3", "label": "3"}, {"value": "4", "label": "4"}], "default": "4"},
+    {"type": "select", "id": "card_effect", "label": "Card effect", "options": [{"value": "tilt", "label": "3D Tilt"}, {"value": "tilt-glare", "label": "3D Tilt + Glare"}, {"value": "hover-lift", "label": "Hover Lift"}, {"value": "none", "label": "None"}], "default": "tilt"},
+    {"type": "range", "id": "tilt_intensity", "label": "Tilt intensity", "min": 4, "max": 24, "step": 2, "default": 12},
+    {"type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1"},
+    {"type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px"},
+    {"type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 100, "step": 4, "default": 36, "unit": "px"}
+  ],
+  "blocks": [{"type": "@app"}],
+  "presets": [{"name": "FORGE Products Grid"}]
+}
+{% endschema %}

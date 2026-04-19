@@ -1,0 +1,78 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400;1,700&family=Inter:wght@300;400;500&display=swap');
+  .lmi-hero {
+    --lmi-rose: #F5EDE8; --lmi-pink: #C4917C; --lmi-cream: #FAF7F4; --lmi-dark: #2A1F1A; --lmi-mid: #8C7B75; --lmi-border: #E8DDD8;
+    background: var(--lmi-rose); padding: {{ section.settings.padding_top }}px 64px {{ section.settings.padding_bottom }}px; font-family: 'Inter', sans-serif;
+  }
+  .lmi-hero__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 3fr 2fr; gap: 80px; align-items: center; }
+  .lmi-hero__eyebrow { display: block; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--lmi-pink); margin: 0 0 24px; font-weight: 300; }
+  .lmi-hero__heading { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; font-size: clamp(36px, 5vw, 72px); line-height: 1.1; letter-spacing: -.01em; color: var(--lmi-dark); margin: 0 0 24px; }
+  .lmi-hero__sub { font-size: 16px; line-height: 1.8; color: var(--lmi-mid); font-weight: 300; max-width: 420px; margin: 0 0 40px; }
+  .lmi-hero__actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 40px; }
+  .lmi-hero__btn { display: inline-block; padding: 16px 48px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 400; text-decoration: none; transition: all 0.35s ease; border-radius: 100px; }
+  .lmi-hero__btn--primary { background: var(--lmi-pink); color: var(--lmi-cream); border: 1.5px solid var(--lmi-pink); }
+  .lmi-hero__btn--primary:hover { background: var(--lmi-dark); border-color: var(--lmi-dark); }
+  .lmi-hero__btn--secondary { background: transparent; color: var(--lmi-pink); text-decoration: underline; text-underline-offset: 3px; padding: 16px 8px; border: none; }
+  .lmi-hero__btn--secondary:hover { color: var(--lmi-dark); }
+  .lmi-hero__badges { display: flex; gap: 10px; flex-wrap: wrap; }
+  .lmi-hero__badge { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--lmi-mid); border: 1px solid var(--lmi-border); padding: 6px 14px; border-radius: 100px; font-weight: 400; }
+  .lmi-hero__image-wrap { border-radius: 12px; overflow: hidden; aspect-ratio: 3/4; background: linear-gradient(135deg, var(--lmi-border) 0%, var(--lmi-rose) 100%); }
+  .lmi-hero__image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lmi-hero__placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  @media (max-width: 900px) { .lmi-hero { padding: 64px 24px; } .lmi-hero__inner { grid-template-columns: 1fr; gap: 48px; } .lmi-hero__image-wrap { aspect-ratio: 16/9; } }
+  @media (prefers-reduced-motion: reduce) { .lmi-hero__btn { transition: none; } }
+</style>
+
+<section class="lmi-hero">
+  <div class="lmi-hero__inner">
+    <div class="lmi-hero__text">
+      {%- if section.settings.eyebrow != blank -%}<span class="lmi-hero__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h1 class="lmi-hero__heading">{{ section.settings.heading | default: 'Your most luminous skin.' }}</h1>
+      {%- if section.settings.subheading != blank -%}<p class="lmi-hero__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+      <div class="lmi-hero__actions">
+        {%- if section.settings.btn_1_label != blank -%}
+          <a href="{{ section.settings.btn_1_url | default: '/collections/all' }}" class="lmi-hero__btn lmi-hero__btn--primary">{{ section.settings.btn_1_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.btn_2_label != blank -%}
+          <a href="{{ section.settings.btn_2_url | default: '/pages/about' }}" class="lmi-hero__btn lmi-hero__btn--secondary">{{ section.settings.btn_2_label }}</a>
+        {%- endif -%}
+      </div>
+      <div class="lmi-hero__badges">
+        {%- if section.settings.badge_1 != blank -%}<span class="lmi-hero__badge">{{ section.settings.badge_1 }}</span>{%- endif -%}
+        {%- if section.settings.badge_2 != blank -%}<span class="lmi-hero__badge">{{ section.settings.badge_2 }}</span>{%- endif -%}
+        {%- if section.settings.badge_3 != blank -%}<span class="lmi-hero__badge">{{ section.settings.badge_3 }}</span>{%- endif -%}
+      </div>
+    </div>
+    <div class="lmi-hero__image-wrap">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.image.alt | default: 'LUMIÈRE skincare' | escape }}" loading="eager" width="600" height="800">
+      {%- else -%}
+        <div class="lmi-hero__placeholder" aria-hidden="true">{{ 'lifestyle-1' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LUMIÈRE Hero",
+  "tag": "section",
+  "class": "lmi-section-hero",
+  "settings": [
+    { "type": "text",         "id": "eyebrow",    "label": "Eyebrow",    "default": "Clean Luxury Skincare" },
+    { "type": "text",         "id": "heading",    "label": "Heading",    "default": "Your most luminous skin." },
+    { "type": "textarea",     "id": "subheading", "label": "Subheading", "default": "Clinically validated formulas, beautifully made. Founded in Paris." },
+    { "type": "image_picker", "id": "image",      "label": "Hero image" },
+    { "type": "text",         "id": "btn_1_label","label": "Button 1",   "default": "Shop Skincare" },
+    { "type": "url",          "id": "btn_1_url",  "label": "Button 1 URL" },
+    { "type": "text",         "id": "btn_2_label","label": "Button 2",   "default": "Our Rituals" },
+    { "type": "url",          "id": "btn_2_url",  "label": "Button 2 URL" },
+    { "type": "text",         "id": "badge_1",    "label": "Badge 1",    "default": "Cruelty Free" },
+    { "type": "text",         "id": "badge_2",    "label": "Badge 2",    "default": "Dermatologist Tested" },
+    { "type": "text",         "id": "badge_3",    "label": "Badge 3",    "default": "Clean Ingredients" },
+    { "type": "range",        "id": "padding_top",    "label": "Padding top",    "min": 40, "max": 160, "step": 8, "default": 80 },
+    { "type": "range",        "id": "padding_bottom", "label": "Padding bottom", "min": 40, "max": 160, "step": 8, "default": 80 }
+  ],
+  "presets": [{ "name": "LUMIÈRE Hero" }]
+}
+{% endschema %}

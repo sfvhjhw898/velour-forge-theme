@@ -1,0 +1,121 @@
+{{ 'apex-brand.css' | asset_url | stylesheet_tag }}
+
+<section class="apex-section apx-wrap">
+  <div class="apx-inner">
+    {%- for block in section.blocks -%}
+      <div class="apx-stat ap-invert-hover" {{ block.shopify_attributes }}>
+        <span class="apx-stat__num">{{ block.settings.number | default: '00' }}</span>
+        <span class="apx-stat__label">{{ block.settings.label | default: 'Stat' | upcase }}</span>
+      </div>
+      {%- unless forloop.last -%}<div class="apx-divider" aria-hidden="true"></div>{%- endunless -%}
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.cta_label != blank -%}
+    <div class="apx-cta-row">
+      <a class="apx-cta ap-invert-hover" href="{{ section.settings.cta_url | default: '/collections/all' }}">
+        {{ section.settings.cta_label | upcase }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+.apx-wrap {
+  border-top: 2px solid var(--ap-border);
+  border-bottom: 2px solid var(--ap-border);
+  overflow: hidden;
+}
+.apx-inner {
+  display: flex;
+  align-items: stretch;
+}
+.apx-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 40px 24px;
+  border-right: 2px solid var(--ap-border);
+  cursor: default;
+}
+.apx-stat:last-child { border-right: none; }
+.apx-divider { display: none; }
+.apx-stat__num {
+  font-family: var(--ap-font);
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--ap-white);
+  transition: color var(--ap-trans);
+}
+.apx-stat:hover .apx-stat__num { color: var(--ap-black); }
+.apx-stat__label {
+  font-size: 10px;
+  letter-spacing: .2em;
+  font-weight: 600;
+  color: var(--ap-mid);
+  transition: color var(--ap-trans);
+}
+.apx-stat:hover .apx-stat__label { color: var(--ap-black); }
+.apx-cta-row {
+  border-top: 2px solid var(--ap-border);
+  padding: 0;
+}
+.apx-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-decoration: none;
+  color: var(--ap-white);
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+.apx-cta:hover { color: var(--ap-black); }
+.apx-cta:focus-visible { outline: 2px solid var(--ap-yellow); outline-offset: -2px; }
+@media (max-width: 600px) {
+  .apx-inner { flex-wrap: wrap; }
+  .apx-stat { flex: 0 0 50%; border-bottom: 2px solid var(--ap-border); }
+  .apx-stat:nth-child(even) { border-right: none; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "APEX Stats Bar",
+  "tag": "section",
+  "class": "apex-section-stats",
+  "settings": [
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop All" },
+    { "type": "url",  "id": "cta_url",   "label": "CTA URL" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number / value", "default": "500+" },
+        { "type": "text", "id": "label",  "label": "Label",          "default": "Athletes" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "APEX Stats Bar",
+    "blocks": [
+      { "type": "stat", "settings": { "number": "500+", "label": "Athletes" } },
+      { "type": "stat", "settings": { "number": "48h",  "label": "Dispatch" } },
+      { "type": "stat", "settings": { "number": "4.9",  "label": "Rating" } },
+      { "type": "stat", "settings": { "number": "10K+", "label": "Reviews" } }
+    ]
+  }]
+}
+{% endschema %}

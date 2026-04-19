@@ -1,0 +1,93 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
+  .frm-mat { --frm-white: #F8F6F2; --frm-black: #0F0F0F; --frm-concrete: #B8B0A8; --frm-mid: #6B6560; --frm-border: #E0DDD8; --frm-warm: #F2EDE8; background: var(--frm-white); padding: {{ section.settings.padding_top }}px 48px {{ section.settings.padding_bottom }}px; font-family: 'Rubik', sans-serif; }
+  .frm-mat__inner { max-width: 1200px; margin: 0 auto; }
+  .frm-mat__header { margin-bottom: 56px; max-width: 560px; }
+  .frm-mat__eyebrow { display: block; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--frm-concrete); margin: 0 0 16px; font-weight: 400; }
+  .frm-mat__heading { font-size: clamp(28px, 4vw, 52px); font-weight: 300; letter-spacing: -.02em; color: var(--frm-black); margin: 0 0 16px; }
+  .frm-mat__body { font-size: 15px; line-height: 1.8; color: var(--frm-mid); margin: 0; font-weight: 300; }
+  .frm-mat__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--frm-border); border: 1px solid var(--frm-border); }
+  .frm-mat__card { background: var(--frm-white); display: flex; flex-direction: column; transition: background 0.25s ease; }
+  .frm-mat__card:hover { background: var(--frm-warm); }
+  .frm-mat__img-wrap { overflow: hidden; aspect-ratio: 4/5; background: var(--frm-warm); }
+  .frm-mat__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 500ms ease; }
+  .frm-mat__card:hover .frm-mat__img { transform: scale(1.04); }
+  .frm-mat__swatch { aspect-ratio: 4/5; }
+  .frm-mat__info { padding: 24px; flex: 1; }
+  .frm-mat__origin { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--frm-concrete); margin: 0 0 8px; font-weight: 400; display: block; }
+  .frm-mat__name { font-size: 18px; font-weight: 400; color: var(--frm-black); margin: 0 0 10px; }
+  .frm-mat__desc { font-size: 13px; line-height: 1.75; color: var(--frm-mid); margin: 0 0 16px; font-weight: 300; }
+  .frm-mat__specs { display: flex; flex-direction: column; gap: 6px; margin: 0; padding-top: 16px; border-top: 1px solid var(--frm-border); list-style: none; padding-left: 0; }
+  .frm-mat__spec { display: flex; justify-content: space-between; font-size: 11px; font-family: 'Courier New', monospace; }
+  .frm-mat__spec-key { color: var(--frm-concrete); }
+  .frm-mat__spec-val { color: var(--frm-black); }
+  @media (max-width: 640px) { .frm-mat { padding: 64px 20px; } .frm-mat__grid { grid-template-columns: 1fr 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .frm-mat__img, .frm-mat__card { transition: none; } }
+</style>
+
+<section class="frm-mat">
+  <div class="frm-mat__inner">
+    <div class="frm-mat__header">
+      {%- if section.settings.eyebrow != blank -%}<span class="frm-mat__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="frm-mat__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.body != blank -%}<p class="frm-mat__body">{{ section.settings.body }}</p>{%- endif -%}
+    </div>
+    <div class="frm-mat__grid">
+      {%- for block in section.blocks -%}
+        <article class="frm-mat__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="frm-mat__img-wrap">
+              <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.image.alt | default: block.settings.name | escape }}" loading="lazy" width="400" height="500" class="frm-mat__img">
+            </div>
+          {%- else -%}
+            <div class="frm-mat__swatch" style="background: {{ block.settings.swatch_color | default: '#D4D4CF' }};"></div>
+          {%- endif -%}
+          <div class="frm-mat__info">
+            {%- if block.settings.origin != blank -%}<span class="frm-mat__origin">{{ block.settings.origin }}</span>{%- endif -%}
+            <h3 class="frm-mat__name">{{ block.settings.name | default: 'Material' }}</h3>
+            {%- if block.settings.desc != blank -%}<p class="frm-mat__desc">{{ block.settings.desc }}</p>{%- endif -%}
+            <dl class="frm-mat__specs">
+              {%- if block.settings.spec_1_label != blank -%}
+                <div class="frm-mat__spec"><dt class="frm-mat__spec-key">{{ block.settings.spec_1_label }}</dt><dd class="frm-mat__spec-val">{{ block.settings.spec_1_value }}</dd></div>
+              {%- endif -%}
+              {%- if block.settings.spec_2_label != blank -%}
+                <div class="frm-mat__spec"><dt class="frm-mat__spec-key">{{ block.settings.spec_2_label }}</dt><dd class="frm-mat__spec-val">{{ block.settings.spec_2_value }}</dd></div>
+              {%- endif -%}
+            </dl>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FORMA Materials",
+  "tag": "section",
+  "class": "frm-section-materials",
+  "settings": [
+    { "type": "text",     "id": "eyebrow", "label": "Eyebrow",   "default": "Craftsmanship" },
+    { "type": "text",     "id": "heading", "label": "Heading",   "default": "Our Materials" },
+    { "type": "textarea", "id": "body",    "label": "Body text" },
+    { "type": "range",    "id": "padding_top",    "label": "Padding top",    "min": 40, "max": 160, "step": 8, "default": 80 },
+    { "type": "range",    "id": "padding_bottom", "label": "Padding bottom", "min": 40, "max": 160, "step": 8, "default": 80 }
+  ],
+  "blocks": [{ "type": "material", "name": "Material", "settings": [
+    { "type": "image_picker", "id": "image",        "label": "Image" },
+    { "type": "color",        "id": "swatch_color", "label": "Swatch colour", "default": "#C8B8A8" },
+    { "type": "text",         "id": "origin",       "label": "Origin" },
+    { "type": "text",         "id": "name",         "label": "Material name", "default": "Solid Oak" },
+    { "type": "textarea",     "id": "desc",         "label": "Description" },
+    { "type": "text",         "id": "spec_1_label", "label": "Spec 1 label" },
+    { "type": "text",         "id": "spec_1_value", "label": "Spec 1 value" },
+    { "type": "text",         "id": "spec_2_label", "label": "Spec 2 label" },
+    { "type": "text",         "id": "spec_2_value", "label": "Spec 2 value" }
+  ]}],
+  "presets": [{ "name": "FORMA Materials", "blocks": [
+    { "type": "material", "settings": { "name": "Solid Oak",    "origin": "FSC Certified", "desc": "Slow-grown European oak. Finished with natural hard-wax oil.", "spec_1_label": "Origin",  "spec_1_value": "Germany", "spec_2_label": "Finish",     "spec_2_value": "Hard-wax oil" } },
+    { "type": "material", "settings": { "name": "Raw Concrete", "origin": "UK Fabricated", "desc": "GFRC panels cast in our London workshop. Each piece unique.",   "spec_1_label": "Weight",  "spec_1_value": "Light",   "spec_2_label": "Lead time",  "spec_2_value": "3 weeks" } },
+    { "type": "material", "settings": { "name": "Cold Steel",   "origin": "Recycled 90%",  "desc": "Powder-coated structural steel in 14 standard colours.",         "spec_1_label": "Gauge",   "spec_1_value": "3mm",     "spec_2_label": "Options",    "spec_2_value": "14 colours" } }
+  ]}]
+}
+{% endschema %}

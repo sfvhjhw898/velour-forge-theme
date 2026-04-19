@@ -1,0 +1,70 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
+  .frm-proc { --frm-white: #F8F6F2; --frm-black: #0F0F0F; --frm-concrete: #B8B0A8; --frm-mid: #6B6560; --frm-border: #E0DDD8; background: var(--frm-black); padding: {{ section.settings.padding_top }}px 64px {{ section.settings.padding_bottom }}px; font-family: 'Rubik', sans-serif; }
+  .frm-proc__inner { max-width: 1000px; margin: 0 auto; }
+  .frm-proc__header { margin-bottom: 64px; }
+  .frm-proc__eyebrow { display: block; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--frm-concrete); margin: 0 0 16px; font-weight: 400; }
+  .frm-proc__heading { font-size: clamp(28px, 4vw, 52px); font-weight: 300; letter-spacing: -.02em; color: var(--frm-white); margin: 0; }
+  .frm-proc__steps { display: flex; flex-direction: column; }
+  .frm-proc__step { display: grid; grid-template-columns: 100px 1fr; gap: 0; align-items: start; border-top: 1px solid rgba(224,221,216,0.15); padding: 32px 0; }
+  .frm-proc__num { font-size: 64px; font-weight: 700; color: rgba(184,176,168,0.12); line-height: 1; text-align: right; padding-right: 32px; user-select: none; }
+  .frm-proc__content { padding-top: 8px; }
+  .frm-proc__title { font-size: 18px; font-weight: 500; color: var(--frm-white); margin: 0 0 12px; letter-spacing: -.01em; }
+  .frm-proc__body { font-size: 14px; line-height: 1.75; color: rgba(184,176,168,0.7); margin: 0; font-weight: 300; }
+  .frm-proc__cta-wrap { margin-top: 56px; padding-top: 56px; border-top: 1px solid rgba(224,221,216,0.15); }
+  .frm-proc__cta { display: inline-block; padding: 16px 48px; border: 1px solid rgba(248,246,242,0.3); color: var(--frm-white); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: all 0.25s ease; }
+  .frm-proc__cta:hover { border-color: var(--frm-white); background: var(--frm-white); color: var(--frm-black); }
+  @media (max-width: 768px) { .frm-proc { padding: 64px 24px; } .frm-proc__step { grid-template-columns: 60px 1fr; } .frm-proc__num { font-size: 44px; } }
+  @media (prefers-reduced-motion: reduce) { .frm-proc__cta { transition: none; } }
+</style>
+
+<section class="frm-proc">
+  <div class="frm-proc__inner">
+    <div class="frm-proc__header">
+      {%- if section.settings.eyebrow != blank -%}<span class="frm-proc__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="frm-proc__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+    <div class="frm-proc__steps">
+      {%- for block in section.blocks -%}
+        <div class="frm-proc__step" {{ block.shopify_attributes }}>
+          <div class="frm-proc__num" aria-hidden="true">0{{ forloop.index }}</div>
+          <div class="frm-proc__content">
+            <h3 class="frm-proc__title">{{ block.settings.title | default: 'Step' }}</h3>
+            {%- if block.settings.body != blank -%}<p class="frm-proc__body">{{ block.settings.body }}</p>{%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.cta_label != blank -%}
+      <div class="frm-proc__cta-wrap">
+        <a href="{{ section.settings.cta_url | default: '/pages/our-process' }}" class="frm-proc__cta">{{ section.settings.cta_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FORMA Process",
+  "tag": "section",
+  "class": "frm-section-process",
+  "settings": [
+    { "type": "text",  "id": "eyebrow",   "label": "Eyebrow",   "default": "How We Make" },
+    { "type": "text",  "id": "heading",   "label": "Heading",   "default": "Considered at every stage." },
+    { "type": "text",  "id": "cta_label", "label": "CTA label", "default": "Visit the Workshop" },
+    { "type": "url",   "id": "cta_url",   "label": "CTA URL" },
+    { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 40, "max": 160, "step": 8, "default": 96 }
+  ],
+  "blocks": [{ "type": "step", "name": "Step", "settings": [
+    { "type": "text",     "id": "title", "label": "Title", "default": "Design" },
+    { "type": "textarea", "id": "body",  "label": "Body" }
+  ]}],
+  "presets": [{ "name": "FORMA Process", "blocks": [
+    { "type": "step", "settings": { "title": "Design",  "body": "Every piece starts as a sketch. We design for use, not trends." } },
+    { "type": "step", "settings": { "title": "Source",  "body": "Materials selected from certified, traceable European suppliers." } },
+    { "type": "step", "settings": { "title": "Make",    "body": "Hand-crafted in our East London workshop. Lead time: 4–6 weeks." } },
+    { "type": "step", "settings": { "title": "Deliver", "body": "White-glove delivery. We install, we take the packaging." } }
+  ]}]
+}
+{% endschema %}

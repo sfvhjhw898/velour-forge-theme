@@ -1,223 +1,91 @@
-<style>
-  .forge-banner-editorial {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
-    position: relative;
-  }
-
-  .forge-banner-editorial__left {
-    background: #1A1A1A;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .forge-banner-editorial__metadata {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 48px;
-    padding: 0 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    font-family: 'Geist', var(--forge-font-body);
-    font-weight: 500;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: rgba(255, 255, 255, 0.3);
-  }
-
-  .forge-banner-editorial__content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 60px;
-  }
-
-  .forge-banner-editorial__heading {
-    margin: 0;
-  }
-
-  .forge-banner-editorial__heading-line {
-    display: block;
-    font-family: var(--forge-font-heading);
-    font-size: clamp(5rem, 8vw, 9rem);
-    color: white;
-    letter-spacing: -0.03em;
-    line-height: 0.92;
-    animation: forge-clip-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-
-  .forge-banner-editorial__heading-line:first-child {
-    font-weight: 300;
-    font-style: italic;
-    animation-delay: 0s;
-  }
-
-  .forge-banner-editorial__heading-line:last-child {
-    font-weight: 600;
-    animation-delay: 0.15s;
-  }
-
-  @keyframes forge-clip-reveal {
-    from {
-      clip-path: inset(0 100% 0 0);
-    }
-    to {
-      clip-path: inset(0 0% 0 0);
-    }
-  }
-
-  .forge-banner-editorial__subheading {
-    margin-top: 1.8rem;
-    font-family: 'Geist', var(--forge-font-body);
-    font-weight: 400;
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.45);
-    letter-spacing: 0.02em;
-  }
-
-  .forge-banner-editorial__cta {
-    display: inline-block;
-    margin-top: 3.2rem;
-    padding: 14px 32px;
-    border: 1.5px solid rgba(255, 255, 255, 0.35);
-    border-radius: 100px;
-    color: white;
-    font-family: 'Geist', var(--forge-font-body);
-    font-weight: 500;
-    font-size: 14px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-
-  .forge-banner-editorial__cta:hover {
-    border-color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.06);
-  }
-
-  .forge-banner-editorial__accent {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: #C4A882;
-    opacity: 0.4;
-  }
-
-  .forge-banner-editorial__right {
-    overflow: hidden;
-    position: relative;
-  }
-
-  .forge-banner-editorial__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .forge-banner-editorial__placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #2A1A10 0%, #1A1A1A 50%, #0D0D0D 100%);
-  }
-
-  .forge-banner-editorial__right::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.35) 100%);
-    pointer-events: none;
-  }
-
-  @media (max-width: 767px) {
-    .forge-banner-editorial {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto 65vw;
-      min-height: auto;
-    }
-
-    .forge-banner-editorial__left {
-      order: 2;
-    }
-
-    .forge-banner-editorial__right {
-      order: 1;
-      height: 65vw;
-    }
-
-    .forge-banner-editorial__metadata {
-      padding: 0 24px;
-    }
-
-    .forge-banner-editorial__content {
-      padding: 48px 24px;
-    }
-
-    .forge-banner-editorial__heading-line {
-      font-size: clamp(3rem, 12vw, 5rem);
-    }
-  }
-</style>
-
-<div class="forge-banner-editorial">
-  <div class="forge-banner-editorial__left">
-    <div class="forge-banner-editorial__metadata">
+<div class="forge-banner-editorial" style="height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative">
+  <div class="forge-banner-editorial__left" style="background:#1A1A1A;overflow:hidden;position:relative;display:flex;flex-direction:column">
+    <div class="forge-banner-editorial__metadata" style="height:48px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;padding:0 40px;font-family:var(--forge-font-body);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:rgba(255,255,255,0.3)">
       <span>EST. 2024</span>
       <span>London, UK</span>
     </div>
-
-    <div class="forge-banner-editorial__content">
-      <h1 class="forge-banner-editorial__heading">
-        <span class="forge-banner-editorial__heading-line" data-forge-split="words" data-forge-split-anim="reveal">
+    <div class="forge-banner-editorial__content" style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 60px">
+      <h1 class="forge-banner-editorial__heading" style="margin:0">
+        <span class="forge-banner-editorial__line forge-banner-editorial__line--1" style="display:block;font-family:var(--forge-font-heading);font-weight:300;font-style:italic;font-size:clamp(5rem,8vw,9rem);color:#fff;letter-spacing:-0.03em;line-height:0.92;animation:forge-clip-reveal 0.8s cubic-bezier(0.16,1,0.3,1) 0s both" data-forge-split="words" data-forge-split-anim="reveal">
           {%- assign heading_parts = section.settings.heading | default: "Dressed. With Intent." | split: ". " -%}
           {{ heading_parts[0] }}.
         </span>
-        <span class="forge-banner-editorial__heading-line" data-forge-split="words" data-forge-split-anim="reveal">
-          {%- if heading_parts[1] -%}
-            {{ heading_parts[1] }}
+        <span class="forge-banner-editorial__line forge-banner-editorial__line--2" style="display:block;font-family:var(--forge-font-heading);font-weight:600;font-style:normal;font-size:clamp(5rem,8vw,9rem);color:#fff;letter-spacing:-0.03em;line-height:0.92;animation:forge-clip-reveal 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s both" data-forge-split="words" data-forge-split-anim="reveal">
+          {%- if heading_parts.size > 1 -%}
+            {{ heading_parts[1] }}.
           {%- else -%}
             With Intent.
           {%- endif -%}
         </span>
       </h1>
-
-      <p class="forge-banner-editorial__subheading">
+      <p class="forge-banner-editorial__subheading" style="margin:1.8rem 0 0;font-family:var(--forge-font-body);font-weight:400;font-size:16px;color:rgba(255,255,255,0.45);letter-spacing:0.02em">
         {{ section.settings.subheading | default: "Merino. British. Uncompromising." }}
       </p>
-
-      <a href="{{ section.settings.button_link | default: '/collections/all' }}" 
-         class="forge-banner-editorial__cta"
-         data-forge-magnet="0.25">
-        {{ section.settings.button_label | default: "Explore Collection →" }}
-      </a>
+      <div style="margin-top:3.2rem">
+        <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="forge-banner-editorial__cta" style="display:inline-block;border:1.5px solid rgba(255,255,255,0.35);border-radius:100px;padding:14px 32px;color:#fff;font-family:var(--forge-font-body);font-weight:500;font-size:14px;text-decoration:none;transition:all 0.2s ease" data-forge-magnet="0.25">
+          {{ section.settings.button_label | default: "Explore Collection →" }}
+        </a>
+      </div>
     </div>
-
-    <div class="forge-banner-editorial__accent"></div>
+    <div class="forge-banner-editorial__accent" style="position:absolute;bottom:0;left:0;width:100%;height:1px;background:#C4A882;opacity:0.4"></div>
   </div>
-
-  <div class="forge-banner-editorial__right">
+  <div class="forge-banner-editorial__right" style="overflow:hidden;position:relative">
     {%- if section.settings.image -%}
       <img src="{{ section.settings.image | image_url: width: 1200 }}"
            srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
-                   {{ section.settings.image | image_url: width: 1200 }} 1200w"
-           sizes="(max-width: 767px) 100vw, 50vw"
+                   {{ section.settings.image | image_url: width: 1200 }} 1200w,
+                   {{ section.settings.image | image_url: width: 1800 }} 1800w"
+           sizes="50vw"
            alt="{{ section.settings.image.alt | escape }}"
            loading="eager"
            fetchpriority="high"
-           width="1200"
-           height="1600"
-           class="forge-banner-editorial__image">
+           width="{{ section.settings.image.width }}"
+           height="{{ section.settings.image.height }}"
+           style="width:100%;height:100%;object-fit:cover;display:block">
     {%- else -%}
-      <div class="forge-banner-editorial__placeholder"></div>
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#2A1A10 0%,#1A1A1A 50%,#0D0D0D 100%)"></div>
     {%- endif -%}
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.35) 100%);pointer-events:none"></div>
   </div>
 </div>
+
+<style>
+@keyframes forge-clip-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+.forge-banner-editorial__cta:hover {
+  border-color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.06);
+}
+
+@media (max-width: 767px) {
+  .forge-banner-editorial {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto 65vw !important;
+    height: auto !important;
+    min-height: 100vh;
+  }
+  .forge-banner-editorial__left {
+    order: 2;
+    padding: 60px 0 80px !important;
+  }
+  .forge-banner-editorial__right {
+    order: 1;
+    height: 65vw;
+  }
+  .forge-banner-editorial__content {
+    padding: 0 32px !important;
+  }
+  .forge-banner-editorial__metadata {
+    padding: 0 32px !important;
+  }
+  .forge-banner-editorial__line {
+    font-size: clamp(3rem,12vw,5rem) !important;
+  }
+}
+</style>
 
 {% schema %}
 {

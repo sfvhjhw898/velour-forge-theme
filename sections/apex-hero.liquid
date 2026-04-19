@@ -1,0 +1,55 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+  .apx-hero {
+    --apx-black: #050505; --apx-yellow: #D4F200; --apx-white: #FFFFFF; --apx-mid: #999999; --apx-border: #222222;
+    position: relative; min-height: 100vh; display: flex; align-items: center;
+    background: var(--apx-black); padding: 80px 64px; font-family: 'Space Grotesk', sans-serif;
+    border-bottom: 3px solid var(--apx-yellow);
+  }
+  .apx-hero__inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+  .apx-hero__eyebrow { display: block; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--apx-yellow); margin: 0 0 28px; font-weight: 500; }
+  .apx-hero__heading { font-size: clamp(64px, 12vw, 160px); font-weight: 700; line-height: 0.9; letter-spacing: -.04em; text-transform: uppercase; color: var(--apx-white); margin: 0 0 36px; }
+  .apx-hero__sub { font-size: 15px; line-height: 1.6; color: var(--apx-mid); max-width: 420px; margin: 0 0 56px; font-weight: 400; }
+  .apx-hero__actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .apx-hero__btn { display: inline-block; padding: 18px 48px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; text-decoration: none; cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+  .apx-hero__btn--primary { background: var(--apx-yellow); color: var(--apx-black); border: 2px solid var(--apx-yellow); }
+  .apx-hero__btn--primary:hover { background: var(--apx-white); border-color: var(--apx-white); color: var(--apx-black); }
+  .apx-hero__btn--secondary { background: transparent; color: var(--apx-white); border: 2px solid var(--apx-white); }
+  .apx-hero__btn--secondary:hover { background: var(--apx-white); color: var(--apx-black); }
+  @media (max-width: 768px) { .apx-hero { padding: 80px 24px 120px; } .apx-hero__actions { flex-direction: column; } .apx-hero__btn { text-align: center; } }
+  @media (prefers-reduced-motion: reduce) { .apx-hero__btn { transition: none; } }
+</style>
+
+<section class="apx-hero">
+  <div class="apx-hero__inner">
+    {%- if section.settings.eyebrow != blank -%}<span class="apx-hero__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h1 class="apx-hero__heading">{{ section.settings.heading | default: 'TRAIN HARDER.' }}</h1>
+    {%- if section.settings.subheading != blank -%}<p class="apx-hero__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+    <div class="apx-hero__actions">
+      {%- if section.settings.btn_primary_label != blank -%}
+        <a href="{{ section.settings.btn_primary_url | default: '/collections/all' }}" class="apx-hero__btn apx-hero__btn--primary">{{ section.settings.btn_primary_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.btn_secondary_label != blank -%}
+        <a href="{{ section.settings.btn_secondary_url | default: '/pages/our-story' }}" class="apx-hero__btn apx-hero__btn--secondary">{{ section.settings.btn_secondary_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "APEX Hero",
+  "tag": "section",
+  "class": "apx-section-hero",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",              "label": "Eyebrow",            "default": "Performance Gear" },
+    { "type": "text",     "id": "heading",              "label": "Heading",            "default": "TRAIN HARDER." },
+    { "type": "textarea", "id": "subheading",           "label": "Subheading",         "default": "Bold technical sportswear for serious athletes." },
+    { "type": "text",     "id": "btn_primary_label",    "label": "Primary button",     "default": "Shop Performance" },
+    { "type": "url",      "id": "btn_primary_url",      "label": "Primary URL" },
+    { "type": "text",     "id": "btn_secondary_label",  "label": "Secondary button",   "default": "Our Story" },
+    { "type": "url",      "id": "btn_secondary_url",    "label": "Secondary URL" }
+  ],
+  "presets": [{ "name": "APEX Hero" }]
+}
+{% endschema %}

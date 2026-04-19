@@ -1,0 +1,65 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Cabin:ital,wght@0,400;0,600;1,400&display=swap');
+  .grd-rev { --grd-brown: #1A0F0A; --grd-cream: #F5EDD6; --grd-warm: #C4540E; --grd-paper: #EDE0C4; --grd-mid: #7A6152; --grd-border: #D4C4B0; background: var(--grd-cream); padding: {{ section.settings.padding_top }}px 48px {{ section.settings.padding_bottom }}px; font-family: 'Cabin', sans-serif; }
+  .grd-rev__inner { max-width: 1100px; margin: 0 auto; }
+  .grd-rev__header { margin-bottom: 56px; }
+  .grd-rev__eyebrow { display: block; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--grd-warm); margin: 0 0 12px; font-weight: 600; }
+  .grd-rev__heading { font-family: 'Amatic SC', cursive; font-size: clamp(40px, 6vw, 72px); font-weight: 700; color: var(--grd-brown); margin: 0; line-height: 1; }
+  .grd-rev__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grd-rev__card { background: var(--grd-paper); border: 1px solid var(--grd-border); padding: 32px 28px; }
+  .grd-rev__stars { display: flex; gap: 3px; margin-bottom: 16px; }
+  .grd-rev__star { width: 14px; height: 14px; fill: var(--grd-warm); }
+  .grd-rev__quote { font-size: 15px; line-height: 1.7; color: var(--grd-brown); font-style: italic; margin: 0 0 24px; }
+  .grd-rev__name { display: block; font-size: 13px; font-weight: 600; color: var(--grd-brown); margin: 0 0 4px; }
+  .grd-rev__product { font-size: 12px; color: var(--grd-warm); font-weight: 400; }
+  @media (max-width: 900px) { .grd-rev { padding: 64px 24px; } .grd-rev__grid { grid-template-columns: 1fr; } }
+</style>
+
+<section class="grd-rev">
+  <div class="grd-rev__inner">
+    <div class="grd-rev__header">
+      {%- if section.settings.eyebrow != blank -%}<span class="grd-rev__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="grd-rev__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+    <div class="grd-rev__grid">
+      {%- for block in section.blocks -%}
+        <div class="grd-rev__card" {{ block.shopify_attributes }}>
+          <div class="grd-rev__stars" aria-label="5 stars">
+            {%- for i in (1..5) -%}
+              <svg class="grd-rev__star" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            {%- endfor -%}
+          </div>
+          <p class="grd-rev__quote">&ldquo;{{ block.settings.quote | default: 'Excellent coffee.' }}&rdquo;</p>
+          <footer>
+            <span class="grd-rev__name">{{ block.settings.name | default: 'Customer' }}</span>
+            {%- if block.settings.product != blank -%}<span class="grd-rev__product">{{ block.settings.product }}</span>{%- endif -%}
+          </footer>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GROUNDS Reviews",
+  "tag": "section",
+  "class": "grd-section-reviews",
+  "settings": [
+    { "type": "text",  "id": "eyebrow", "label": "Eyebrow", "default": "From Our Regulars" },
+    { "type": "text",  "id": "heading", "label": "Heading", "default": "What they're brewing." },
+    { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 40, "max": 160, "step": 8, "default": 96 }
+  ],
+  "blocks": [{ "type": "review", "name": "Review", "settings": [
+    { "type": "textarea", "id": "quote",   "label": "Quote",   "default": "The best coffee I've ever had at home." },
+    { "type": "text",     "id": "name",    "label": "Name",    "default": "James M." },
+    { "type": "text",     "id": "product", "label": "Product", "default": "Ethiopia Yirgacheffe" }
+  ]}],
+  "presets": [{ "name": "GROUNDS Reviews", "blocks": [
+    { "type": "review", "settings": { "quote": "The Ethiopia Yirgacheffe is the best filter coffee I've ever had at home. Extraordinary.", "name": "James M.",  "product": "Ethiopia Yirgacheffe" } },
+    { "type": "review", "settings": { "quote": "I've subscribed for 2 years. Always fresh, always excellent. GROUNDS is non-negotiable.", "name": "Sarah K.",  "product": "Monthly Subscription" } },
+    { "type": "review", "settings": { "quote": "The brew guide cards that come with each order are a brilliant touch. This is proper coffee.", "name": "Tom H.", "product": "Colombia La Palma" } }
+  ]}]
+}
+{% endschema %}

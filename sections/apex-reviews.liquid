@@ -1,0 +1,60 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+  .apx-rev { --apx-black: #050505; --apx-dark: #0D0D0D; --apx-yellow: #D4F200; --apx-white: #FFFFFF; --apx-mid: #999999; --apx-border: #1A1A1A; background: var(--apx-dark); padding: {{ section.settings.padding_top }}px 64px {{ section.settings.padding_bottom }}px; font-family: 'Space Grotesk', sans-serif; }
+  .apx-rev__inner { max-width: 1200px; margin: 0 auto; }
+  .apx-rev__header { margin-bottom: 56px; }
+  .apx-rev__eyebrow { display: block; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--apx-yellow); margin: 0 0 16px; }
+  .apx-rev__heading { font-size: clamp(28px, 4vw, 52px); font-weight: 700; text-transform: uppercase; letter-spacing: -.03em; color: var(--apx-white); margin: 0; }
+  .apx-rev__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .apx-rev__card { padding: 32px 28px; background: #111111; border-left: 3px solid var(--apx-yellow); transition: background 0.15s; }
+  .apx-rev__card:hover { background: #1A1A1A; }
+  .apx-rev__name { font-size: 13px; font-weight: 700; color: var(--apx-white); margin: 0 0 4px; letter-spacing: .05em; text-transform: uppercase; }
+  .apx-rev__role { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--apx-yellow); font-weight: 500; margin: 0 0 20px; }
+  .apx-rev__quote-mark { display: block; font-size: 48px; line-height: 0.7; color: rgba(212,242,0,0.3); margin: 0 0 16px; font-weight: 700; user-select: none; }
+  .apx-rev__quote { font-size: 14px; line-height: 1.7; color: var(--apx-mid); margin: 0; font-style: italic; }
+  @media (max-width: 1024px) { .apx-rev__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .apx-rev { padding: 64px 24px; } .apx-rev__grid { grid-template-columns: 1fr; } }
+</style>
+
+<section class="apx-rev">
+  <div class="apx-rev__inner">
+    <div class="apx-rev__header">
+      {%- if section.settings.eyebrow != blank -%}<span class="apx-rev__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="apx-rev__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+    <div class="apx-rev__grid">
+      {%- for block in section.blocks -%}
+        <div class="apx-rev__card" {{ block.shopify_attributes }}>
+          <p class="apx-rev__name">{{ block.settings.name | default: 'Athlete' }}</p>
+          {%- if block.settings.role != blank -%}<p class="apx-rev__role">{{ block.settings.role }}</p>{%- endif -%}
+          <span class="apx-rev__quote-mark" aria-hidden="true">&ldquo;</span>
+          <p class="apx-rev__quote">{{ block.settings.quote | default: 'Great product.' }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "APEX Reviews",
+  "tag": "section",
+  "class": "apx-section-reviews",
+  "settings": [
+    { "type": "text",  "id": "eyebrow", "label": "Eyebrow", "default": "Athlete Reviews" },
+    { "type": "text",  "id": "heading", "label": "Heading", "default": "From the field." },
+    { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 40, "max": 160, "step": 8, "default": 96 }
+  ],
+  "blocks": [{ "type": "review", "name": "Review", "settings": [
+    { "type": "textarea", "id": "quote", "label": "Quote",    "default": "APEX changed my training completely." },
+    { "type": "text",     "id": "name",  "label": "Name",     "default": "D. Okafor" },
+    { "type": "text",     "id": "role",  "label": "Role",     "default": "Marathon Runner · London" }
+  ]}],
+  "presets": [{ "name": "APEX Reviews", "blocks": [
+    { "type": "review", "settings": { "quote": "Switched to APEX 18 months ago. Recovery times are noticeably better and the fit is unlike anything else.", "name": "D. Okafor",  "role": "Marathon Runner · London" } },
+    { "type": "review", "settings": { "quote": "The fabric is genuinely technical. Stays dry, moves with you, looks sharp after 200 sessions.",              "name": "L. Petrov",  "role": "CrossFit Coach · Manchester" } },
+    { "type": "review", "settings": { "quote": "My whole gym has switched to APEX. The quality speaks for itself.",                                           "name": "R. Hassan",  "role": "Personal Trainer · Birmingham" } }
+  ]}]
+}
+{% endschema %}

@@ -1,0 +1,57 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+  .apx-stats { --apx-black: #050505; --apx-yellow: #D4F200; --apx-white: #FFFFFF; --apx-mid: #999999; --apx-border: #222222; background: var(--apx-black); font-family: 'Space Grotesk', sans-serif; border-top: 1px solid var(--apx-border); border-bottom: 1px solid var(--apx-border); }
+  .apx-stats__row { display: flex; align-items: stretch; }
+  .apx-stats__stat { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 48px 24px; border-right: 1px solid var(--apx-border); cursor: default; transition: background 0s; }
+  .apx-stats__stat:last-child { border-right: none; }
+  .apx-stats__stat:hover { background: var(--apx-yellow); }
+  .apx-stats__num { font-size: clamp(40px, 5vw, 72px); font-weight: 700; line-height: 1; letter-spacing: -.03em; color: var(--apx-white); transition: color 0s; }
+  .apx-stats__stat:hover .apx-stats__num { color: var(--apx-black); }
+  .apx-stats__label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--apx-mid); transition: color 0s; }
+  .apx-stats__stat:hover .apx-stats__label { color: var(--apx-black); }
+  .apx-stats__cta-row { border-top: 1px solid var(--apx-border); }
+  .apx-stats__cta { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 22px 24px; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; color: var(--apx-white); width: 100%; background: transparent; transition: background 0s, color 0s; }
+  .apx-stats__cta:hover { background: var(--apx-yellow); color: var(--apx-black); }
+  @media (max-width: 640px) { .apx-stats__row { flex-wrap: wrap; } .apx-stats__stat { flex: 0 0 50%; border-bottom: 1px solid var(--apx-border); } .apx-stats__stat:nth-child(even) { border-right: none; } }
+</style>
+
+<section class="apx-stats">
+  <div class="apx-stats__row">
+    {%- for block in section.blocks -%}
+      <div class="apx-stats__stat" {{ block.shopify_attributes }}>
+        <span class="apx-stats__num">{{ block.settings.number | default: '00' }}</span>
+        <span class="apx-stats__label">{{ block.settings.label | default: 'Stat' }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.cta_label != blank -%}
+    <div class="apx-stats__cta-row">
+      <a class="apx-stats__cta" href="{{ section.settings.cta_url | default: '/collections/all' }}">
+        {{ section.settings.cta_label | upcase }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "APEX Stats",
+  "tag": "section",
+  "class": "apx-section-stats",
+  "settings": [
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop All" },
+    { "type": "url",  "id": "cta_url",   "label": "CTA URL" }
+  ],
+  "blocks": [{ "type": "stat", "name": "Stat", "settings": [
+    { "type": "text", "id": "number", "label": "Number / value", "default": "500+" },
+    { "type": "text", "id": "label",  "label": "Label",          "default": "Athletes" }
+  ]}],
+  "presets": [{ "name": "APEX Stats", "blocks": [
+    { "type": "stat", "settings": { "number": "500+",  "label": "Athletes" } },
+    { "type": "stat", "settings": { "number": "48h",   "label": "Dispatch" } },
+    { "type": "stat", "settings": { "number": "4.9",   "label": "Rating" } },
+    { "type": "stat", "settings": { "number": "10K+",  "label": "Reviews" } }
+  ]}]
+}
+{% endschema %}

@@ -1,0 +1,98 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap');
+  .lmi-rit { --lmi-rose: #F5EDE8; --lmi-pink: #C4917C; --lmi-cream: #FAF7F4; --lmi-dark: #2A1F1A; --lmi-mid: #8C7B75; --lmi-border: #E8DDD8; --lmi-shadow: 0 4px 24px rgba(42,31,26,0.08); background: var(--lmi-cream); padding: {{ section.settings.padding_top }}px 48px {{ section.settings.padding_bottom }}px; font-family: 'Inter', sans-serif; }
+  .lmi-rit__inner { max-width: 880px; margin: 0 auto; }
+  .lmi-rit__header { text-align: center; margin-bottom: 56px; }
+  .lmi-rit__eyebrow { display: block; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--lmi-pink); margin: 0 0 16px; font-weight: 300; }
+  .lmi-rit__heading { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(28px, 4vw, 48px); font-weight: 400; color: var(--lmi-dark); margin: 0 0 16px; }
+  .lmi-rit__sub { font-size: 15px; line-height: 1.75; color: var(--lmi-mid); max-width: 480px; margin: 0 auto; font-weight: 300; }
+  .lmi-rit__steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  .lmi-rit__step { display: grid; grid-template-columns: 56px auto 1fr auto; align-items: center; gap: 20px; padding: 24px 28px; background: white; border: 1px solid var(--lmi-border); border-radius: 12px; box-shadow: var(--lmi-shadow); transition: box-shadow 0.35s ease, transform 0.35s ease; }
+  .lmi-rit__step:hover { box-shadow: 0 8px 40px rgba(42,31,26,0.12); transform: translateY(-2px); }
+  .lmi-rit__num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 28px; font-weight: 400; color: var(--lmi-border); line-height: 1; }
+  .lmi-rit__icon { width: 28px; height: 28px; color: var(--lmi-pink); }
+  .lmi-rit__icon svg { width: 28px; height: 28px; stroke: var(--lmi-pink); fill: none; stroke-width: 1.5; }
+  .lmi-rit__content { flex: 1; }
+  .lmi-rit__name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; font-weight: 400; color: var(--lmi-dark); margin: 0 0 4px; }
+  .lmi-rit__time { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--lmi-pink); margin: 0 0 8px; font-weight: 400; }
+  .lmi-rit__desc { font-size: 13px; line-height: 1.7; color: var(--lmi-mid); margin: 0; font-weight: 300; }
+  .lmi-rit__img-wrap { width: 72px; flex-shrink: 0; }
+  .lmi-rit__img { width: 72px; height: 72px; object-fit: cover; border-radius: 50%; border: 2px solid var(--lmi-border); display: block; }
+  .lmi-rit__cta-wrap { text-align: center; margin-top: 48px; }
+  .lmi-rit__cta { display: inline-block; padding: 14px 48px; background: var(--lmi-pink); color: var(--lmi-cream); text-decoration: none; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; border-radius: 100px; transition: background 0.3s ease; }
+  .lmi-rit__cta:hover { background: var(--lmi-dark); }
+  .lmi-rit__cta:focus-visible { outline: 2px solid var(--lmi-pink); outline-offset: 3px; }
+  @media (max-width: 640px) { .lmi-rit { padding: 64px 16px; } .lmi-rit__step { grid-template-columns: 40px 1fr; grid-template-rows: auto auto; } .lmi-rit__img-wrap, .lmi-rit__icon { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .lmi-rit__step { transition: none; } .lmi-rit__cta { transition: none; } }
+</style>
+
+<section class="lmi-rit">
+  <div class="lmi-rit__inner">
+    <div class="lmi-rit__header">
+      {%- if section.settings.eyebrow != blank -%}<span class="lmi-rit__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="lmi-rit__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.subheading != blank -%}<p class="lmi-rit__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+    </div>
+
+    <ol class="lmi-rit__steps" aria-label="{{ section.settings.heading | default: 'Skincare ritual steps' | escape }}">
+      {%- for block in section.blocks -%}
+        <li class="lmi-rit__step" {{ block.shopify_attributes }}>
+          <span class="lmi-rit__num" aria-hidden="true">0{{ forloop.index }}</span>
+          {%- if block.settings.icon_svg != blank -%}
+            <div class="lmi-rit__icon" aria-hidden="true">{{ block.settings.icon_svg }}</div>
+          {%- else -%}
+            <div class="lmi-rit__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+          {%- endif -%}
+          <div class="lmi-rit__content">
+            <h3 class="lmi-rit__name">{{ block.settings.name | default: 'Step' }}</h3>
+            {%- if block.settings.time != blank -%}<p class="lmi-rit__time">{{ block.settings.time }}</p>{%- endif -%}
+            {%- if block.settings.desc != blank -%}<p class="lmi-rit__desc">{{ block.settings.desc }}</p>{%- endif -%}
+          </div>
+          {%- if block.settings.image != blank -%}
+            <div class="lmi-rit__img-wrap">
+              <img src="{{ block.settings.image | image_url: width: 144 }}" alt="{{ block.settings.image.alt | default: block.settings.name | escape }}" loading="lazy" width="72" height="72" class="lmi-rit__img">
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+
+    {%- if section.settings.cta_label != blank -%}
+      <div class="lmi-rit__cta-wrap">
+        <a class="lmi-rit__cta" href="{{ section.settings.cta_url | default: '/collections/all' }}">{{ section.settings.cta_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LUMIÈRE Ritual",
+  "tag": "section",
+  "class": "lmi-section-ritual",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",    "label": "Eyebrow",    "default": "The Method" },
+    { "type": "text",     "id": "heading",    "label": "Heading",    "default": "Your Daily Ritual" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    { "type": "text",     "id": "cta_label",  "label": "CTA label",  "default": "Shop Skincare" },
+    { "type": "url",      "id": "cta_url",    "label": "CTA URL" },
+    { "type": "range",    "id": "padding_top",    "label": "Padding top",    "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "range",    "id": "padding_bottom", "label": "Padding bottom", "min": 40, "max": 160, "step": 8, "default": 96 }
+  ],
+  "blocks": [{ "type": "step", "name": "Ritual Step", "settings": [
+    { "type": "text",         "id": "name",     "label": "Step name",      "default": "Cleanse" },
+    { "type": "text",         "id": "time",     "label": "Time",           "default": "60 sec" },
+    { "type": "textarea",     "id": "desc",     "label": "Description" },
+    { "type": "html",         "id": "icon_svg", "label": "Icon SVG (optional)" },
+    { "type": "image_picker", "id": "image",    "label": "Product image" }
+  ]}],
+  "presets": [{ "name": "LUMIÈRE Ritual", "blocks": [
+    { "type": "step", "settings": { "name": "Cleanse",    "time": "60 sec", "desc": "Apply gently to damp skin with circular motions. Rinse with cool water." } },
+    { "type": "step", "settings": { "name": "Tone",       "time": "30 sec", "desc": "Press toner into skin with clean palms — never rub." } },
+    { "type": "step", "settings": { "name": "Serum",      "time": "90 sec", "desc": "3–4 drops warmed between fingers. Press into face and neck." } },
+    { "type": "step", "settings": { "name": "Moisturise", "time": "45 sec", "desc": "Seal everything in. Work upward and outward from the centre." } }
+  ]}]
+}
+{% endschema %}

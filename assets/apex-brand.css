@@ -1,0 +1,50 @@
+/* APEX — Athletic Performance Brand Tokens
+   Design: Kinetic Brutalism — bold, uppercase, high-contrast
+   Fonts: Space Grotesk (heading + body)
+   ─────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --ap-black:   #0A0A0A;
+  --ap-white:   #FFFFFF;
+  --ap-red:     #E5001A;
+  --ap-yellow:  #DFE104;
+  --ap-grey:    #1A1A1A;
+  --ap-mid:     #444444;
+  --ap-light:   #F5F5F5;
+  --ap-border:  #222222;
+  --ap-font:    'Space Grotesk', 'Arial Black', sans-serif;
+  --ap-radius:  0px;
+  --ap-trans:   150ms ease;
+  --ap-trans-slow: 300ms ease;
+}
+
+.apex-section {
+  font-family: var(--ap-font);
+  -webkit-font-smoothing: antialiased;
+  background: var(--ap-black);
+  color: var(--ap-white);
+}
+
+/* Utility: acid invert on hover */
+.ap-invert-hover {
+  transition: background var(--ap-trans), color var(--ap-trans);
+}
+.ap-invert-hover:hover { background: var(--ap-yellow); color: var(--ap-black); }
+
+/* Marquee base */
+.ap-marquee-track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: ap-marquee 14s linear infinite;
+  will-change: transform;
+}
+@keyframes ap-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ap-marquee-track { animation: none; }
+}

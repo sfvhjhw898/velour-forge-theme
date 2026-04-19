@@ -1,108 +1,40 @@
-/* pittch-scroll-reveal.js
-   Intersection Observer–driven scroll reveals.
-   Applies data-reveal="masked|slide-up|zoom|stagger" to Dawn built-ins
-   and observes every [data-reveal] element (including those set in Liquid).
-   Runs once per page. Respects prefers-reduced-motion.
-*/
-
-(function () {
+/*!
+ * FORGE Scroll Reveal v2.0
+ * IntersectionObserver — no dependencies.
+ */
+(function(){
   'use strict';
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
 
-  if (window.__forgeRevealInit) return;
-  window.__forgeRevealInit = true;
+  var style = document.createElement('style');
+  style.textContent = [
+    '[data-forge-anim]{opacity:0}',
+    '[data-forge-anim="fade-up"]{transform:translateY(40px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}',
+    '[data-forge-anim="reveal"]{clip-path:inset(0 100% 0 0);transition:opacity .4s,clip-path .9s cubic-bezier(.25,.46,.45,.94)}',
+    '[data-forge-anim].forge-visible{opacity:1;transform:none;clip-path:inset(0 0% 0 0)}',
+    '[data-forge-anim="stagger"]{opacity:1}',
+    '[data-forge-anim="stagger"]>*{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1)}',
+    '[data-forge-anim="stagger"].forge-visible>*{opacity:1;transform:none}',
+    '[data-forge-anim="stagger"].forge-visible>*:nth-child(1){transition-delay:0s}',
+    '[data-forge-anim="stagger"].forge-visible>*:nth-child(2){transition-delay:.08s}',
+    '[data-forge-anim="stagger"].forge-visible>*:nth-child(3){transition-delay:.16s}',
+    '[data-forge-anim="stagger"].forge-visible>*:nth-child(4){transition-delay:.24s}',
+    '[data-forge-anim="stagger"].forge-visible>*:nth-child(n+5){transition-delay:.32s}',
+  ].join('');
+  document.head.appendChild(style);
 
-  /* Skip entirely for users who prefer reduced motion */
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  /* ── Auto-apply reveal types to Dawn built-in elements ────────────── */
-
-  var AUTO_RULES = [
-    /* Headings → masked clip-reveal */
-    {
-      type: 'masked',
-      selectors: [
-        '.featured-collection__title',
-        '.rich-text__heading',
-        '.image-with-text__heading',
-        '.multicolumn__title',
-        '.newsletter__heading',
-        '.collapsible-content__heading',
-      ],
-    },
-    /* Subtitles / body copy → slide-up */
-    {
-      type: 'slide-up',
-      selectors: [
-        '.featured-collection .collection-description',
-        '.rich-text__text p',
-        '.image-with-text__text p',
-        '.newsletter__subheading',
-        '.psh-content__sub',
-      ],
-    },
-    /* Image wrappers → soft zoom */
-    {
-      type: 'zoom',
-      selectors: [
-        '.image-with-text__media',
-        '.banner__media',
-        '.collection-hero__image',
-      ],
-    },
-    /* Product grid → stagger children */
-    {
-      type: 'stagger',
-      selectors: [
-        '.product-grid',
-      ],
-    },
-  ];
-
-  AUTO_RULES.forEach(function (rule) {
-    rule.selectors.forEach(function (sel) {
-      document.querySelectorAll(sel).forEach(function (el) {
-        /* Don't overwrite explicit data-reveal set in Liquid */
-        if (!el.hasAttribute('data-reveal')) {
-          el.setAttribute('data-reveal', rule.type);
-        }
-      });
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('forge-visible'); io.unobserve(e.target); }
     });
-  });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-  /* ── Intersection Observer ──────────────────────────────────────────── */
-
-  var io = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.12,
-      rootMargin: '0px 0px -50px 0px',
-    }
-  );
-
-  function observeAll() {
-    document.querySelectorAll('[data-reveal]').forEach(function (el) {
-      io.observe(el);
-    });
+  function observe() {
+    document.querySelectorAll('[data-forge-anim]').forEach(function(el) { io.observe(el); });
   }
-
-  /* Handle both DOMContentLoaded and dynamic Shopify section renders */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', observeAll);
-  } else {
-    observeAll();
-  }
-
-  /* Re-observe after Shopify theme editor section changes */
-  document.addEventListener('shopify:section:load', function () {
-    window.__forgeRevealInit = false;
-    /* Re-run from scratch for the newly loaded section */
-    setTimeout(observeAll, 100);
-  });
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', observe)
+    : observe();
+  document.addEventListener('shopify:section:load', observe);
 })();

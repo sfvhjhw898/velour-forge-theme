@@ -1,0 +1,54 @@
+/* FORMA — Furniture & Homeware Brand Tokens
+   Design: Architectural minimal — negative space, precision
+   Fonts: Rubik (heading) + Nunito Sans (body)
+   ─────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&family=Rubik:wght@300;400;500;600&display=swap');
+
+:root {
+  --fo-black:    #1A1A1A;
+  --fo-white:    #F8F8F6;
+  --fo-warm:     #F2EDE8;
+  --fo-gold:     #A16207;
+  --fo-mid:      #555550;
+  --fo-light:    #E2E2DF;
+  --fo-border:   #D4D4CF;
+  --fo-font-head:'Rubik', system-ui, sans-serif;
+  --fo-font-body:'Nunito Sans', system-ui, sans-serif;
+  --fo-mono:     'Courier New', monospace;
+  --fo-trans:    300ms ease;
+  --fo-radius:   1px;
+}
+
+.forma-section {
+  font-family: var(--fo-font-body);
+  background: var(--fo-white);
+  color: var(--fo-black);
+  -webkit-font-smoothing: antialiased;
+}
+
+.forma-section h2,
+.forma-section h3 {
+  font-family: var(--fo-font-head);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+}
+
+.fo-label {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--fo-mid);
+  font-family: var(--fo-font-body);
+}
+
+.fo-divider {
+  border: none;
+  border-top: 1px solid var(--fo-border);
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forma-section * { transition: none !important; animation: none !important; }
+}

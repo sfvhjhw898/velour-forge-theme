@@ -1,0 +1,72 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
+  .frm-about { --frm-white: #F8F6F2; --frm-black: #0F0F0F; --frm-concrete: #B8B0A8; --frm-mid: #6B6560; --frm-border: #E0DDD8; background: var(--frm-white); padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; font-family: 'Rubik', sans-serif; }
+  .frm-about__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 55fr 45fr; align-items: center; }
+  .frm-about__text { padding: 80px 64px; }
+  .frm-about__eyebrow { display: block; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--frm-concrete); margin: 0 0 24px; font-weight: 400; }
+  .frm-about__heading { font-size: clamp(28px, 4vw, 56px); font-weight: 300; letter-spacing: -.02em; color: var(--frm-black); margin: 0 0 28px; line-height: 1.1; }
+  .frm-about__body { font-size: 16px; line-height: 1.8; color: var(--frm-mid); margin: 0 0 40px; font-weight: 300; max-width: 480px; }
+  .frm-about__stats { display: flex; gap: 48px; margin-bottom: 40px; }
+  .frm-about__stat-num { font-size: 32px; font-weight: 700; color: var(--frm-black); display: block; letter-spacing: -.02em; }
+  .frm-about__stat-label { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--frm-concrete); font-weight: 400; }
+  .frm-about__cta { font-size: 14px; font-weight: 500; color: var(--frm-black); text-decoration: underline; text-underline-offset: 3px; transition: color 0.25s ease; }
+  .frm-about__cta:hover { color: var(--frm-mid); }
+  .frm-about__image { height: 100%; min-height: 480px; overflow: hidden; background: linear-gradient(135deg, var(--frm-border) 0%, var(--frm-white) 100%); }
+  .frm-about__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .frm-about__placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--frm-border); }
+  @media (max-width: 900px) { .frm-about__inner { grid-template-columns: 1fr; } .frm-about__text { padding: 64px 24px; } .frm-about__image { min-height: 300px; } }
+  @media (prefers-reduced-motion: reduce) { .frm-about__cta { transition: none; } }
+</style>
+
+<section class="frm-about">
+  <div class="frm-about__inner">
+    <div class="frm-about__text">
+      {%- if section.settings.eyebrow != blank -%}<span class="frm-about__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="frm-about__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.body != blank -%}<p class="frm-about__body">{{ section.settings.body }}</p>{%- endif -%}
+      {%- if section.settings.stat_1_number != blank or section.settings.stat_2_number != blank -%}
+        <div class="frm-about__stats">
+          {%- if section.settings.stat_1_number != blank -%}
+            <div class="frm-about__stat"><span class="frm-about__stat-num">{{ section.settings.stat_1_number }}</span><span class="frm-about__stat-label">{{ section.settings.stat_1_label }}</span></div>
+          {%- endif -%}
+          {%- if section.settings.stat_2_number != blank -%}
+            <div class="frm-about__stat"><span class="frm-about__stat-num">{{ section.settings.stat_2_number }}</span><span class="frm-about__stat-label">{{ section.settings.stat_2_label }}</span></div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.cta_url | default: '/pages/our-story' }}" class="frm-about__cta">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </div>
+    <div class="frm-about__image">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.image.alt | default: 'FORMA workshop' | escape }}" loading="lazy" width="600" height="700" class="frm-about__img">
+      {%- else -%}
+        <div class="frm-about__placeholder" aria-hidden="true">{{ 'lifestyle-2' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FORMA About",
+  "tag": "section",
+  "class": "frm-section-about",
+  "settings": [
+    { "type": "text",         "id": "eyebrow",       "label": "Eyebrow",       "default": "About FORMA" },
+    { "type": "text",         "id": "heading",       "label": "Heading",       "default": "Objects designed to outlast the room they're in." },
+    { "type": "textarea",     "id": "body",          "label": "Body text" },
+    { "type": "text",         "id": "stat_1_number", "label": "Stat 1 number", "default": "12" },
+    { "type": "text",         "id": "stat_1_label",  "label": "Stat 1 label",  "default": "Years in business" },
+    { "type": "text",         "id": "stat_2_number", "label": "Stat 2 number", "default": "100%" },
+    { "type": "text",         "id": "stat_2_label",  "label": "Stat 2 label",  "default": "European made" },
+    { "type": "text",         "id": "cta_label",     "label": "CTA label",     "default": "Read our story" },
+    { "type": "url",          "id": "cta_url",       "label": "CTA URL" },
+    { "type": "image_picker", "id": "image",         "label": "Image" },
+    { "type": "range",        "id": "padding_top",   "label": "Padding top",   "min": 0, "max": 160, "step": 8, "default": 0 },
+    { "type": "range",        "id": "padding_bottom","label": "Padding bottom","min": 0, "max": 160, "step": 8, "default": 0 }
+  ],
+  "presets": [{ "name": "FORMA About" }]
+}
+{% endschema %}

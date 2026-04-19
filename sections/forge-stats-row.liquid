@@ -1,0 +1,59 @@
+<section class="forge-stats-row color-{{ section.settings.color_scheme }}"
+         style="padding-top:{{ section.settings.padding_top }}px;padding-bottom:{{ section.settings.padding_bottom }}px">
+  <div class="forge-stats-row__inner">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'stat' -%}
+        <div class="forge-stats-row__cell" {{ block.shopify_attributes }}>
+          <span class="forge-stats-row__number"
+                data-forge-counter="{{ block.settings.number | remove: '+' | remove: '%' | remove: 'k' | remove: 'K' }}"
+                data-forge-counter-suffix="{{ block.settings.suffix | default: '+' }}">
+            {{ block.settings.number }}
+          </span>
+          {%- if block.settings.unit != blank -%}
+            <span class="forge-stats-row__unit">{{ block.settings.unit }}</span>
+          {%- endif -%}
+          <span class="forge-stats-row__label">{{ block.settings.label }}</span>
+        </div>
+        {%- unless forloop.last -%}
+          <div class="forge-stats-row__divider" aria-hidden="true"></div>
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FORGE Stats Row",
+  "tag": "section",
+  "settings": [
+    {"type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-5"},
+    {"type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 8, "default": 64, "unit": "px"},
+    {"type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 8, "default": 64, "unit": "px"}
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {"type": "text", "id": "number", "label": "Number", "default": "500"},
+        {"type": "text", "id": "suffix", "label": "Suffix", "default": "+"},
+        {"type": "text", "id": "unit", "label": "Unit (optional)"},
+        {"type": "text", "id": "label", "label": "Label", "default": "Happy Customers"}
+      ]
+    },
+    {"type": "@app"}
+  ],
+  "presets": [
+    {
+      "name": "FORGE Stats Row",
+      "blocks": [
+        {"type": "stat", "settings": {"number": "500", "suffix": "k+", "label": "Customers"}},
+        {"type": "stat", "settings": {"number": "98", "suffix": "%", "label": "5-star reviews"}},
+        {"type": "stat", "settings": {"number": "12", "suffix": "+", "label": "Years experience"}}
+      ]
+    }
+  ],
+  "max_blocks": 4
+}
+{% endschema %}

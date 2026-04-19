@@ -1,79 +1,249 @@
 {
   "sections": {
-    "velour_hero": {
-      "type": "velour-hero",
+    "forge_hero": {
+      "type": "main-banner",
       "settings": {
-        "eyebrow": "New Season 2026",
-        "heading": "VELOUR.",
-        "subheading": "Luxury fashion, crafted slowly. New season pieces available now.",
-        "btn_1_label": "Shop the Edit",
-        "btn_1_url": "shopify://collections/all",
-        "btn_2_label": "Our Story",
-        "btn_2_url": "shopify://pages/our-story"
+        "heading": "VELOUR. Dressed with Intent.",
+        "subheading": "heritage · premium · understated — made for Style-conscious professionals aged 28-45 who value.",
+        "scroll_hint": "Scroll to explore",
+        "button_label_1": "Shop Collection",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "Our Story",
+        "button_link_2": "shopify://pages/our-story"
       }
     },
-    "velour_statement": {
-      "type": "velour-statement",
+    "forge_ticker": {
+      "type": "forge-ticker-section",
+      "blocks": {
+        "item_0": {
+          "type": "item",
+          "settings": {
+            "text": "VELOUR"
+          }
+        },
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Made in England"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Designed by Hand"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Free UK Shipping"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "New Collection"
+          }
+        }
+      },
+      "block_order": [
+        "item_0",
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
       "settings": {
-        "eyebrow": "The Edit",
-        "statement": "Fashion made to outlast every trend.",
-        "color_scheme": "light"
+        "color_scheme": "scheme-4",
+        "speed": 50,
+        "direction": "ltr"
+      }
+    },
+    "forge_collections": {
+      "type": "forge-collection-cards",
+      "blocks": {
+        "card_1": {
+          "type": "collection_card",
+          "settings": {
+            "fallback_title": "New Arrivals",
+            "tagline": "Explore our new arrivals — the latest from VELOUR."
+          }
+        },
+        "card_2": {
+          "type": "collection_card",
+          "settings": {
+            "fallback_title": "Essentials",
+            "tagline": "The essentials range. Core pieces worth keeping."
+          }
+        },
+        "card_3": {
+          "type": "collection_card",
+          "settings": {
+            "fallback_title": "Gift Sets",
+            "tagline": "Perfectly presented gifts from VELOUR."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ],
+      "settings": {
+        "heading": "Shop the Range",
+        "subheading": "Explore everything VELOUR has to offer.",
+        "color_scheme": "scheme-3",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "forge_hscroll": {
+      "type": "forge-hscroll-showcase",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "heading": "The VELOUR Collection",
+        "color_scheme": "scheme-5"
+      }
+    },
+    "forge_bento": {
+      "type": "forge-bento",
+      "settings": {
+        "heading": "Why Every Detail Matters",
+        "subheading": "VELOUR — heritage, premium, understated.",
+        "story_link": "shopify://pages/our-story",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "cell_1_eyebrow": "The VELOUR Standard",
+        "cell_1_heading": "British Knitwear, Redefined.",
+        "cell_1_body": "Every VELOUR piece begins with 100% Merino wool, sourced from the finest fleeces and crafted in England. The result is knitwear that feels extraordinary and lasts for years.",
+        "cell_1_cta": "Our Story →",
+        "cell_2_heading": "Naturally Temperature-Regulating",
+        "cell_2_body": "Merino wool regulates your body temperature year-round — warm in winter, cool in summer. No synthetic fibres. No compromise.",
+        "cell_3_stat": "100%",
+        "cell_3_stat_label": "Merino Wool",
+        "cell_3_body": "Pure Merino in every piece. No blends, no shortcuts.",
+        "cell_4_heading": "Machine Washable",
+        "cell_4_body": "Luxury without the fuss. Every VELOUR piece is machine washable at 30°C.",
+        "cell_5_heading": "Made in England",
+        "cell_5_body": "Designed, crafted, and finished in our Yorkshire mill.",
+        "pill_1": "Free UK Shipping",
+        "pill_2": "30-Day Returns",
+        "pill_3": "Sustainable Packaging",
+        "pill_4": "Lifetime Quality"
+      }
+    },
+    "brand_story": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Story Behind the Brand.",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>VELOUR was built on a simple idea: heritage and premium shouldn't be mutually exclusive. Read about how we got here.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Read Our Story",
+            "button_link": "shopify://pages/our-story",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "scheme-1",
+        "section_color_scheme": "scheme-2",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "The Collection",
+        "title": "Featured Pieces",
         "heading_size": "h2",
+        "description": "<p>Our best-selling luxury — made with heritage.</p>",
+        "show_description": true,
+        "description_style": "subtitle",
         "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
         "color_scheme": "scheme-1",
         "image_ratio": "portrait",
+        "image_shape": "default",
         "show_secondary_image": true,
-        "padding_top": 72,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 64,
         "padding_bottom": 56
       }
-    },
-    "velour_lookbook": {
-      "type": "velour-lookbook",
-      "settings": { "eyebrow": "The Lookbook", "heading": "Season Highlights" },
-      "blocks": {
-        "l1": { "type": "look", "settings": { "label": "SS26",       "title": "The Linen Edit" } },
-        "l2": { "type": "look", "settings": { "label": "Collection", "title": "Evening Wear" } },
-        "l3": { "type": "look", "settings": { "label": "Casual",     "title": "Weekend Pieces" } }
-      },
-      "block_order": ["l1", "l2", "l3"]
-    },
-    "velour_process": {
-      "type": "velour-process",
-      "settings": { "eyebrow": "The Process", "heading": "From our atelier to your wardrobe." },
-      "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Select Your Piece",  "body": "Carefully curated — never mass-produced. Take your time." } },
-        "s2": { "type": "step", "settings": { "title": "Crafted to Order",   "body": "Hand-finished in our London studio. Every stitch deliberate." } },
-        "s3": { "type": "step", "settings": { "title": "Yours, Forever",     "body": "Lifetime repair guarantee. Clothes that last decades." } }
-      },
-      "block_order": ["s1", "s2", "s3"]
-    },
-    "velour_testimonials": {
-      "type": "velour-testimonials",
-      "settings": { "eyebrow": "Our Clients", "heading": "What they say." },
-      "blocks": {
-        "t1": { "type": "testimonial", "settings": { "quote": "The quality is unlike anything on the high street. VELOUR pieces feel genuinely luxurious.", "name": "A. Whitmore", "role": "Verified Buyer · London" } },
-        "t2": { "type": "testimonial", "settings": { "quote": "Arrived in beautiful packaging. The garment is perfectly cut. I'll be ordering again.", "name": "C. Dupont", "role": "Verified Buyer · Paris" } },
-        "t3": { "type": "testimonial", "settings": { "quote": "I've worn this piece to three events and received compliments at every one.", "name": "P. Nakashima", "role": "Verified Buyer · Tokyo" } }
-      },
-      "block_order": ["t1", "t2", "t3"]
     },
     "newsletter": {
       "type": "newsletter",
       "blocks": {
-        "heading": { "type": "heading",   "settings": { "heading": "New season. First to know.", "heading_size": "h2" } },
-        "sub":     { "type": "paragraph", "settings": { "text": "Early access, private sales, and editorials. No noise." } }
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Stay close to VELOUR.",
+            "heading_size": "h2"
+          }
+        },
+        "subheading": {
+          "type": "paragraph",
+          "settings": {
+            "text": "New arrivals, behind-the-scenes, and early access. No noise."
+          }
+        }
       },
-      "block_order": ["heading", "sub"],
-      "settings": { "color_scheme": "scheme-5", "full_width": true, "padding_top": 56, "padding_bottom": 56 }
+      "block_order": [
+        "heading",
+        "subheading"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
-  "order": ["velour_hero", "velour_statement", "featured_collection", "velour_lookbook", "velour_process", "velour_testimonials", "newsletter"]
+  "order": [
+    "forge_hero",
+    "forge_ticker",
+    "forge_collections",
+    "forge_hscroll",
+    "forge_bento",
+    "brand_story",
+    "featured_collection",
+    "newsletter"
+  ]
 }

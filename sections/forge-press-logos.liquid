@@ -1,0 +1,50 @@
+<section class="forge-press-logos color-{{ section.settings.color_scheme }}"
+         style="padding-top:{{ section.settings.padding_top }}px;padding-bottom:{{ section.settings.padding_bottom }}px">
+  <div class="forge-press-logos__inner">
+    {%- if section.settings.heading != blank -%}
+      <p class="forge-press-logos__eyebrow">{{ section.settings.heading }}</p>
+    {%- endif -%}
+    <div class="forge-press-logos__row" data-forge-anim="stagger">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'logo' -%}
+          <div class="forge-press-logos__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" target="_blank" rel="noopener noreferrer">{%- endif -%}
+            {%- if block.settings.logo != blank -%}
+              {{- block.settings.logo | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.name, class: 'forge-press-logos__img', width: 120, height: 40 -}}
+            {%- else -%}
+              <span class="forge-press-logos__text">{{ block.settings.name }}</span>
+            {%- endif -%}
+            {%- if block.settings.link != blank -%}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FORGE Press Logos",
+  "tag": "section",
+  "settings": [
+    {"type": "text", "id": "heading", "label": "Eyebrow", "default": "As seen in"},
+    {"type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1"},
+    {"type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 80, "step": 4, "default": 48, "unit": "px"},
+    {"type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 80, "step": 4, "default": 48, "unit": "px"}
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {"type": "image_picker", "id": "logo", "label": "Logo image"},
+        {"type": "text", "id": "name", "label": "Name", "default": "The Guardian"},
+        {"type": "url", "id": "link", "label": "Link (optional)"}
+      ]
+    },
+    {"type": "@app"}
+  ],
+  "presets": [{"name": "FORGE Press Logos"}],
+  "max_blocks": 8
+}
+{% endschema %}

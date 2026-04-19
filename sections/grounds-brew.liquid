@@ -1,0 +1,85 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Cabin:ital,wght@0,400;0,600;1,400&display=swap');
+  .grd-brew { --grd-brown: #1A0F0A; --grd-cream: #F5EDD6; --grd-warm: #C4540E; --grd-paper: #EDE0C4; --grd-mid: #7A6152; --grd-border: #D4C4B0; background: var(--grd-cream); padding: {{ section.settings.padding_top }}px 48px {{ section.settings.padding_bottom }}px; font-family: 'Cabin', sans-serif; }
+  .grd-brew__inner { max-width: 960px; margin: 0 auto; }
+  .grd-brew__header { margin-bottom: 56px; }
+  .grd-brew__eyebrow { display: block; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--grd-warm); margin: 0 0 12px; font-weight: 600; }
+  .grd-brew__heading { font-family: 'Amatic SC', cursive; font-size: clamp(48px, 8vw, 88px); font-weight: 700; color: var(--grd-brown); margin: 0 0 12px; line-height: 1; }
+  .grd-brew__intro { font-size: 15px; line-height: 1.75; color: var(--grd-mid); max-width: 520px; margin: 0; }
+  .grd-brew__methods { display: flex; flex-direction: column; }
+  .grd-brew__method { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 28px; padding: 28px 0; border-bottom: 1px solid var(--grd-border); }
+  .grd-brew__method:first-child { border-top: 1px solid var(--grd-border); }
+  .grd-brew__num { font-family: 'Amatic SC', cursive; font-size: 56px; font-weight: 700; color: rgba(212,196,176,0.7); line-height: 1; text-align: center; user-select: none; }
+  .grd-brew__body { display: flex; flex-direction: column; gap: 8px; }
+  .grd-brew__name { font-family: 'Amatic SC', cursive; font-size: 32px; font-weight: 700; color: var(--grd-brown); margin: 0; }
+  .grd-brew__badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .grd-brew__badge { font-size: 11px; letter-spacing: .1em; color: var(--grd-brown); background: var(--grd-paper); padding: 4px 10px; font-weight: 600; }
+  .grd-brew__badge-label { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--grd-border); font-weight: 400; margin-right: 4px; }
+  .grd-brew__tip { font-size: 13px; font-style: italic; color: var(--grd-mid); margin: 0; line-height: 1.6; }
+  .grd-brew__img-wrap { width: 96px; flex-shrink: 0; }
+  .grd-brew__img { width: 96px; height: 96px; object-fit: cover; border-radius: 50%; border: 3px solid var(--grd-paper); display: block; }
+  @media (max-width: 640px) { .grd-brew { padding: 64px 20px; } .grd-brew__method { grid-template-columns: 40px 1fr; } .grd-brew__img-wrap { display: none; } .grd-brew__num { font-size: 40px; } }
+</style>
+
+<section class="grd-brew">
+  <div class="grd-brew__inner">
+    <div class="grd-brew__header">
+      {%- if section.settings.eyebrow != blank -%}<span class="grd-brew__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="grd-brew__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.intro != blank -%}<p class="grd-brew__intro">{{ section.settings.intro }}</p>{%- endif -%}
+    </div>
+    <div class="grd-brew__methods">
+      {%- for block in section.blocks -%}
+        <div class="grd-brew__method" {{ block.shopify_attributes }}>
+          <div class="grd-brew__num" aria-hidden="true">{{ forloop.index }}</div>
+          <div class="grd-brew__body">
+            <h3 class="grd-brew__name">{{ block.settings.method | default: 'Method' }}</h3>
+            <div class="grd-brew__badges">
+              {%- if block.settings.ratio != blank -%}
+                <span class="grd-brew__badge"><span class="grd-brew__badge-label">Ratio</span>{{ block.settings.ratio }}</span>
+              {%- endif -%}
+              {%- if block.settings.time != blank -%}
+                <span class="grd-brew__badge"><span class="grd-brew__badge-label">Time</span>{{ block.settings.time }}</span>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.tip != blank -%}<p class="grd-brew__tip">{{ block.settings.tip }}</p>{%- endif -%}
+          </div>
+          {%- if block.settings.image != blank -%}
+            <div class="grd-brew__img-wrap">
+              <img src="{{ block.settings.image | image_url: width: 192 }}" alt="{{ block.settings.image.alt | default: block.settings.method | escape }}" loading="lazy" width="96" height="96" class="grd-brew__img">
+            </div>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <p style="color:var(--grd-mid);padding:24px 0;">Add brew methods using the block editor.</p>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GROUNDS Brew Guide",
+  "tag": "section",
+  "class": "grd-section-brew",
+  "settings": [
+    { "type": "text",     "id": "eyebrow", "label": "Eyebrow", "default": "The Craft" },
+    { "type": "text",     "id": "heading", "label": "Heading", "default": "How to Brew" },
+    { "type": "textarea", "id": "intro",   "label": "Intro text" },
+    { "type": "range",    "id": "padding_top",    "label": "Padding top",    "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "range",    "id": "padding_bottom", "label": "Padding bottom", "min": 40, "max": 160, "step": 8, "default": 96 }
+  ],
+  "blocks": [{ "type": "method", "name": "Brew Method", "settings": [
+    { "type": "text",         "id": "method", "label": "Method name", "default": "Pour Over" },
+    { "type": "text",         "id": "ratio",  "label": "Ratio",       "default": "1:16" },
+    { "type": "text",         "id": "time",   "label": "Brew time",   "default": "4 min" },
+    { "type": "textarea",     "id": "tip",    "label": "Tip / note" },
+    { "type": "image_picker", "id": "image",  "label": "Image" }
+  ]}],
+  "presets": [{ "name": "GROUNDS Brew Guide", "blocks": [
+    { "type": "method", "settings": { "method": "Pour Over",   "ratio": "1:16", "time": "4 min",  "tip": "Grind medium-fine. Bloom 45s with 2× coffee weight in water." } },
+    { "type": "method", "settings": { "method": "French Press","ratio": "1:15", "time": "4 min",  "tip": "Coarse grind. Don't stir after pressing." } },
+    { "type": "method", "settings": { "method": "Espresso",    "ratio": "1:2",  "time": "28 sec", "tip": "Dial in grind until shot runs 25–32 seconds." } }
+  ]}]
+}
+{% endschema %}

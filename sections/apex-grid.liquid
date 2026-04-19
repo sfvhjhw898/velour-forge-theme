@@ -1,0 +1,79 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+  .apx-grid { --apx-black: #050505; --apx-yellow: #D4F200; --apx-white: #FFFFFF; --apx-mid: #999999; --apx-border: #222222; background: var(--apx-black); padding: {{ section.settings.padding_top }}px 64px {{ section.settings.padding_bottom }}px; font-family: 'Space Grotesk', sans-serif; }
+  .apx-grid__inner { max-width: 1200px; margin: 0 auto; }
+  .apx-grid__header { margin-bottom: 64px; }
+  .apx-grid__eyebrow { display: block; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--apx-yellow); margin: 0 0 16px; }
+  .apx-grid__heading { font-size: clamp(32px, 4vw, 60px); font-weight: 700; letter-spacing: -.03em; text-transform: uppercase; color: var(--apx-white); margin: 0; line-height: 1; }
+  .apx-grid__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 2px solid var(--apx-border); }
+  .apx-grid__card { padding: 48px 40px; border-right: 2px solid var(--apx-border); transition: border-color 0.15s; }
+  .apx-grid__card:last-child { border-right: none; }
+  .apx-grid__card:hover { border-color: var(--apx-yellow); }
+  .apx-grid__icon { width: 48px; height: 48px; margin-bottom: 28px; stroke: var(--apx-yellow); fill: none; stroke-width: 1.5; }
+  .apx-grid__title { font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: -.01em; color: var(--apx-white); margin: 0 0 16px; }
+  .apx-grid__body { font-size: 14px; line-height: 1.7; color: var(--apx-mid); margin: 0; font-weight: 400; }
+  @media (max-width: 900px) { .apx-grid { padding: 64px 24px; } .apx-grid__cards { grid-template-columns: 1fr; } .apx-grid__card { border-right: none; border-bottom: 2px solid var(--apx-border); } .apx-grid__card:last-child { border-bottom: none; } }
+</style>
+
+<section class="apx-grid">
+  <div class="apx-grid__inner">
+    <div class="apx-grid__header">
+      {%- if section.settings.eyebrow != blank -%}<span class="apx-grid__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="apx-grid__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+    <div class="apx-grid__cards">
+      {%- for block in section.blocks -%}
+        <div class="apx-grid__card" {{ block.shopify_attributes }}>
+          {%- assign icon = block.settings.icon | default: 'lightning' -%}
+          {%- if icon == 'lightning' -%}
+            <svg class="apx-grid__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round"/></svg>
+          {%- elsif icon == 'shield' -%}
+            <svg class="apx-grid__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          {%- elsif icon == 'target' -%}
+            <svg class="apx-grid__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          {%- elsif icon == 'stopwatch' -%}
+            <svg class="apx-grid__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 3h6M12 3v2"/></svg>
+          {%- elsif icon == 'star' -%}
+            <svg class="apx-grid__icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          {%- else -%}
+            <svg class="apx-grid__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          {%- endif -%}
+          <h3 class="apx-grid__title">{{ block.settings.title | default: 'Feature' }}</h3>
+          {%- if block.settings.body != blank -%}<p class="apx-grid__body">{{ block.settings.body }}</p>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "APEX Feature Grid",
+  "tag": "section",
+  "class": "apx-section-grid",
+  "settings": [
+    { "type": "text",  "id": "eyebrow", "label": "Eyebrow", "default": "The APEX Edge" },
+    { "type": "text",  "id": "heading", "label": "Heading", "default": "Built Different." },
+    { "type": "range", "id": "padding_top",    "label": "Padding top",    "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 40, "max": 160, "step": 8, "default": 96 }
+  ],
+  "blocks": [{ "type": "feature", "name": "Feature", "settings": [
+    { "type": "select", "id": "icon", "label": "Icon",
+      "options": [
+        { "value": "lightning", "label": "Lightning" },
+        { "value": "shield",    "label": "Shield" },
+        { "value": "target",    "label": "Target" },
+        { "value": "stopwatch", "label": "Stopwatch" },
+        { "value": "star",      "label": "Star" },
+        { "value": "arrow",     "label": "Arrow" }
+      ], "default": "lightning" },
+    { "type": "text",     "id": "title", "label": "Title", "default": "Performance Feature" },
+    { "type": "textarea", "id": "body",  "label": "Description" }
+  ]}],
+  "presets": [{ "name": "APEX Feature Grid", "blocks": [
+    { "type": "feature", "settings": { "icon": "lightning", "title": "Maximum Performance", "body": "Technical fabrics engineered for high-output training. Four-way stretch, sweat-resistant, zero restrictions." } },
+    { "type": "feature", "settings": { "icon": "shield",    "title": "Built to Last",       "body": "2-year warranty on every garment. Designed for the session after the session after the session." } },
+    { "type": "feature", "settings": { "icon": "arrow",     "title": "Free Returns",        "body": "30-day no-questions returns. If it doesn't perform, send it back." } }
+  ]}]
+}
+{% endschema %}

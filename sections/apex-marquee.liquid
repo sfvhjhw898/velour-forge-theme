@@ -1,0 +1,67 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
+  .apx-mq { --apx-black: #050505; --apx-yellow: #D4F200; --apx-border: #222222; background: var(--apx-black); border-top: 2px solid var(--apx-yellow); border-bottom: 2px solid var(--apx-yellow); padding: 0; overflow: hidden; font-family: 'Space Grotesk', sans-serif; }
+  .apx-mq__row { display: flex; overflow: hidden; padding: 18px 0; }
+  .apx-mq__row--reverse { padding: 18px 0; }
+  .apx-mq__track { display: flex; width: max-content; animation: apx-scroll {{ section.settings.speed | default: 35 | times: 1 }}s linear infinite; }
+  .apx-mq__row--reverse .apx-mq__track { animation-direction: reverse; }
+  @keyframes apx-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .apx-mq__phrase { display: flex; align-items: center; gap: 0; white-space: nowrap; font-size: clamp(20px, 2.5vw, 32px); font-weight: 700; text-transform: uppercase; color: var(--apx-yellow); padding: 0 32px; letter-spacing: -.01em; }
+  .apx-mq__sep { color: rgba(212,242,0,0.4); margin: 0 16px; font-size: 0.7em; }
+  .apx-mq__divider { height: 1px; background: var(--apx-border); margin: 0; }
+  @media (prefers-reduced-motion: reduce) { .apx-mq__track { animation: none; } .apx-mq__row { overflow-x: auto; } }
+</style>
+
+{%- assign phrase_list = '' -%}
+{%- for block in section.blocks -%}
+  {%- assign phrase_list = phrase_list | append: block.settings.phrase | append: '|||' -%}
+{%- endfor -%}
+{%- assign phrases = phrase_list | split: '|||' -%}
+
+<section class="apx-mq" aria-hidden="true">
+  <div class="apx-mq__row">
+    <div class="apx-mq__track">
+      {%- for n in (1..2) -%}
+        {%- for phrase in phrases -%}
+          {%- if phrase != blank -%}
+            <span class="apx-mq__phrase">{{ phrase }}<span class="apx-mq__sep">&times;</span></span>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+  <div class="apx-mq__divider"></div>
+  <div class="apx-mq__row apx-mq__row--reverse">
+    <div class="apx-mq__track">
+      {%- for n in (1..2) -%}
+        {%- for phrase in phrases -%}
+          {%- if phrase != blank -%}
+            <span class="apx-mq__phrase">{{ phrase }}<span class="apx-mq__sep">&bullet;</span></span>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "APEX Marquee",
+  "tag": "section",
+  "class": "apx-section-marquee",
+  "settings": [
+    { "type": "range", "id": "speed", "label": "Speed (seconds per loop)", "min": 10, "max": 80, "step": 5, "default": 30 }
+  ],
+  "blocks": [{ "type": "phrase", "name": "Phrase", "settings": [
+    { "type": "text", "id": "phrase", "label": "Phrase", "default": "Train Harder" }
+  ]}],
+  "presets": [{ "name": "APEX Marquee", "blocks": [
+    { "type": "phrase", "settings": { "phrase": "Train Harder" } },
+    { "type": "phrase", "settings": { "phrase": "Recover Faster" } },
+    { "type": "phrase", "settings": { "phrase": "APEX Performance" } },
+    { "type": "phrase", "settings": { "phrase": "Free UK Shipping" } },
+    { "type": "phrase", "settings": { "phrase": "Built Different" } },
+    { "type": "phrase", "settings": { "phrase": "No Limits" } }
+  ]}]
+}
+{% endschema %}

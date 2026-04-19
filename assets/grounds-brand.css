@@ -1,0 +1,52 @@
+/* GROUNDS — Specialty Coffee Brand Tokens
+   Design: warm editorial artisan
+   Fonts: Amatic SC (heading) + Cabin (body)
+   ─────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cabin:wght@400;500;600;700&display=swap');
+
+:root {
+  --gr-brown:      #2C1810;
+  --gr-mid:        #5C3D1E;
+  --gr-warm:       #A07850;
+  --gr-cream:      #FAF6EF;
+  --gr-paper:      #F0E8D8;
+  --gr-border:     #C9B89A;
+  --gr-text:       #1E120A;
+  --gr-muted:      #8B6B4A;
+  --gr-font-head:  'Amatic SC', cursive;
+  --gr-font-body:  'Cabin', system-ui, sans-serif;
+  --gr-radius:     3px;
+  --gr-trans:      250ms ease;
+}
+
+.grounds-section {
+  font-family: var(--gr-font-body);
+  background: var(--gr-cream);
+  color: var(--gr-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.grounds-section h2,
+.grounds-section h3 {
+  font-family: var(--gr-font-head);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .02em;
+}
+
+.gr-tag {
+  display: inline-block;
+  padding: 5px 14px;
+  background: var(--gr-paper);
+  border: 1px solid var(--gr-border);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gr-mid);
+  font-family: var(--gr-font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grounds-section * { transition: none !important; animation: none !important; }
+}
