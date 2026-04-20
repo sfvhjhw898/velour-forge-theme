@@ -1,0 +1,218 @@
+{%- comment -%}
+  FORGE — Products Editorial
+  Two-column portrait grid. Oversized numbering. Editorial typography.
+  Alternates image sizes: first card tall, second short, etc.
+  Use for: fashion, beauty, furniture, luxury.
+{%- endcomment -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: rgb(var(--color-background));
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    gap: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__title {
+    font-family: var(--forge-font-heading, Georgia, serif);
+    font-size: clamp(2.8rem, 4.5vw, 5.6rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__view-all {
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground));
+    text-decoration: none;
+    border-bottom: 1px solid rgba(var(--color-foreground-rgb, 0,0,0), 0.3);
+    padding-bottom: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__view-all:hover {
+    opacity: 0.6;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 2.4rem;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__item {
+    position: relative;
+  }
+
+  /* Odd items are taller */
+  #shopify-section-{{ section.id }} .forge-ed__item:nth-child(odd) .forge-ed__img-wrap {
+    aspect-ratio: 3/4;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__item:nth-child(even) .forge-ed__img-wrap {
+    aspect-ratio: 4/5;
+    margin-top: 6rem;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__img-wrap {
+    position: relative;
+    overflow: hidden;
+    background: rgba(var(--color-foreground-rgb, 0,0,0), 0.04);
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__item:hover .forge-ed__img-wrap img {
+    transform: scale(1.04);
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__num {
+    position: absolute;
+    top: 1.6rem;
+    left: 1.6rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgb(var(--color-background));
+    mix-blend-mode: difference;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__quick-add {
+    position: absolute;
+    bottom: 1.4rem;
+    right: 1.4rem;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+    border: none;
+    padding: 1rem 1.8rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 2;
+    text-decoration: none;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__item:hover .forge-ed__quick-add {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__info {
+    padding: 1.4rem 0 0;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__name {
+    font-family: var(--forge-font-heading, Georgia, serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgb(var(--color-foreground));
+    margin: 0 0 0.4rem;
+    text-decoration: none;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .forge-ed__price {
+    font-size: 1.3rem;
+    color: rgba(var(--color-foreground-rgb, 0,0,0), 0.6);
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .forge-ed__grid {
+      gap: 1.4rem 1.2rem;
+    }
+    #shopify-section-{{ section.id }} .forge-ed__item:nth-child(even) .forge-ed__img-wrap {
+      margin-top: 3rem;
+    }
+    #shopify-section-{{ section.id }} .forge-ed__title {
+      font-size: clamp(2.4rem, 7vw, 3.6rem);
+    }
+  }
+{%- endstyle -%}
+
+<div class="page-width">
+  <div class="forge-ed__header" data-forge-anim="fade-up">
+    {%- if section.settings.title != blank -%}
+      <h2 class="forge-ed__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.view_all_label != blank -%}
+      <a href="{{ section.settings.collection | default: collections.all | link }}" class="forge-ed__view-all">
+        {{ section.settings.view_all_label }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- assign col = section.settings.collection | default: collections.all -%}
+  <div class="forge-ed__grid">
+    {%- for product in col.products limit: section.settings.products_to_show -%}
+      {%- assign num = forloop.index | prepend: '0' | slice: -2, 2 -%}
+      <div class="forge-ed__item" data-forge-anim="fade-up" style="--delay:{{ forloop.index0 | times: 80 }}ms">
+        <div class="forge-ed__img-wrap">
+          {%- if product.featured_image -%}
+            <img
+              src="{{ product.featured_image | image_url: width: 800 }}"
+              alt="{{ product.featured_image.alt | escape | default: product.title }}"
+              loading="lazy"
+              width="800"
+              height="1000"
+            >
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          <span class="forge-ed__num">{{ num }}</span>
+          <a href="{{ product.url }}" class="forge-ed__quick-add">View</a>
+        </div>
+        <div class="forge-ed__info">
+          <a href="{{ product.url }}" class="forge-ed__name">{{ product.title }}</a>
+          <div class="forge-ed__price">
+            {%- render 'price', product: product, use_variant: true -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FORGE Products Editorial",
+  "tag": "section",
+  "settings": [
+    {"type": "text", "id": "title", "label": "Heading", "default": "The Collection"},
+    {"type": "text", "id": "view_all_label", "label": "View all label", "default": "View all →"},
+    {"type": "collection", "id": "collection", "label": "Collection"},
+    {"type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 12, "step": 2, "default": 6},
+    {"type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1"},
+    {"type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 8, "default": 80, "unit": "px"},
+    {"type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 8, "default": 80, "unit": "px"}
+  ],
+  "blocks": [{"type": "@app"}],
+  "presets": [{"name": "FORGE Products Editorial"}]
+}
+{% endschema %}

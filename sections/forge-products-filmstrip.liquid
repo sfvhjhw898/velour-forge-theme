@@ -1,0 +1,255 @@
+{%- comment -%}
+  FORGE — Products Filmstrip
+  Horizontal scrolling strip of product cards. Compact, fast-scan layout.
+  Use for: sport, tech, streetwear, coffee — brands with many SKUs.
+{%- endcomment -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: rgb(var(--color-background));
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.8rem;
+    padding: 0 max(2rem, calc((100vw - 1200px) / 2));
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__title {
+    font-family: var(--forge-font-heading, Georgia, serif);
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__nav {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__btn {
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid rgba(var(--color-foreground-rgb, 0,0,0), 0.2);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__btn:hover {
+    background: rgb(var(--color-foreground));
+    border-color: rgb(var(--color-foreground));
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__btn:hover svg {
+    stroke: rgb(var(--color-background));
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__btn svg {
+    stroke: rgb(var(--color-foreground));
+    transition: stroke 0.2s;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__track {
+    display: flex;
+    gap: 1.6rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 max(2rem, calc((100vw - 1200px) / 2)) 2rem;
+    cursor: grab;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__track.is-grabbing {
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__card {
+    flex: 0 0 {{ section.settings.card_width | default: 280 }}px;
+    scroll-snap-align: start;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__img {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: rgba(var(--color-foreground-rgb, 0,0,0), 0.04);
+    margin-bottom: 1.2rem;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__card:hover .forge-film__img img {
+    transform: scale(1.05);
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__name {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: rgb(var(--color-foreground));
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__price {
+    font-size: 1.3rem;
+    color: rgba(var(--color-foreground-rgb, 0,0,0), 0.5);
+  }
+
+  #shopify-section-{{ section.id }} .forge-film__badge {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.2rem;
+    background: rgb(var(--color-foreground));
+    color: rgb(var(--color-background));
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .forge-film__card {
+      flex: 0 0 220px;
+    }
+    #shopify-section-{{ section.id }} .forge-film__header {
+      padding: 0 2rem;
+    }
+    #shopify-section-{{ section.id }} .forge-film__track {
+      padding: 0 2rem 2rem;
+    }
+  }
+{%- endstyle -%}
+
+<div id="forge-film-{{ section.id }}">
+  <div class="forge-film__header">
+    {%- if section.settings.title != blank -%}
+      <h2 class="forge-film__title" data-forge-anim="fade-up">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    <div class="forge-film__nav" aria-label="Scroll navigation">
+      <button class="forge-film__btn" data-film-prev="{{ section.id }}" aria-label="Previous">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+      </button>
+      <button class="forge-film__btn" data-film-next="{{ section.id }}" aria-label="Next">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {%- assign col = section.settings.collection | default: collections.all -%}
+  <div class="forge-film__track" id="forge-film-track-{{ section.id }}">
+    {%- for product in col.products limit: section.settings.products_to_show -%}
+      <div class="forge-film__card">
+        <div class="forge-film__img">
+          {%- if product.available == false -%}
+            <span class="forge-film__badge">Sold out</span>
+          {%- elsif product.compare_at_price > product.price -%}
+            <span class="forge-film__badge">Sale</span>
+          {%- endif -%}
+          <a href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+            {%- if product.featured_image -%}
+              <img
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.featured_image.alt | escape | default: product.title }}"
+                loading="lazy"
+                width="600"
+                height="800"
+              >
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </a>
+        </div>
+        <a href="{{ product.url }}" class="forge-film__name">{{ product.title }}</a>
+        <div class="forge-film__price">
+          {%- render 'price', product: product, use_variant: true -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+<script>
+(function () {
+  var id = '{{ section.id }}';
+  var track = document.getElementById('forge-film-track-' + id);
+  if (!track) return;
+
+  // Drag-to-scroll
+  var isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', function (e) {
+    isDown = true;
+    track.classList.add('is-grabbing');
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  document.addEventListener('mouseup', function () {
+    isDown = false;
+    track.classList.remove('is-grabbing');
+  });
+  track.addEventListener('mousemove', function (e) {
+    if (!isDown) return;
+    e.preventDefault();
+    var x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+
+  // Button nav
+  var cardWidth = (track.firstElementChild && track.firstElementChild.offsetWidth + 16) || 296;
+  document.querySelector('[data-film-prev="' + id + '"]').addEventListener('click', function () {
+    track.scrollBy({ left: -cardWidth * 2, behavior: 'smooth' });
+  });
+  document.querySelector('[data-film-next="' + id + '"]').addEventListener('click', function () {
+    track.scrollBy({ left: cardWidth * 2, behavior: 'smooth' });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "FORGE Products Filmstrip",
+  "tag": "section",
+  "settings": [
+    {"type": "text", "id": "title", "label": "Heading", "default": "Shop All"},
+    {"type": "collection", "id": "collection", "label": "Collection"},
+    {"type": "range", "id": "products_to_show", "label": "Products to show", "min": 4, "max": 20, "step": 2, "default": 12},
+    {"type": "range", "id": "card_width", "label": "Card width (px)", "min": 200, "max": 400, "step": 20, "default": 280, "unit": "px"},
+    {"type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1"},
+    {"type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 8, "default": 64, "unit": "px"},
+    {"type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 8, "default": 64, "unit": "px"}
+  ],
+  "blocks": [{"type": "@app"}],
+  "presets": [{"name": "FORGE Products Filmstrip"}]
+}
+{% endschema %}

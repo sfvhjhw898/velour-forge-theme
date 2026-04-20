@@ -1,0 +1,274 @@
+{%- comment -%}
+  FORGE — Products Spotlight
+  Hero feature: one large product left, curated grid right.
+  Full-bleed, high-impact. Use for: launches, hero collections.
+{%- endcomment -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: rgb(var(--color-background));
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3.2rem;
+    gap: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__title {
+    font-family: var(--forge-font-heading, Georgia, serif);
+    font-size: clamp(2.4rem, 4vw, 4.8rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__cta {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground));
+    text-decoration: none;
+    border-bottom: 1px solid rgba(var(--color-foreground-rgb, 0,0,0), 0.25);
+    padding-bottom: 2px;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__cta:hover { opacity: 0.6; }
+
+  #shopify-section-{{ section.id }} .forge-spot__layout {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2rem;
+  }
+
+  /* Hero product */
+  #shopify-section-{{ section.id }} .forge-spot__hero {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__hero-img {
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__hero:hover .forge-spot__hero-img img {
+    transform: scale(1.03);
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 4rem 2.8rem 2.8rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__hero-name {
+    font-family: var(--forge-font-heading, Georgia, serif);
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: #fff;
+    display: block;
+    margin-bottom: 0.6rem;
+    text-decoration: none;
+    pointer-events: all;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__hero-price {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__hero-btn {
+    display: inline-block;
+    margin-top: 1.6rem;
+    padding: 1.2rem 2.4rem;
+    background: #fff;
+    color: #000;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    pointer-events: all;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__hero-btn:hover {
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+  }
+
+  /* Supporting grid */
+  #shopify-section-{{ section.id }} .forge-spot__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+    align-content: start;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__item {
+    text-decoration: none;
+    color: rgb(var(--color-foreground));
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__item-img {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: rgba(var(--color-foreground-rgb, 0,0,0), 0.04);
+    margin-bottom: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__item:hover .forge-spot__item-img img {
+    transform: scale(1.06);
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__item-name {
+    font-size: 1.3rem;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #shopify-section-{{ section.id }} .forge-spot__item-price {
+    font-size: 1.2rem;
+    color: rgba(var(--color-foreground-rgb, 0,0,0), 0.5);
+  }
+
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .forge-spot__layout {
+      grid-template-columns: 1fr;
+    }
+    #shopify-section-{{ section.id }} .forge-spot__hero-img {
+      aspect-ratio: 3/4;
+    }
+    #shopify-section-{{ section.id }} .forge-spot__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+{%- endstyle -%}
+
+<div class="page-width">
+  <div class="forge-spot__header" data-forge-anim="fade-up">
+    {%- if section.settings.title != blank -%}
+      <h2 class="forge-spot__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.collection | default: collections.all | link }}" class="forge-spot__cta">
+        {{ section.settings.cta_label }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- assign col = section.settings.collection | default: collections.all -%}
+  {%- assign hero_product = col.products.first -%}
+
+  <div class="forge-spot__layout">
+    {%- comment -%} Hero product {%- endcomment -%}
+    <div class="forge-spot__hero" data-forge-anim="fade-up">
+      {%- if hero_product != blank -%}
+        <a href="{{ hero_product.url }}" class="forge-spot__hero-img">
+          {%- if hero_product.featured_image -%}
+            <img
+              src="{{ hero_product.featured_image | image_url: width: 1200 }}"
+              alt="{{ hero_product.featured_image.alt | escape | default: hero_product.title }}"
+              loading="lazy"
+              width="1200"
+              height="1800"
+            >
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </a>
+        <div class="forge-spot__hero-overlay">
+          <a href="{{ hero_product.url }}" class="forge-spot__hero-name">{{ hero_product.title }}</a>
+          <div class="forge-spot__hero-price">
+            {%- render 'price', product: hero_product, use_variant: true -%}
+          </div>
+          <a href="{{ hero_product.url }}" class="forge-spot__hero-btn">{{ section.settings.hero_btn_label | default: 'Shop now' }}</a>
+        </div>
+      {%- else -%}
+        <div class="forge-spot__hero-img">
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Supporting grid (products 2–5) {%- endcomment -%}
+    <div class="forge-spot__grid">
+      {%- for product in col.products limit: 5 offset: 1 -%}
+        <a href="{{ product.url }}" class="forge-spot__item" data-forge-anim="fade-up" style="--delay:{{ forloop.index0 | times: 80 }}ms">
+          <div class="forge-spot__item-img">
+            {%- if product.featured_image -%}
+              <img
+                src="{{ product.featured_image | image_url: width: 400 }}"
+                alt="{{ product.featured_image.alt | escape | default: product.title }}"
+                loading="lazy"
+                width="400"
+                height="400"
+              >
+            {%- else -%}
+              {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <span class="forge-spot__item-name">{{ product.title }}</span>
+          <div class="forge-spot__item-price">
+            {%- render 'price', product: product, use_variant: true -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FORGE Products Spotlight",
+  "tag": "section",
+  "settings": [
+    {"type": "text", "id": "title", "label": "Heading", "default": "Featured"},
+    {"type": "text", "id": "cta_label", "label": "View all label", "default": "Shop all →"},
+    {"type": "text", "id": "hero_btn_label", "label": "Hero button label", "default": "Shop now"},
+    {"type": "collection", "id": "collection", "label": "Collection"},
+    {"type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1"},
+    {"type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 8, "default": 80, "unit": "px"},
+    {"type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 8, "default": 80, "unit": "px"}
+  ],
+  "blocks": [{"type": "@app"}],
+  "presets": [{"name": "FORGE Products Spotlight"}]
+}
+{% endschema %}
